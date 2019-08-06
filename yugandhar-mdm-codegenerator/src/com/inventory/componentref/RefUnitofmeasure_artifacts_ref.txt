@@ -1,0 +1,271 @@
+/* Generated 28 Jul, 2019 5:37:44 PM by Hibernate Tools 5.3.0.Beta2 using Yugandhar custom templates. 
+Generated and to be used in accordance with Yugandhar Licensing Terms. */
+
+//This file covers the artifacts for manual modification of database and codebase.
+// Step 1. Merge the cache configuration as per instructions
+// Step 2. executed the SQLs in database
+// Step 3. Execute the SQLs in database. For Maria DB enable the SQL_MODE=ORACLE option and then execute the insert scripts. 
+// Step 4. Make an entry in make entry in YugandharBootProjectApplication
+// Step 5. Add the generated DO to in TxnPayload object
+// Step 6. execute the transaction using sample message generated
+
+// Step 1. Execute the SQLs in database. For Maria DB enable the SQL_MODE=ORACLE option and then execute the insert scripts. 
+// Step 2. Make an entry in make entry in YugandharMsplatformApplication
+// Step 3. Add the generated DO to in TxnPayload object
+// Step 4. execute the transaction using sample message generated
+
+###STEP 1###
+// Add below block of code in xpath <service><jsr107:defaults> of the /yugandhar-mdmhub-boot-project/src/main/resources/ehcache.xml
+//----------------------------------------------------
+	<jsr107:cache name="REFUNITOFMEASURE_BUSKEY" template="heap-cache" />
+
+	
+###STEP 2###
+// Add below block of code in xpath <Config> of the /yugandhar-mdmhub-boot-project/src/main/resources/ehcache.xml
+//----------------------------------------------------
+	<cache alias="REFUNITOFMEASURE_BUSKEY" uses-template="heap-cache" >
+		<expiry>
+			<ttl unit="seconds">30</ttl>
+		</expiry>
+	</cache>
+	
+###STEP 3###	
+/* insert sqls for transaction registration */
+//----------------------------------------------------
+/*#enable below SQL_MODE option for mariaDB/MySQL else the insert SQL will fail. No need to enable this option for Oracle Database */
+/*set SQL_MODE=ORACLE; */
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION, CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+    (YUG_REGISTRY_SEQ.nextval, 0, 'createRefUnitofmeasureBase', 'com.inventory.componentref.RefUnitofmeasureService', 'add', 
+    'create record in the database', CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, 'Generator', '000000000');
+
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION,CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+    (YUG_REGISTRY_SEQ.nextval, 0, 'updateRefUnitofmeasureBase', 'com.inventory.componentref.RefUnitofmeasureService', 'merge', 
+    'update the database record based on primary key i.e. idpk', CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Generator', '000000000');
+
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION,CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+    (YUG_REGISTRY_SEQ.nextval, 0, 'retrieveRefUnitofmeasureBase', 'com.inventory.componentref.RefUnitofmeasureService', 'findById', 
+    'retrieve the record from database based on primary key i.e. idpk', CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Generator', '000000000');
+
+
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION,CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+    (YUG_REGISTRY_SEQ.nextval, 0, 'findRefUnitofmeasureByBusinessKeyBase', 'com.inventory.componentref.RefUnitofmeasureService', 'findByBusinessKey', 
+    'find the unique record from dababase based on by business key',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, 'Generator', '000000000');
+
+
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION,CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+    (YUG_REGISTRY_SEQ.nextval, 0, 'findAllRefUnitofmeasureByLanguageCodeBase', 'com.inventory.componentref.RefUnitofmeasureService', 'findAllRecordsByLanguageCode', 
+    'find All records by language code',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, 'Generator', '000000000');
+	
+COMMIT;
+
+
+/* rollback scripts if needed
+delete from CONFIG_TXN_REGISTRY where TXNSERVICE_NAME ='createRefUnitofmeasureBase';
+delete from CONFIG_TXN_REGISTRY where TXNSERVICE_NAME ='updateRefUnitofmeasureBase';
+delete from CONFIG_TXN_REGISTRY where TXNSERVICE_NAME ='retrieveRefUnitofmeasureBase';
+delete from CONFIG_TXN_REGISTRY where TXNSERVICE_NAME ='findRefUnitofmeasureByBusinessKeyBase';
+delete from CONFIG_TXN_REGISTRY where TXNSERVICE_NAME ='findAllRefUnitofmeasureByLanguageCodeBase';
+commit; */
+
+###STEP 4###
+//Modify the entry in yugandhar-mdmhub-boot-project-jeec for your generated packages for spring component scan, entity scan and repository scan. Make the changes as below
+//
+		@ComponentScan({"com.yugandhar.*","<your package name here>"})
+		@EntityScan({"com.yugandhar.*","<your package name here>"})
+		@EnableJpaRepositories({"com.yugandhar.*","<your package name here>"})
+		
+		e.g.
+		@ComponentScan({"com.yugandhar.*","com.demo.*"})
+		@EntityScan({"com.yugandhar.*","com.demo.*"})
+		@EnableJpaRepositories({"com.yugandhar.*","com.demo.*"})
+
+
+###STEP 5###
+/* Add the below code snipped in com.yugandhar.common.extern.transferobj.TxnPayload object */
+
+	protected RefUnitofmeasureDO refUnitofmeasureDO;
+	protected List<RefUnitofmeasureDO> refUnitofmeasureDOList;
+	/**
+	 * @return the demoDO
+	 */
+	public RefUnitofmeasureDO getRefUnitofmeasureDO() {
+		return refUnitofmeasureDO;
+	}
+	/**
+	 * @param demoDO the demoDO to set
+	 */
+	public void setRefUnitofmeasureDO(RefUnitofmeasureDO refUnitofmeasureDO) {
+		this.refUnitofmeasureDO = refUnitofmeasureDO;
+	}
+	/**
+	 * @return the demoDOList
+	 */
+	public List<RefUnitofmeasureDO> getRefUnitofmeasureDOList() {
+		return refUnitofmeasureDOList;
+	}
+	/**
+	 * @param demoDOList the demoDOList to set
+	 */
+	public void setRefUnitofmeasureDOList(List<RefUnitofmeasureDO> refUnitofmeasureDOList) {
+		this.refUnitofmeasureDOList = refUnitofmeasureDOList;
+	}
+
+###STEP 6###
+/* Sample JSON Messages for test */
+//----------------------------------------------------
+=================================================================
+createRefUnitofmeasureBase sample JSON message
+=================================================================
+
+{
+	"txnHeader": {
+	 "requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+	  "transactionServiceName": "createRefUnitofmeasureBase"
+	},
+	"txnPayload": {
+			 "refUnitofmeasureDO":        {
+		  "idPk": null, 
+		 		  "version": null, 
+		 		  "createdTs": null, 
+		 		  "deletedTs": null, 
+		 		  "updatedTs": null, 
+		 		  "updatedByUser": null, 
+		 		  "updatedByTxnId": null, 
+		 		  "configLanguageCodeKey": null, 
+		 		  "key": null, 
+		 		  "value": null, 
+		 		  "description": null
+      }
+		
+	}
+	
+}
+  
+=================================================================
+updateRefUnitofmeasureBase sample JSON message
+================================================================= 
+  {
+	"txnHeader": {
+		"requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+		"transactionServiceName": "updateRefUnitofmeasureBase"
+	},
+	"txnPayload": {
+			 "refUnitofmeasureDO":       {
+		  "idPk": null, 
+		 		  "version": null, 
+		 		  "createdTs": null, 
+		 		  "deletedTs": null, 
+		 		  "updatedTs": null, 
+		 		  "updatedByUser": null, 
+		 		  "updatedByTxnId": null, 
+		 		  "configLanguageCodeKey": null, 
+		 		  "key": null, 
+		 		  "value": null, 
+		 		  "description": null
+      }
+		
+	}
+	
+}
+
+=================================================================
+retrieveRefUnitofmeasureBase sample JSON message
+================================================================= 
+{
+	"txnHeader": {
+		"requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+	  "transactionServiceName": "retrieveRefUnitofmeasureBase"
+	},
+	"txnPayload": {
+			 "refUnitofmeasureDO":        {
+         "idPk": "1"
+		 
+      }
+		
+	}
+	
+}
+  
+=================================================================
+findRefUnitofmeasureByBusinessKey sample JSON message
+================================================================= 
+{
+	"txnHeader": {
+		"requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+		"transactionServiceName": "findRefUnitofmeasureByBusinessKeyBase"
+	},
+	"txnPayload": {
+			 "refUnitofmeasureDO":       {
+		"configLanguageCodeKey": "1",
+         "key": "ACTIVE"
+      }
+		
+	}
+	
+}
+  
+======================================================================
+findAllRefUnitofmeasureByLanguageCode sample JSON message
+======================================================================
+{
+	"txnHeader": {
+		"requesterLanguage": "1",
+		"userName": "Rakesh9",
+		"userRole": "admin9",
+		"txnMessageId": "12312311115999",
+		"transactionServiceName": "findAllRefUnitofmeasureByLanguageCodeBase"
+	},
+	"txnPayload": {
+		"paginationIndexOfCurrentSlice": 0,
+		"paginationPageSize": 25, 
+			"refUnitofmeasureDO":        {
+		"configLanguageCodeKey": "1"
+      }
+		
+	}
+	
+}
+  
+  

@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="c525f074-d6b3-4f41-b865-f723d7e4e511" activeEnvironment="Default" name="InventoryManagement" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d5565a95-8406-439a-b09d-4fcf644e27c3" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8091" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://localhost:8091</con:endpoint></con:endpoints><con:resource name="YugandharRequestProcessor" path="/inventory/rest/YugandharRequestProcessor" id="3b5ab9ab-e490-4ace-82fe-4601e350a7ac"><con:settings/><con:parameters/><con:method name="YugandharRequestProcessor 1" id="ed4109b6-27d4-461c-931b-7c0f8b9b3573" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:yug="http://localhost/rest/YugandharRequestProcessor">yug:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:yug="http://localhost/inventory/rest/YugandharRequestProcessor">yug:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="2cde7054-abfb-48e5-a221-e50046211db1" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
+	"txnHeader": {
+	 "requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+      "transactionServiceName": "createInventoryOrderBase"
+	},
+	"txnPayload": {
+			 "inventoryOrderDO":       {
+		  "idPk": null, 
+		 		  "version": null, 
+		 		  "createdTs": null, 
+		 		  "deletedTs": null, 
+		 		  "updatedTs": null, 
+		 		  "updatedByUser": null, 
+		 		  "updatedByTxnId": null, 
+		 		  "orderId": "12345", 
+		 		  "productId": "12345", 
+		 		  "unitPrice": "100", 
+		 		  "unitQuantity": "100"
+      }
+		
+	}
+	
+}</con:request><con:originalUri>http://localhost/rest/YugandharRequestProcessor</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="8f8e54a1-a705-468a-80e6-8cbe8cc5394f" name="Inventory"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="2155dde8-1373-40ff-9677-e8df16f7430d" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Order" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="create" id="39048b8e-be92-448d-9d23-2f85498caa43"><con:settings/><con:config service="http://localhost:8091" methodName="YugandharRequestProcessor 1" resourcePath="/inventory/rest/YugandharRequestProcessor" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="create" id="8aeb0207-07f1-4032-bcba-a5090e733c7a" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
+	"txnHeader": {
+	 "requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+      "transactionServiceName": "createInventoryOrderBase"
+	},
+	"txnPayload": {
+			 "inventoryOrderDO":       {
+		  "idPk": null, 
+		 		  "version": null, 
+		 		  "createdTs": null, 
+		 		  "deletedTs": null, 
+		 		  "updatedTs": null, 
+		 		  "updatedByUser": null, 
+		 		  "updatedByTxnId": null, 
+		 		  "orderId": "12345", 
+		 		  "productId": "12345", 
+		 		  "unitPrice": "100", 
+		 		  "unitQuantity": "100"
+      }
+		
+	}
+	
+}</con:request><con:originalUri>http://localhost/inventory/rest/YugandharRequestProcessor</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="update" id="87df0f32-f471-419d-a77c-7323ac44e7c6"><con:settings/><con:config service="http://localhost:8091" methodName="YugandharRequestProcessor 1" resourcePath="/inventory/rest/YugandharRequestProcessor" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="update" id="0999b2c3-86bd-4bf5-b516-a0f4a8538828" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
+   "responseCode": "SUCCESS",
+   "txnHeader":    {
+      "requesterLanguage": "1",
+      "userName": "admin",
+      "userRole": "admin",
+      "txnMessageId": "1234567890123",
+      "transactionServiceName": "updateInventoryOrderBase",
+      "totalExecutionTimeMillies": "81"
+   },
+   "txnPayload": {"inventoryOrderDO":    {
+      "idPk": "c7b68d5a-ba10-4878-960c-9e0673a59ebf",
+      "version": 0,
+      "orderId": "12345",
+      "productId": "12345",
+      "unitPrice": 102,
+      "unitQuantity": 100
+   }}
+}</con:request><con:originalUri>http://localhost/inventory/rest/YugandharRequestProcessor</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="retrieve" id="c1013e59-dccf-46b3-9d84-f52dd37a4305"><con:settings/><con:config service="http://localhost:8091" methodName="YugandharRequestProcessor 1" resourcePath="/inventory/rest/YugandharRequestProcessor" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="retrieve" id="833ee155-b9f8-4e36-bcff-85833172dd60" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
+   "responseCode": "SUCCESS",
+   "txnHeader":    {
+      "requesterLanguage": "1",
+      "userName": "admin",
+      "userRole": "admin",
+      "txnMessageId": "1234567890123",
+      "transactionServiceName": "retrieveInventoryOrderBase"
+   },
+   "txnPayload": {"inventoryOrderDO":    {
+      "idPk": "c7b68d5a-ba10-4878-960c-9e0673a59ebf"
+   }}
+}</con:request><con:originalUri>http://localhost/inventory/rest/YugandharRequestProcessor</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="3d3d82f3-0e24-4a7e-9797-8e0827ba21da" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Product" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="create" id="024cd3b6-31be-447d-b3ac-fe33cc05e247"><con:settings/><con:config service="http://localhost:8091" methodName="YugandharRequestProcessor 1" resourcePath="/inventory/rest/YugandharRequestProcessor" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="create" id="61a16b2a-731d-489e-8091-7d03ab0db0fd" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
+	"txnHeader": {
+	 "requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+      "transactionServiceName": "createInventoryProductBase"
+	},
+	"txnPayload": {
+			 "inventoryProductDO":       {
+		  "idPk": null, 
+		 		  "version": null, 
+		 		  "createdTs": null, 
+		 		  "deletedTs": null, 
+		 		  "updatedTs": null, 
+		 		  "updatedByUser": null, 
+		 		  "updatedByTxnId": null, 
+		 		  "productId": "100", 
+		 		  "supplierId": "asdlfkjasdlfkjsdf", 
+		 		  "productName": "Product 1", 
+		 		  "productType": "roduct type", 
+		 		  "productCategory": "Product Cat", 
+		 		  "hsnSacCode": null, 
+		 		  "productStatus": "ACTIVE", 
+		 		  "productExpiryDate": "2022-07-27T18.55.04.245+0000", 
+		 		  "productArrivalDate": "2019-07-27T18.55.04.245+0000", 
+		 		  "quantityRecevied": "10", 
+		 		  "quantityInhand": "5", 
+		 		  "quantityUnitOfMeasure": "Units", 
+		 		  "billNumber": "Anb810308-09234"
+      }
+		
+	}
+	
+}</con:request><con:originalUri>http://localhost/inventory/rest/YugandharRequestProcessor</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="update" id="ec956883-8639-4539-a79b-0fba34f4703a"><con:settings/><con:config service="http://localhost:8091" methodName="YugandharRequestProcessor 1" resourcePath="/inventory/rest/YugandharRequestProcessor" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="update" id="d29261de-627c-4743-b107-67decab6115f" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
+   "responseCode": "SUCCESS",
+   "txnHeader":    {
+      "requesterLanguage": "1",
+      "userName": "admin",
+      "userRole": "admin",
+      "txnMessageId": "1234567890123",
+      "transactionServiceName": "updateInventoryProductBase"
+   },
+   "txnPayload": {"inventoryProductDO":    {
+      "idPk": "d5185033-58d7-43c7-b6d7-2e42c89df1b9",
+      "version": 0,
+      "createdTs": "2019-07-28T11.32.02.871+0000",
+      "updatedTs": "2019-07-28T11.32.02.871+0000",
+      "updatedByUser": "admin",
+      "updatedByTxnId": "1234567890123",
+      "productId": "100",
+      "supplierId": "asdlfkjasdlfkjsdf1111",
+      "productName": "Product 1",
+      "productType": "roduct type",
+      "productCategory": "Product Cat",
+      "productStatus": "ACTIVE",
+      "productExpiryDate": "2022-07-27T18.55.04.245+0000",
+      "productArrivalDate": "2019-07-27T18.55.04.245+0000",
+      "quantityRecevied": 10,
+      "quantityInhand": 5,
+      "quantityUnitOfMeasure": "Units",
+      "billNumber": "Anb810308-09234"
+   }}
+}</con:request><con:originalUri>http://localhost/inventory/rest/YugandharRequestProcessor</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="retrieve" id="1524493b-02e2-4de0-b762-bb1a52417190"><con:settings/><con:config service="http://localhost:8091" methodName="YugandharRequestProcessor 1" resourcePath="/inventory/rest/YugandharRequestProcessor" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="retrieve" id="17faa66f-4f5a-482a-af34-330410fdd58e" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
+   "responseCode": "SUCCESS",
+   "txnHeader":    {
+      "requesterLanguage": "1",
+      "userName": "admin",
+      "userRole": "admin",
+      "txnMessageId": "1234567890123",
+      "transactionServiceName": "retrieveInventoryProductBase"
+   },
+   "txnPayload": {"inventoryProductDO":    {
+      "idPk": "d5185033-58d7-43c7-b6d7-2e42c89df1b9"
+   }}
+}</con:request><con:originalUri>http://localhost/inventory/rest/YugandharRequestProcessor</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="d8ae6a1d-8668-4feb-bbe3-65e5307bbc4f" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="RefUnitOfMeasure" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="create" id="2dc50f38-9b6f-475a-b1c8-b0bc7c0eae23"><con:settings/><con:config service="http://localhost:8091" methodName="YugandharRequestProcessor 1" resourcePath="/inventory/rest/YugandharRequestProcessor" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="create" id="220aa504-9484-4434-b990-eef3afb72385" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
+	"txnHeader": {
+	 "requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+	  "transactionServiceName": "createRefUnitofmeasureBase"
+	},
+	"txnPayload": {
+			 "refUnitofmeasureDO":        {
+		  "idPk": null, 
+		 		  "version": null, 
+		 		  "createdTs": null, 
+		 		  "deletedTs": null, 
+		 		  "updatedTs": null, 
+		 		  "updatedByUser": null, 
+		 		  "updatedByTxnId": null, 
+		 		  "configLanguageCodeKey": "1", 
+		 		  "key": "1", 
+		 		  "value": "KG", 
+		 		  "description": "Kilograms"
+      }
+		
+	}
+	
+}</con:request><con:originalUri>http://localhost/inventory/rest/YugandharRequestProcessor</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="e95a60a4-a62a-4af3-883d-2629581016d9" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CreateBrahamachari" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="createLEWithPhoneAndAddress" id="97ab343e-a83d-4942-b3bc-ea170d3c7e38"><con:settings/><con:config service="http://localhost:8091" methodName="YugandharRequestProcessor 1" resourcePath="/inventory/rest/YugandharRequestProcessor" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="createLEWithPhoneAndAddress" id="9df87387-45f1-46ca-b86a-2b52726851a3" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
+	"txnHeader": {
+	 "requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "rakesh",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+      "paginationStartIndex": null,
+      "paginationEndIndex": null,
+      "paginationTotalResultCount": null,
+	  "transactionServiceName": "createLegalEntity"
+	},
+	"txnPayload": {
+			 "legalentityDO":       {
+			"primaryKeyDO": {
+			"idPk": "77776663666AAAA211"
+			},
+			"displayName": "JOHN MCLEAN",
+			"entityObjectTypeRefkey": "1",
+			"classificationCodeRefkey": "1",
+			"importanceTypeRefkey": "1",
+			"leRatingRefkey": "1",
+			"statusTypeRefkey": "1",
+			"sourceSystemRefkey": "1",
+			"onboardingDate": "2015-10-23",
+			"offboardingDate": null,
+			"kycVerificationFlag": "Y",
+			"description": "NO Issues",
+			
+      	 "lePersonDO":       {
+			"legalentityIdpk": null,
+			"version": null,
+			"personTypeRefkey": null,
+			"genderRefkey": "1",
+			"dateOfBirth": "1983-10-23",
+			"countryOfBirthRefkey": "356",
+			"countryCitizenshipRefkey": "356",
+			"countryOfDomicileRefkey": "356",
+			"preferredLanguageRefkey": "1",
+			"maritalStatus": null,
+			"highestEduQualRefkey": null,
+			"isDeceasedFlag": "Y",
+			"deceasedDate": "2017-10-23",
+			"isHandicappedFlag": null,
+			"handicappedSinceDate": "2017-08-21",
+			"numberOfDependents": null,
+			"numberOfChildren": null,
+			"prefereedLanguageRefkey": null,
+     
+		"personnamesDOList": 
+			[{
+			"idPk": null,
+			"version": null,
+			"legalentityIdpk": null,
+			"personnameTypeRefkey": "1",
+			"prefixNameRefkey": null,
+			"prefixMisc": null,
+			"nameOne": "JOHN",
+			"nameTwo": "PER",
+			"nameThree": "Third Name",
+			"nameFour": "Fourth Name",
+			"lastName": "MACLEAN",
+			"nickName": "Pappu",
+			"popularName": "Pappu",
+			"suffixNameRefkey": 1,
+			"suffixMisc": "Pappu",
+			"nameStandardisedFlag": "N",
+			"sourceSystemRefkey": "1"
+      },
+      {
+			"idPk": null,
+			"version": null,
+			"legalentityIdpk": null,
+			"personnameTypeRefkey": "2",
+			"prefixNameRefkey": null,
+			"prefixMisc": null,
+			"nameOne": "JOHNSON",
+			"nameTwo": null,
+			"nameThree": null,
+			"nameFour": null,
+			"lastName": "MCLEAN",
+			"nickName": null,
+			"popularName": null,
+			"suffixNameRefkey": null,
+			"suffixMisc": null,
+			"nameStandardisedFlag": null,
+			"sourceSystemRefkey": null
+      }]
+      
+     },
+	"leSystemKeysRegistryDOList":       [{
+			"sourceSystemRefkey": "1",
+			"referenceId": "SSN11234",
+			"legalentityIdpk": null,
+			"statusInSourceRefkey": "1",
+			"description": "Sample"
+      } , 
+      {
+			"sourceSystemRefkey": "2",
+			"referenceId": "DR1122444",
+			"legalentityIdpk": null,
+			"statusInSourceRefkey": "1",
+			"description": "Sample2"
+      }],
+     
+     "leAddressAssocDOList":       [{
+			"legalentityIdpk": null,
+			"addressIdpk": null,
+			"addressTypeRefkey": "1",
+			"addressSubtypeRefkey": "2",
+			"preferredFlag": "N",
+			"solicitationFlag": "N",
+			"addressDO":       {
+			"idPk": null,
+			"version": null,
+			"createdTs": null,
+			"deletedTs": null,
+			"updatedTs": null,
+			"updatedByUser": null,
+			"updatedByTxnId": null,
+			"addressLineOne": "ADDRESS COUNTRY 1",
+			"addressLineTwo": "AA3",
+			"addressLineThree": "TEST3",
+			"addressLineFour": "ROAD",
+			"streetNumber": "103",
+			"streetName": "NIL ROAD",
+			"houseNumber": "13",
+			"buildingNumber": "E",
+			"county": "YORKSHIRE",
+			"city": "PUNE",
+			"districtZone": "PUNE",
+			"stateProvinceRefkey": "AL",
+			"countryRefkey": "840",
+			"postalCode": "411057",
+			"nearestLandmark": "NEAR HANUMAND MANDIR",
+			"boxDesignator": "Y",
+			"boxIdentifier": "10",
+			"nearestRailwayStation": "PUNE",
+			"nearestAirport": "MUMBAI"
+      }
+      },
+      {
+			"legalentityIdpk": null,
+			"addressIdpk": null,
+			"addressTypeRefkey": "1",
+			"addressSubtypeRefkey": "1",
+			"preferredFlag": "N",
+			"solicitationFlag": "N",
+			"addressDO":       {
+			"idPk": null,
+			"version": null,
+			"createdTs": null,
+			"deletedTs": null,
+			"updatedTs": null,
+			"updatedByUser": null,
+			"updatedByTxnId": null,
+			"addressLineOne": "Test Address Line1",
+			"addressLineTwo": "Test Address Line2",
+			"addressLineThree": "Test Address Line3",
+			"addressLineFour": "Test Address Line4",
+			"streetNumber": "103",
+			"streetName": "NILKANTH ROAD",
+			"houseNumber": "13",
+			"buildingNumber": "E",
+			"county": "YORKSHIRE",
+			"city": "Pune",
+			"districtZone": "PUNE",
+			"stateProvinceRefkey": "AL",
+			"countryRefkey": "840",
+			"postalCode": "3332221",
+			"nearestLandmark": "NEAR HANUMAND MANDIR",
+			"boxDesignator": "Y",
+			"boxIdentifier": "10",
+			"nearestRailwayStation": "PUNE",
+			"nearestAirport": "MUMBAI"
+      }
+      }],
+      "lePhoneAssocDOList":       [{
+			"legalentityIdpk": null,
+			"phoneTypeRefkey": "1",
+			"phoneSubtypeRefkey": "1",
+			"preferredFlag": "1",
+			"phoneNumber": "1",
+			"phoneStandardizedIdpk": null,
+			"phoneStandardizedDO":       {
+			"ituCountryCallingCode": "01",
+			"areaCode": "20",
+			"exchange": "724",
+			"phoneNumber": "43293948721",
+			"extension": "31547"
+      }
+      },
+      {
+			"legalentityIdpk": null,
+			"phoneTypeRefkey": "2",
+			"phoneSubtypeRefkey": "2",
+			"preferredFlag": "1",
+			"phoneNumber": "1",
+			"phoneStandardizedIdpk": null,
+			"phoneStandardizedDO":       {
+			"ituCountryCallingCode": "01",
+			"areaCode": "20",
+			"exchange": "724",
+			"phoneNumber": "123123",
+			"extension": "31547"
+      }
+      },{
+			"legalentityIdpk": null,
+			"phoneTypeRefkey": "3",
+			"phoneSubtypeRefkey": "3",
+			"preferredFlag": "1",
+			"phoneNumber": "1",
+			"phoneStandardizedIdpk": null,
+			"phoneStandardizedDO":       {
+			"ituCountryCallingCode": "01",
+			"areaCode": "20",
+			"exchange": "724",
+			"phoneNumber": "66226622",
+			"extension": "31547"
+      }
+      }],
+       "lePreferencesDOList":       [{
+			"legalentityIdpk": null,
+			"preferenceTypeRefkey": "1",
+			"prefFlag": "Y",
+			"prefDescription": "TEST"
+      }, 
+      {
+			"legalentityIdpk": null,
+			"preferenceTypeRefkey": "2",
+			"prefFlag": "Y",
+			"prefDescription": "TEST"
+      }],
+       "leIdentifierKycRegistryDOList":       [{
+			"identificationTypeRefkey": "1",
+			"identificationNumber": "SSN12312",
+			"legalentityIdpk": null,
+			"document": "TEST",
+			"issuedBy": "GOVT",
+			"idConsideredForKycFlag": null,
+			"issuedDate": "2017-08-23",
+			"sourceSystemRefkey": null,
+			"identityDescription": null
+      }, {
+			"identificationTypeRefkey": "2",
+			"identificationNumber": "DR123123",
+			"legalentityIdpk": null,
+			"document": "TEST",
+			"issuedBy": "GOVT",
+			"idConsideredForKycFlag": null,
+			"issuedDate": "2017-08-23",
+			"sourceSystemRefkey": null,
+			"identityDescription": null
+      }],
+      "leAccountAssocDOList":       [{
+			"legalentityIdpk": null,
+			"leRoletypeRefkey": "1",
+			"accountIdpk": null,
+			"roleActivationDate": "2017-08-23",
+			"roleDeactivationDate": "2018-08-23",
+			"deactivationReasonRefkey": "1",
+			"agreementTypeRefkey": null,
+			"agreementTypeDescription": null,
+			"accountDO":       {
+			"contractSignedLangRefkey": "1",
+			"currencyRefkey": "12",
+			"billingModeTypeRefkey": "1",
+			"frequencyOfPayment": null,
+			"lobtypeRefkey": null,
+			"lobDescription": null,
+			"sourceSystemRefkey": null,
+			"sourceAccountId": null,
+			"managedbyBuCode": null,
+			"managedbyBuId": null,
+			"branchCodeRefkey": null,
+			"accountName": "Test",
+			"accountName2": null,
+			"accountDescription": null,
+			"accountSourceStatusRefkey": null,
+			"accountMdmStatusRefkey": null,
+			"signedDate": "2017-08-23",
+			"signedPlace": null,
+			"executedDate": "2017-08-23",
+			"terminatedDate": "2017-09-23",
+			"terminationReasonRefkey": null,
+			"accountAddressAssocDOList":       [
+                  {
+            "addressTypeRefkey": "1",
+            "addressSubtypeRefkey": "1",
+            "preferredFlag": "Y",
+            "solicitationFlag": "Y",
+            "addressDO":             {
+             
+               "addressLineOne": "Test Address Line1",
+               "addressLineTwo": "Test Address Line2",
+               "city": "Pune",
+               "countryRefkey": "356",
+               "postalCode": "111222"
+            }
+         },
+                  {
+            "addressTypeRefkey": "2",
+            "addressSubtypeRefkey": "2",
+            "preferredFlag": "Y",
+            "solicitationFlag": "Y",
+            "addressDO":             {
+               "addressLineOne": "Test Address Line1",
+               "addressLineTwo": "Test Address Line2",
+               "city": "Pune",
+               "countryRefkey": "356",
+               "postalCode": "111222"
+            }
+         }
+      ],
+      "accountPhoneAssocDOList":       [
+                  {
+            "phoneTypeRefkey": "1",
+            "phoneSubtypeRefkey": "1",
+            "preferredFlag": "Y",
+            "phoneNumber": "12321123213",
+            "phoneStandardizedIdpk": null,
+            "phoneStandardizedDO":             {
+               "ituCountryCallingCode": "01",
+               "areaCode": "20",
+               "exchange": "724",
+               "phoneNumber": "66226622",
+               "extension": "31547"
+            }
+         },
+                  {
+            "phoneTypeRefkey": "2",
+            "phoneSubtypeRefkey": "2",
+            "preferredFlag": "Y",
+            "phoneNumber": "12321123213",
+            "phoneStandardizedIdpk": null,
+            "phoneStandardizedDO":             {
+               "ituCountryCallingCode": "01",
+               "areaCode": "20",
+               "exchange": "724",
+               "phoneNumber": "66226622",
+               "extension": "31547"
+            }
+         }
+      ]
+      }
+      },{
+			"legalentityIdpk": null,
+			"leRoletypeRefkey": "1",
+			"accountIdpk": null,
+			"roleActivationDate": "2017-08-23",
+			"roleDeactivationDate": "2019-08-23",
+			"deactivationReasonRefkey": "1",
+			"agreementTypeRefkey": null,
+			"agreementTypeDescription": null,
+			"accountDO":       {
+			"contractSignedLangRefkey": "1",
+			"currencyRefkey": "12",
+			"billingModeTypeRefkey": "1",
+			"frequencyOfPayment": null,
+			"lobtypeRefkey": null,
+			"lobDescription": null,
+			"sourceSystemRefkey": null,
+			"sourceAccountId": null,
+			"managedbyBuCode": null,
+			"managedbyBuId": null,
+			"branchCodeRefkey": null,
+			"accountName": "Test",
+			"accountName2": null,
+			"accountDescription": null,
+			"accountSourceStatusRefkey": null,
+			"accountMdmStatusRefkey": null,
+			"signedDate": "2017-08-23",
+			"signedPlace": null,
+			"executedDate": "2017-08-23",
+			"terminatedDate": "2019-08-23",
+			"terminationReasonRefkey": null
+      }
+      }],
+       "leVehicleAssocDOList":       [{
+			"legalentityIdpk": null,
+			"leRoletypeRefkey": "1",
+			"accountIdpk": "1",
+			"roleActivationDate": "2017-08-23",
+			"roleDeactivationDate": "2019-08-23",
+			"deactivationReasonRefkey": null,
+			"agreementTypeRefkey": null,
+			"agreementTypeDescription": "test",
+			 "vehicleDO":       {
+			"vinNumber": "MH12LSKDHJFDLDKFHJ",
+			"chassisNumber": "121242834792387498327494",
+			"make": "HONDA",
+			"model": "CITY",
+			"year": "1984",
+			"interiorColor": null,
+			"exteriorColor": null,
+			"registrationNumber": null,
+			"countryOfRegistrationRefkey": "356",
+			"insuranceIssuedBy": null,
+			"insuranceIssuedDate": "2017-08-23",
+			"insuranceExpiryDate": "2018-08-22"
+      }
+      },{
+			"legalentityIdpk": null,
+			"leRoletypeRefkey": "1",
+			"accountIdpk": "1",
+			"roleActivationDate": "2017-08-23",
+			"roleDeactivationDate": "2019-08-23",
+			"deactivationReasonRefkey": null,
+			"agreementTypeRefkey": null,
+			"agreementTypeDescription": "test",
+			 "vehicleDO":       {
+			"vinNumber": "MH12LSKDHJFDLDKFHJ",
+			"chassisNumber": "121242834792387498327494",
+			"make": "HONDA",
+			"model": "CITY",
+			"year": "1984",
+			"interiorColor": null,
+			"exteriorColor": null,
+			"registrationNumber": null,
+			"countryOfRegistrationRefkey": "356",
+			"insuranceIssuedBy": null,
+			"insuranceIssuedDate": "2017-08-23",
+			"insuranceExpiryDate": "2019-08-23"
+      }
+      }],
+      "lePropertyAssocDOList":       [{
+			"propertyIdpk": null,
+			"legalentityIdpk": null,
+			"propertyLeReltypeRefkey": "1",
+			"description": null,
+			"propertyDO":       {
+			"propertyName": "Test",
+			"addressIdpk": "123213"
+      }
+      },
+      {
+			"propertyIdpk": null,
+			"legalentityIdpk": null,
+			"propertyLeReltypeRefkey": "1",
+			"description": null,
+			"propertyDO":       {
+			"propertyName": "Test",
+			"addressIdpk": "123213"
+      }
+      },
+      {
+			"propertyIdpk": null,
+			"legalentityIdpk": null,
+			"propertyLeReltypeRefkey": "1",
+			"description": null,
+			"propertyDO":       {
+			"propertyName": "Test",
+			"addressIdpk": "123213"
+      }
+      }],
+      "miscellaneousInfoDOList":       [{
+			"name1": "1",
+			"value1": "1",
+			"name2": "2",
+			"value2": "2"
+  },
+  {
+			"name1": "1",
+			"value1": "1",
+			"name2": "2",
+			"value2": "2"
+  },
+  {
+			"name1": "1",
+			"value1": "1",
+			"name2": "2",
+			"value2": "2"
+  }]
+		
+     
+	}
+}
+}</con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

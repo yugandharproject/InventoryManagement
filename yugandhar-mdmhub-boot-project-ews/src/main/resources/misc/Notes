@@ -1,0 +1,48 @@
+TxnTransferObj.txnPayload.inventoryOrderDO
+TxnTransferObj.txnPayload.inventoryOrderDOList
+
+legalentityDO.displayName
+legalentityDO.statusTypeRefkey
+lePersonDO.personnamesDOList.personnamesDO
+lePersonDO.personnamesDOList.personnamesDO.personnameTypeRefkey;
+lePersonDO.personnamesDOList.personnamesDO.personnameTypeRefValue;
+lePersonDO.personnamesDOList.personnamesDO.prefixNameRefkey;
+lePersonDO.personnamesDOList.personnamesDO.prefixNameRefValue;
+lePersonDO.personnamesDOList.personnamesDO.prefixMisc;
+lePersonDO.personnamesDOList.personnamesDO.nameOne;
+lePersonDO.personnamesDOList.personnamesDO.nameTwo;
+lePersonDO.personnamesDOList.personnamesDO.nameThree;
+lePersonDO.personnamesDOList.personnamesDO.nameFour;
+lePersonDO.personnamesDOList.personnamesDO.lastName;
+leAddressAssocDOList.addressDO
+lePhoneAssocDOList
+
+
+
+-------------------------header object------------------------------------
+TxnTransferObj.txnHeader
+TxnTransferObj.txnHeader.requesterLanguage;
+	TxnTransferObj.txnHeader.requesterLocale;
+	
+	//Authorization properties
+	TxnTransferObj.txnHeader.userName;
+	TxnTransferObj.txnHeader.userRole;
+	TxnTransferObj.txnHeader.accessToken;
+	
+	//correlation properties
+	TxnTransferObj.txnHeader.txnCorrelationId;
+	TxnTransferObj.txnHeader.txnMessageId;
+	
+	//Request originator and interfacing system trace
+	TxnTransferObj.txnHeader.requestOriginSource;
+	TxnTransferObj.txnHeader.requesterSystem;
+	
+	//Trasaction Status
+	TxnTransferObj.txnHeader.transactionResponseCode;
+	TxnTransferObj.txnHeader.requestTimeStamp;
+	TxnTransferObj.txnHeader.responseTimeStamp;
+	TxnTransferObj.txnHeader.TotalExecutionTimeMillies;
+	
+	//Transaction Name
+	TxnTransferObj.txnHeader.transactionServiceName;
+-------------------------------------------------------------

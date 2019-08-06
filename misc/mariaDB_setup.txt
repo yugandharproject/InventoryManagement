@@ -1,0 +1,32 @@
+
+D:\Yugandhar\repoClone\IskonManagement\mariadb-10.3.13-winx64\bin>mysql_install_db --datadir=../data --password=prabhuji1# -R
+Running bootstrap
+2019-07-25 11:24:54 0 [Note] D:\Yugandhar\repoClone\IskonManagement\mariadb-10.3.13-winx64\bin\mysqld.exe (mysqld 10.3.13-MariaDB) starting as process 268 ...
+Removing default user
+Allowing remote access for user root
+Setting root password
+Creating my.ini file
+Creation of the database was successful
+D:\Yugandhar\repoClone\IskonManagement\mariadb-10.3.13-winx64\bin>mysqld --console
+2019-07-25 11:25:23 0 [Note] mysqld (mysqld 10.3.13-MariaDB) starting as process 3652 ...
+2019-07-25 11:25:23 0 [Note] InnoDB: Mutexes and rw_locks use Windows interlocked functions
+2019-07-25 11:25:23 0 [Note] InnoDB: Uses event mutexes
+2019-07-25 11:25:23 0 [Note] InnoDB: Compressed tables use zlib 1.2.11
+2019-07-25 11:25:23 0 [Note] InnoDB: Number of pools: 1
+2019-07-25 11:25:23 0 [Note] InnoDB: Using SSE2 crc32 instructions
+2019-07-25 11:25:23 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+2019-07-25 11:25:23 0 [Note] InnoDB: Completed initialization of buffer pool
+2019-07-25 11:25:24 0 [Note] InnoDB: 128 out of 128 rollback segments are active.
+2019-07-25 11:25:24 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+2019-07-25 11:25:24 0 [Note] InnoDB: Setting file '.\ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+2019-07-25 11:25:24 0 [Note] InnoDB: File '.\ibtmp1' size is now 12 MB.
+2019-07-25 11:25:24 0 [Note] InnoDB: Waiting for purge to start
+2019-07-25 11:25:24 0 [Note] InnoDB: 10.3.13 started; log sequence number 1630851; transaction id 21
+2019-07-25 11:25:24 0 [Note] InnoDB: Loading buffer pool(s) from D:\Yugandhar\repoClone\IskonManagement\mariadb-10.3.13-winx64\data\ib_buffer_pool
+2019-07-25 11:25:24 0 [Note] InnoDB: Buffer pool(s) load completed at 190725 11:25:24
+2019-07-25 11:25:24 0 [Note] Plugin 'FEEDBACK' is disabled.
+2019-07-25 11:25:24 0 [Note] Server socket created on IP: '::'.
+2019-07-25 11:25:24 0 [Note] Reading of all Master_info entries succeded
+2019-07-25 11:25:24 0 [Note] Added new Master_info '' to hash table
+2019-07-25 11:25:24 0 [Note] mysqld: ready for connections.
+Version: '10.3.13-MariaDB'  socket: ''  port: 3306  mariadb.org binary distribution

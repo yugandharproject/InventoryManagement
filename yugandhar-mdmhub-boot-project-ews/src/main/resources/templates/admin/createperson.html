@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{admin/main_layout}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Create a Brahmachari entry</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width-device-width, initial-scale 1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popperjs/1.14.7/umd/poppermin.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+<style>
+div.div-outline {
+  border: 1px solid;
+  outline: 1px grey;
+}
+</style>
+</head>
+
+<body>
+	<div layout:fragment="content" class="col">
+	<!--  Error and Information messages and the header -->
+	<div th:if="${uimessagewrapper != null and !uimessagewrapper.successMessageList.empty}">
+		<div class="alert alert-success">
+			<h6 th:each="obj : ${uimessagewrapper.successMessageList}" th:text="${obj}" class="text-success" style="font--size:100%;font-weight:normal;margin-top:0px;margin-bottom:0px">--</h6>
+		</div>
+	</div>
+	<div th:if="${uimessagewrapper != null and !uimessagewrapper.errorMessageList.empty}">
+		<div class="alert alert-danger" role="alert">
+		<strong>Failed!</strong>
+			<h6 th:each="obj : ${uimessagewrapper.errorMessageList}" th:text="${obj}" class="text-danger" style="font-size:100%;font-color: maroon;font-weight:bold;margin-top:0px;margin-bottom:0px">--</h6>
+		</div>
+	</div>
+	
+	<header>
+		<h6 class="title-agile text-left" style="margin-top: 1px; margin-bottom: 30px; ">Add a new Brahamachari Entry</h6>
+	</header>
+	
+		<form name="createpersonform" class="container-fluid  form-horizontal"
+			action="#" th:action="@{createperson_do}"
+			th:object="${legalentityDO}" method="post">
+			<div class="row ">
+				<label class="control-label col-sm-2 col-form-label-sm"
+					for="brahmachari_id">Brahamachari Id</label>
+				<div class="col-sm-3">
+					<input type="text" disabled="true" class="form-control form-control-sm"
+						id="brahmachari_id" placeholder="" name="brahmachari_id"
+						th:field="*{idPk}">
+				</div>
+			</div>
+			<div class=" row">
+				<label class="control-label col-sm-2 col-form-label-sm"
+					for="brahmachari_name">Brahamachari Name</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm"
+						id="brahmachari_name" placeholder="" name="brahmachari_name"
+						th:field="*{displayName}">
+				</div>
+			</div>
+			<div class=" row">
+				<label class="control-label col-sm-2 col-form-label-sm" for="Gender">Gender</label>
+				<div class="col-sm-2">
+					<select class="form-control form-control-sm" id="Gender" name="Gender" th:field="*{lePersonDO.genderRefkey}">
+					    <option th:each="refGenderDO, itemStat : ${txnPayload.refGenderDOList}" th:value="${txnPayload.refGenderDOList[__${itemStat.index}__].key}" 
+					    th:text="${txnPayload.refGenderDOList[__${itemStat.index}__].value}">
+   						 </option>
+    				</select>
+				</div>
+			</div> 
+
+			<!-- Phone Number block -->
+			<!--  <ul class="nav nav-tabs" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#contactDetailsPane">Contact Details</a> </li>
+ 			</ul>
+ 			<br/>
+ 			<div class="tab-content">
+ 			<div id="contactDetailsPane" class="content tab-pane active">  -->
+			<div class="row">
+				<span class="control-label col-sm-2 col-form-label-sm">Contact Details</span>
+			</div>
+			<div th:each="lePhoneAssocDO, itemStat : *{lePhoneAssocDOList}">
+			
+				<div class="row">
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="houseNumber">Contact Details</label>
+					<div class="col-sm-2">
+						<select class="form-control form-control-sm" id="phoneTypeRefkey" name="phoneTypeRefkey"  th:field="*{lePhoneAssocDOList[__${itemStat.index}__].phoneTypeRefkey}">
+						<option th:each="refPhoneTypeDO, itemStatphone : ${txnPayload.refPhoneTypeDOList}" th:value="${txnPayload.refPhoneTypeDOList[__${itemStatphone.index}__].key}" 
+							    th:text="${txnPayload.refPhoneTypeDOList[__${itemStatphone.index}__].value}">
+						</option>
+						</select>
+					</div>
+					<div class="col-sm-3">
+						<input type="text" class="form-control form-control-sm"
+							id="phoneNumber" placeholder="" name="cellphone"
+							th:field="*{lePhoneAssocDOList[__${itemStat.index}__].phoneNumber}" />
+					</div>
+				</div>
+			</div>
+			<!-- </div></div> -->
+		
+
+			<!-- Address block -->
+			<div class="row col-sm-2">
+				<span class="control-label col-form-label-sm">Address</span>
+			</div>
+			<div th:each="leAddressAssocDO, itemStat : *{leAddressAssocDOList}">
+				<div hidden="true"> <input type="text" hidden="true" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressTypeRefkey}" />
+				 <input type="text" hidden="true" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressSubtypeRefkey}" />
+				</div>		
+				<div class="row ">
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="houseNumber">House Number</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control form-control-sm"
+							id="houseNumber" placeholder="" name="houseNumber"
+							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.houseNumber}" />
+					</div>
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="addressLineOne">address Line One</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control form-control-sm"
+							id="addressLineOne" placeholder="" name="addressLineOne"
+							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.addressLineOne}" />
+					</div>
+				</div>
+				<div class="row ">
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="addressLineTwo">Address Line two</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control form-control-sm"
+							id="addressLineTwo" placeholder="" name="addressLineTwo"
+							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.addressLineTwo}" />
+					</div>
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="addressLineThree">Address Line three</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control form-control-sm"
+							id="addressLineThree" placeholder="" name="addressLineThree"
+							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.addressLineThree}" />
+					</div>
+				</div>
+				<div class="row ">
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="city">City</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control form-control-sm"
+							id="city" placeholder="" name="city"
+							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.city}" />
+					</div>
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="postalCode">PIN/ZIP Code</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control form-control-sm"
+							id="postalCode" placeholder="" name="postalCode"
+							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.postalCode}" />
+					</div>
+				</div>
+				<div class="row ">
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="stateProvinceRefkey">State</label>
+					<div class="col-sm-3">
+						<select class="form-control form-control-sm" id="stateProvinceRefkey" name="stateProvinceRefkey"  th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.stateProvinceRefkey}">
+						<option th:each="refStateProvinceDO, itemStatphone : ${txnPayload.refStateProvinceDOList}" th:value="${txnPayload.refStateProvinceDOList[__${itemStatphone.index}__].key}" 
+							    th:text="${txnPayload.refStateProvinceDOList[__${itemStatphone.index}__].value}">
+						</option>
+						</select>
+					</div>
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="countryRefkey">Country</label>
+					<div class="col-sm-3">
+						<select class="form-control form-control-sm" id="countryRefkey" name="countryRefkey"
+							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.countryRefkey}">
+						<option th:value="356" th:text="India"></option>
+						</select>
+					</div>
+				</div>
+			</div>
+			
+			<button type="submit" class="btn btn-primary">Save</button>
+			
+		</form>
+
+	</div>
+	</div>
+</body>
+</html>

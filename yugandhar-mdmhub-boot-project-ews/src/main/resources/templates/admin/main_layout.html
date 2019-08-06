@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:layout= "http://www.w3.org/1999/xhtml" xmlns:th= "http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content= "width=device-width, initial-scale 1">
+<link rel="stylesheet"
+href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popperjs/1.14.7/umd/poppermin.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="container-fluid">
+<div class="row bg-light">
+<!--  headerhtml that's here -->
+<div class="col-sm" th:replace="admin/header :: header"></div>
+</div>
+<div class="row">
+<div class="col bg-light" th:replace="admin/navvertical :: nav-vertical"></div>
+<div class="col" layout:fragment="content"></div>
+</div>
+<!-- footerhtml that's here -->
+<footer>
+<div th:replace="admin/footer:: footer"></div>
+</footer>
+</div>
+</body>
+</html>
