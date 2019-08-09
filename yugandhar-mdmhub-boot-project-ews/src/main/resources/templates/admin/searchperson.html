@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{admin/main_layout}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Create a Brahmachari entry</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width-device-width, initial-scale 1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popperjs/1.14.7/umd/poppermin.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+<style>
+div.div-outline {
+  border: 1px solid;
+  outline: 1px grey;
+}
+</style>
+</head>
+
+<body>
+	<div layout:fragment="content" class="col">
+	<!--  Error and Information messages and the header -->
+	<div th:if="${uimessagewrapper != null and !uimessagewrapper.successMessageList.empty}">
+		<div class="alert alert-success">
+			<h6 th:each="obj : ${uimessagewrapper.successMessageList}" th:text="${obj}" class="text-success" style="font--size:100%;font-weight:normal;margin-top:0px;margin-bottom:0px">--</h6>
+		</div>
+	</div>
+	<div th:if="${uimessagewrapper != null and !uimessagewrapper.errorMessageList.empty}">
+		<div class="alert alert-danger" role="alert">
+		<strong>Failed!</strong>
+			<h6 th:each="obj : ${uimessagewrapper.errorMessageList}" th:text="${obj}" class="text-danger" style="font-size:100%;font-color: maroon;font-weight:bold;margin-top:0px;margin-bottom:0px">--</h6>
+		</div>
+	</div>
+	
+	<header>
+		<h6 class="title-agile text-left" style="margin-top: 1px; margin-bottom: 30px; ">Search Person</h6>
+	</header>
+	
+		<form name="searchpersonform" class="container-fluid  form-horizontal"
+			action="#" th:action="@{searchperson_do}"
+			th:object="${searchLegalEntityRequestDO}" method="post">
+			
+			<div class=" row">
+				<label class="control-label col-sm-2 col-form-label-sm"
+					for="brahmachari_name">Brahamachari Name</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm"
+						id="brahmachari_name" placeholder="" name="brahmachari_name"
+						th:field="*{displayName}">
+				</div>
+			</div>
+			<div class=" row">
+				<label class="control-label col-sm-2 col-form-label-sm"
+					for="brahmachari_name">Phone Number or Email</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm"
+						id="brahmachari_name" placeholder="" name="brahmachari_name"
+						th:field="*{phoneNumber}">
+				</div>
+			</div>
+			
+			<div class=" row">
+				<label class="control-label col-sm-2 col-form-label-sm"
+					for="brahmachari_name">City</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm"
+						id="brahmachari_name" placeholder="" name="brahmachari_name"
+						th:field="*{city}">
+				</div>
+			</div>
+			
+			<button type="submit" class="btn btn-primary">Search</button>
+			
+		</form>
+
+	</div>
+	</div>
+</body>
+</html>

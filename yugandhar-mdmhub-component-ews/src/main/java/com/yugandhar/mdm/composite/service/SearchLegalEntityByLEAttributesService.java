@@ -210,7 +210,7 @@ public class SearchLegalEntityByLEAttributesService {
 		HashMap<String, String> paramMap = new HashMap<String, String>();
 
 		queryJoinString.append(
-				"select distinct legalentity.id_pk, legalentity.VERSION, legalentity.CREATED_TS, legalentity.DELETED_TS, legalentity.UPDATED_TS, legalentity.UPDATED_BY_USER, legalentity.UPDATED_BY_TXN_ID, legalentity.DISPLAY_NAME, legalentity.ENTITY_OBJECT_TYPE_REFKEY, legalentity.CLASSIFICATION_CODE_REFKEY, legalentity.IMPORTANCE_TYPE_REFKEY, legalentity.LE_RATING_REFKEY, legalentity.STATUS_TYPE_REFKEY, legalentity.SOURCE_SYSTEM_REFKEY, legalentity.ONBOARDING_DATE, legalentity.OFFBOARDING_DATE, legalentity.KYC_VERIFICATION_FLAG, legalentity.DESCRIPTION from legalentity ");
+				"select distinct legalentity.id_pk, legalentity.VERSION, legalentity.CREATED_TS, legalentity.DELETED_TS, legalentity.UPDATED_TS, legalentity.UPDATED_BY_USER, legalentity.UPDATED_BY_TXN_ID, legalentity.DISPLAY_NAME, legalentity.ENTITY_OBJECT_TYPE_REFKEY, legalentity.CLASSIFICATION_CODE_REFKEY, legalentity.IMPORTANCE_TYPE_REFKEY, legalentity.LE_RATING_REFKEY, legalentity.STATUS_TYPE_REFKEY, legalentity.SOURCE_SYSTEM_REFKEY, legalentity.ONBOARDING_DATE, legalentity.OFFBOARDING_DATE, legalentity.KYC_VERIFICATION_FLAG, legalentity.DESCRIPTION, legalentity.PHONETIC_DISPLAY_NAME from legalentity ");
 		if (inquiryFilter.equals(yugandharConstants.FILTER_VALUE_ACTIVE)) {
 			queryCriteriaString
 					.append(" where (legalentity.DELETED_TS is null or legalentity.DELETED_TS > current_timestamp) ");

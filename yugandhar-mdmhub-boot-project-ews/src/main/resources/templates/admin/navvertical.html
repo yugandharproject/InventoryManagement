@@ -1,31 +1,31 @@
-<div th:fragment="nav-vertical" xmlns:th= "http://www.w3.orgg/1999/xhtml" style="width: 200px; height: 500px; background-color: rgba(0,0,0,.03); ">
+<div th:fragment="nav-vertical" xmlns:th= "http://www.w3.orgg/1999/xhtml" style="width: 200px; height: 500px; background-color:#ffe6e6 ">
 <div id="leftnavigation">
-<div class="card">
-<div class="card-header">
-<a class="text-secondary" data-toggle="collapse" href=" #collapseOne" style= "font-size:15px; ">
+<div class="card" style="background-color:#cc0000">
+<div class="card-header" style="background-color:#800000">
+<a class="text-white" data-toggle="collapse" href=" #collapseOne" style= "font-size:15px; ">
 Inventory Management admin
 </a>
 </div>
 <div id="collapseOne" class="collapse" data-parent="#leftnavigation">
 <div class="card-body">
-<a class="text-secondary" href="#" th:href ="@{/admin/createperson}" style="display: block;font-size:13px " >Brahmachari Entry</a>
-<a class="text-secondary" href="#" th:href ="@{/admin/listallpersons}" style="display: block;font-size:13px">Brahmachari Search</a>
-<a class="text-secondary" href="#" th:href ="@{/admin/createproduct}" style="display: block;font-size:13px " >Product entry</a>
-<a class="text-secondary" href="#" th:href ="@{/admin/searchproduct}" style="display: block;font-size:13px">Product Search</a>
-<a class="text-secondary" href="#" th:href ="@{/admin/issueproduct}" style="display: block;font-size:13px">Issue Product</a>
+<a class="text-white" href="#" th:href ="@{/admin/createperson}" style="display: block;font-size:13px " >Brahmachari Entry</a>
+<a class="text-white" href="#" th:href ="@{/admin/searchperson}" style="display: block;font-size:13px">Brahmachari Search</a>
+<a class="text-white" href="#" th:href ="@{/admin/createproduct}" style="display: block;font-size:13px " >Product entry</a>
+<a class="text-white" href="#" th:href ="@{/admin/searchproduct}" style="display: block;font-size:13px">Product Search</a>
+<a class="text-white" href="#" th:href ="@{/admin/issueproduct}" style="display: block;font-size:13px">Issue Product</a>
 </div> </div> </div>
 
 
 <!--  Inventory reports  menu-->
 
-<div class="card">
-<div class="card-header">
-<a class="text-secondary" data-toggle= "collapse" href=" #collapseTwo" style= "font-size:15px; ">
+<div class="card" style="background-color:#cc0000">
+<div class="card-header" style="background-color:#800000">
+<a class="text-white" data-toggle= "collapse" href=" #collapseTwo" style= "font-size:15px; ">
 Inventory Report
 </a>
 </div>
 <div id="collapseTwo" class="collapse" data-parent="#leftnavigation">
 <div class="card-body">
-<a class="text-secondary" href="#" style="display: block;font-size:13px">Generate extract</a>
+<a class="text-white" href="#" style="display: block;font-size:13px">Generate extract</a>
 </div> </div> </div>
 </div> </div>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{admin/main_layout}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Create a Brahmachari entry</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width-device-width, initial-scale 1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popperjs/1.14.7/umd/poppermin.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<style>
+div.div-outline {
+	border: 1px solid;
+	outline: 1px grey;
+}
+</style>
+</head>
+
+<body>
+	<div layout:fragment="content" class="col">
+		<!--  Error and Information messages and the header -->
+		<div
+			th:if="${uimessagewrapper != null and !uimessagewrapper.successMessageList.empty}">
+			<div class="alert alert-success">
+				<h6 th:each="obj : ${uimessagewrapper.successMessageList}"
+					th:text="${obj}" class="text-success"
+					style="font--size: 100%; font-weight: normal; margin-top: 0px; margin-bottom: 0px">--</h6>
+			</div>
+		</div>
+		<div
+			th:if="${uimessagewrapper != null and !uimessagewrapper.errorMessageList.empty}">
+			<div class="alert alert-danger" role="alert">
+				<strong>Failed!</strong>
+				<h6 th:each="obj : ${uimessagewrapper.errorMessageList}"
+					th:text="${obj}" class="text-danger"
+					style="font-size: 100%; font-color: maroon; font-weight: bold; margin-top: 0px; margin-bottom: 0px">--</h6>
+			</div>
+		</div>
+
+		<header>
+			<h6 class="title-agile text-left"
+				style="margin-top: 1px; margin-bottom: 30px;">Search Person</h6>
+		</header>
+
+		<form name="searchpersonform" class="container-fluid" th:action="@{editdeleteperson}"
+			th:object="${txnPayload}" method="post">
+
+			<table id="searchpersonresultsTable" align="center" class="table table-sm table-stiped">
+				<thead class="thead-light">
+					<tr>
+						<th style="font-size:90%;" rowspan="1">Person Id</th>
+						<th style="font-size:90%;" rowspan="1">First Name</th>
+						<th style="font-size:90%;" rowspan="1">Last Name</th>
+						<th style="font-size:90%;" rowspan="1">Nick Name</th>
+						<th style="font-size:90%;" rowspan="1">Phone Number</th>
+						<th style="font-size:90%;" rowspan="1">Alternate phone</th>
+						<th style="font-size:90%;" rowspan="1">email</th>
+						<th style="font-size:90%;" rowspan="1">Actions</th>
+					</tr>
+				</thead>
+			<tbody>
+				<tr th:each="legalentityDO, itemStat: ${txnPayload.legalentityDOList}">
+					<td style="font-size:90%" th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].idPk}" th:field="${txnPayload.legalentityDOList[__${itemStat.index}__].idPk}" ></td>
+					<!-- <td style="font-size:90%" th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].displayName}" ></td> -->
+					<td style="font-size:90%" th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].lePersonDO.personnamesDOList[__0__].nameOne}" th:field="${txnPayload.legalentityDOList[__${itemStat.index}__].lePersonDO.personnamesDOList[__0__].nameOne}"></td>
+					<td style="font-size:90%" th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].lePersonDO.personnamesDOList[__0__].lastName}" ></td>
+					<td style="font-size:90%" th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].lePersonDO.personnamesDOList[__0__].nickName}" ></td>
+					<!-- phone type =1 MOBILE -->
+					<td style="font-size:90%" th:each="lePhoneAssocDO, phoneCounter: ${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList}"  
+					 th:if="${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList[__${phoneCounter.index}__].phoneTypeRefkey} == '1'" 
+					 th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList[__${phoneCounter.index}__].phoneNumber}"></td> 
+					 <!-- phone type =2 PHONE -->
+					 <td style="font-size:90%" th:each="lePhoneAssocDO, phoneCounter: ${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList}"  
+					 th:if="${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList[__${phoneCounter.index}__].phoneTypeRefkey} == '2'" 
+					 th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList[__${phoneCounter.index}__].phoneNumber}"></td> 
+					 
+					 <!-- phone type =3 EMAIL -->
+					 <td style="font-size:90%" th:each="lePhoneAssocDO, phoneCounter: ${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList}"  
+					 th:if="${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList[__${phoneCounter.index}__].phoneTypeRefkey} == '3'" 
+					 th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList[__${phoneCounter.index}__].phoneNumber}"></td>
+					 <td>
+					 <button type="submit" class="btn btn-outline-secondary btn-sm"  name="editperson" th:value="${txnPayload.legalentityDOList[__${itemStat.index}__].idPk}" th:text="Edit"></button>				 
+					 
+					 
+					 </td>
+				</tr>
+				
+			</tbody>
+			</table>
+
+
+		</form>
+
+	</div>
+	</div>
+</body>
+</html>

@@ -4,7 +4,7 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Create a Person entry</title>
+<title>Edit Person details</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale 1">
 <link rel="stylesheet"
@@ -25,7 +25,7 @@ div.div-outline {
 </head>
 
 <body>
-	<div layout:fragment="content" class="col">
+	<div layout:fragment="content" class="col" >
 	<!--  Error and Information messages and the header -->
 	<div th:if="${uimessagewrapper != null and !uimessagewrapper.successMessageList.empty}">
 		<div class="alert alert-success">
@@ -40,19 +40,21 @@ div.div-outline {
 	</div>
 	
 	<header>
-		<h6 class="title-agile text-left" style="margin-top: 1px; margin-bottom: 30px; ">Add a new Person Entry</h6>
+		<h6 class="title-agile text-left" style="margin-top: 1px; margin-bottom: 30px; ">Edit Person details</h6>
 	</header>
 	
-		<form name="createpersonform" class="container-fluid  form-horizontal"
-			action="#" th:action="@{createperson_do}"
+		<form name="editpersonform" class="container-fluid  form-horizontal"
+			action="#" th:action="@{editdeleteperson_do}" modelAttribute="${legalentityDO}"
 			th:object="${legalentityDO}" method="post">
-			<div hidden="true" class="row ">
+			<div class="row ">
 				<label class="control-label col-sm-2 col-form-label-sm"
 					for="personId">Person Id</label>
 				<div class="col-sm-3">
-					<input type="text" disabled="true" class="form-control form-control-sm"
-						id="personId" placeholder="" name="personId"
-						th:field="*{idPk}">
+					<input type="text" readonly="true" class="form-control form-control-sm" id="idPk" placeholder="" name="idPk" th:field="${legalentityDO.idPk}">
+					<input type="text" hidden="true" class="form-control form-control-sm" id="version" placeholder="" name="version" th:field="${legalentityDO.version}">
+					<input type="text" hidden="true" class="form-control form-control-sm" id="entityObjectTypeRefkey" placeholder="" name="entityObjectTypeRefkey" th:field="${legalentityDO.entityObjectTypeRefkey}">
+					<input type="text" hidden="true" class="form-control form-control-sm" id="personId" placeholder="" name="personId" th:field="${legalentityDO.lePersonDO.legalentityIdpk}">
+					<input type="text" hidden="true" class="form-control form-control-sm" id="personversion" placeholder="" name="personversion" th:field="${legalentityDO.lePersonDO.version}">
 				</div>
 			</div>
 			
@@ -60,9 +62,9 @@ div.div-outline {
 				<label class="control-label col-sm-2 col-form-label-sm"
 					for="personnameone">First Name</label>
 				<div class="col-sm-3">
-					<input required type="text" class="form-control form-control-sm"
-						id="personnameone" placeholder="" name="personnameone"
-						th:field="${legalentityDO.lePersonDO.personnamesDOList[__0__].nameOne}">
+					<input required type="text" class="form-control form-control-sm" id="personnameone"th:field="${legalentityDO.lePersonDO.personnamesDOList[__0__].nameOne}"  placeholder="" name="personnameone" >
+					<input hidden="true" type="text" class="form-control form-control-sm" id="personnameone"th:field="${legalentityDO.lePersonDO.personnamesDOList[__0__].idPk}"  placeholder="" name="personnameone" >
+					<input hidden="true" type="text" class="form-control form-control-sm" id="personnameone"th:field="${legalentityDO.lePersonDO.personnamesDOList[__0__].version}"  placeholder="" name="personnameone" >
 				</div>
 			</div>
 			
@@ -113,6 +115,10 @@ div.div-outline {
 					th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneNumber}">
 					<input hidden="true" type="text" class="form-control form-control-sm" th:each="lePhoneAssocDO, itemlephone : *{lePhoneAssocDOList}" 
 					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '1'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey}">					
+					<input hidden="true" type="text" class="form-control form-control-sm" th:each="lePhoneAssocDO, itemlephone : *{lePhoneAssocDOList}" 
+					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '1'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].idPk}">
+					<input hidden="true" type="text" class="form-control form-control-sm" th:each="lePhoneAssocDO, itemlephone : *{lePhoneAssocDOList}" 
+					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '1'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].version}">
 				</div>
 				
 				
@@ -123,7 +129,11 @@ div.div-outline {
 					<input type="text" class="form-control form-control-sm" id="Landline" placeholder="" name="Landline" th:each="lePhoneAssocDO, itemlephone : *{lePhoneAssocDOList}" 
 					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '2'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneNumber}">
 					<input hidden="true" type="text" class="form-control form-control-sm" th:each="lePhoneAssocDO, itemlephone : *{lePhoneAssocDOList}" 
-					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '2'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey}">					
+					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '2'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey}">
+					<input hidden="true" type="text" class="form-control form-control-sm" th:each="lePhoneAssocDO, itemlephone : *{lePhoneAssocDOList}" 
+					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '2'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].idPk}">
+					<input hidden="true" type="text" class="form-control form-control-sm" th:each="lePhoneAssocDO, itemlephone : *{lePhoneAssocDOList}" 
+					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '2'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].version}">					
 				</div>
 				
 				<label class="control-label col-form-label-sm"
@@ -133,42 +143,14 @@ div.div-outline {
 					<input type="text" class="form-control form-control-sm" id="email" placeholder="" name="email" th:each="lePhoneAssocDO, itemlephone : *{lePhoneAssocDOList}" 
 					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '3'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneNumber}">
 					<input hidden="true" type="text" class="form-control form-control-sm" th:each="lePhoneAssocDO, itemlephone : *{lePhoneAssocDOList}" 
-					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '3'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey}">					
+					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '3'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey}">
+					<input hidden="true" type="text" class="form-control form-control-sm" th:each="lePhoneAssocDO, itemlephone : *{lePhoneAssocDOList}" 
+					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '3'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].idPk}">
+					<input hidden="true" type="text" class="form-control form-control-sm" th:each="lePhoneAssocDO, itemlephone : *{lePhoneAssocDOList}" 
+					th:if="*{lePhoneAssocDOList[__${itemlephone.index}__].phoneTypeRefkey} == '3'" th:field="*{lePhoneAssocDOList[__${itemlephone.index}__].version}">					
 				</div>
 				
 			</div>
-			
-			
-			<!--  <ul class="nav nav-tabs" role="tablist">
-			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#contactDetailsPane">Contact Details</a> </li>
- 			</ul>
- 			<br/>
- 			<div class="tab-content">
- 			<div id="contactDetailsPane" class="content tab-pane active"> 
-			<div class="row">
-				<span class="control-label col-sm-2 col-form-label-sm">Contact Details</span>
-			</div>
-			<div th:each="lePhoneAssocDO, itemStat : *{lePhoneAssocDOList}">
-			
-				<div class="row">
-					<label class="control-label col-sm-2 col-form-label-sm"
-						for="houseNumber">Contact Details</label>
-					<div class="col-sm-2">
-						<select class="form-control form-control-sm" id="phoneTypeRefkey" name="phoneTypeRefkey"  th:field="*{lePhoneAssocDOList[__${itemStat.index}__].phoneTypeRefkey}">
-						<option th:each="refPhoneTypeDO, itemStatphone : ${txnPayload.refPhoneTypeDOList}" th:value="${txnPayload.refPhoneTypeDOList[__${itemStatphone.index}__].key}" 
-							    th:text="${txnPayload.refPhoneTypeDOList[__${itemStatphone.index}__].value}">
-						</option>
-						</select>
-					</div>
-					<div class="col-sm-3">
-						<input type="text" class="form-control form-control-sm"
-							id="phoneNumber" placeholder="" name="cellphone"
-							th:field="*{lePhoneAssocDOList[__${itemStat.index}__].phoneNumber}" />
-					</div>
-				</div>
-			</div>  -->
-			<!-- </div></div> contact details pane ends here-->
 		
 
 			<!-- Address block -->
@@ -178,14 +160,18 @@ div.div-outline {
 			<div th:each="leAddressAssocDO, itemStat : *{leAddressAssocDOList}">
 				<div hidden="true"> <input type="text" hidden="true" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressTypeRefkey}" />
 				 <input type="text" hidden="true" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressSubtypeRefkey}" />
+				 <input type="text" hidden="true" th:field="*{leAddressAssocDOList[__${itemStat.index}__].idPk}" />
+				 <input type="text" hidden="true" th:field="*{leAddressAssocDOList[__${itemStat.index}__].version}" />
 				</div>		
 				<div class="row ">
 					<label class="control-label col-sm-2 col-form-label-sm"
 						for="houseNumber">House Number</label>
 					<div class="col-sm-3">
-						<input required type="text" class="form-control form-control-sm"
-							id="houseNumber" placeholder="" name="houseNumber"
-							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.houseNumber}" />
+						<input required type="text" class="form-control form-control-sm" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.houseNumber}" id="houseNumber" placeholder="" name="houseNumber" />
+						<input hidden="true" type="text" class="form-control form-control-sm" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.idPk}" id="houseNumber" placeholder="" name="houseNumber" />
+						<input hidden="true" type="text" class="form-control form-control-sm" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.version}" id="houseNumber" placeholder="" name="houseNumber" />	
+							
+							
 					</div>
 					<label class="control-label col-sm-2 col-form-label-sm"
 						for="addressLineOne">address Line One</label>
@@ -227,7 +213,7 @@ div.div-outline {
 							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.postalCode}" />
 					</div>
 				</div>
-				<div class="row ">
+				<div class="row">
 					<label class="control-label col-sm-2 col-form-label-sm"
 						for="stateProvinceRefkey">State</label>
 					<div class="col-sm-3">
@@ -248,8 +234,57 @@ div.div-outline {
 				</div>
 			</div>
 			
-			<button type="submit" class="btn btn-primary">Save</button>
+			<button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#confirmSaveModal'" th:text="Save" th:disabled="${readonlyform}"> </button>
+			<button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#confirmDeleteModal'" th:text="Remove" th:disabled="${readonlyform}"> </button>
 			
+				<!--  Save confirmation Modal -->
+					 <div th:id="confirmSaveModal" class="modal" tabindex="-1" role="dialog">
+					<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title">Confirm</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden= "true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+					<p style="color: maroon ">Do you wish to continue making the changes?</p>
+					</div>
+					<div class="modal-footer">
+					<button id="btnconfirmSaveModalSave" type="submit" name="action" th:value="editsave" th:text="Save" class="btn btn-primary"></button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+					</div>
+					</div>
+					</div>
+					
+			<!--  Delete confirmation Modal -->
+					 <div th:id="confirmDeleteModal" class="modal" tabindex="-1" role="dialog">
+					<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title">Confirm</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden= "true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+					<p style="color: maroon ">Do you wish to continue making the changes? The changes can not be reversed after deletion</p>
+					</div>
+					<div class="modal-footer">
+					<button id="btnconfirmDeleteModalProceed" type="submit" name="action" th:value="delete" th:text="Proceed" class="btn btn-danger"></button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+					</div>
+					</div>
+					</div>
+					
+
+					<script>
+						$('#btnconfirmSaveModalSave').click(function(){
+							$('#confirmSaveModal').modal('toggle');
+						});
+					</script>
 		</form>
 
 	</div>

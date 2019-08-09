@@ -1,12 +1,14 @@
 package com.inventory.web;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.yugandhar.common.constant.yugandharConstants;
 import com.yugandhar.common.exception.YugandharCommonException;
@@ -23,12 +26,14 @@ import com.yugandhar.common.transobj.TxnHeader;
 import com.yugandhar.common.transobj.TxnTransferObj;
 import com.yugandhar.common.util.CommonValidationUtil;
 import com.yugandhar.mdm.extern.dobj.LeAddressAssocDO;
+import com.yugandhar.mdm.extern.dobj.LePersonDO;
 import com.yugandhar.mdm.extern.dobj.LePhoneAssocDO;
 import com.yugandhar.mdm.extern.dobj.LegalentityDO;
-import com.yugandhar.mdm.extern.dobj.RefCountryIsoDO;
+import com.yugandhar.mdm.extern.dobj.PersonnamesDO;
 import com.yugandhar.mdm.extern.dobj.RefGenderDO;
 import com.yugandhar.mdm.extern.dobj.RefPhoneTypeDO;
 import com.yugandhar.mdm.extern.dobj.RefStateProvinceDO;
+import com.yugandhar.mdm.extern.dobj.SearchLegalEntityRequestDO;
 import com.yugandhar.mdm.misc.dobj.CommonValidationResponse;
 import com.yugandhar.rest.controller.RequestProcessor;
 
@@ -62,81 +67,113 @@ public class InventoryMgmtWebController {
 	}
 
 	
-	private void populateCreatepersonDropdown(Model model) {
-		TxnTransferObj reqTxnTransferObj;
-		TxnTransferObj respTxnTransferObj;
-		TxnPayload respTxnPayload = new TxnPayload();
-		// Gender, Phone Number Contact Details, Country, State-province
-		reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "findAllRefGenderByLanguageCodeBase");
-		RefGenderDO refGenderDO = new RefGenderDO();
-		refGenderDO.setConfigLanguageCodeKey("1");
-		reqTxnTransferObj.getTxnPayload().setRefGenderDO(refGenderDO);
-		respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
-		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
-			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
-		} else {
-			respTxnPayload.setRefGenderDOList( respTxnTransferObj.getTxnPayload().getRefGenderDOList());
-		}
-		
-		// phone
-		
-		reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "findAllRefPhoneTypeByLanguageCodeBase");
-		RefPhoneTypeDO refPhoneTypeDO = new RefPhoneTypeDO();
-		refPhoneTypeDO.setConfigLanguageCodeKey("1");
-		reqTxnTransferObj.getTxnPayload().setRefPhoneTypeDO(refPhoneTypeDO);
-		respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
-		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
-			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
-		} else {
-			respTxnPayload.setRefPhoneTypeDOList( respTxnTransferObj.getTxnPayload().getRefPhoneTypeDOList());
-		}
-		
-		// state-province
-		reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "findAllRefStateProvinceByLanguageCodeBase");
-		RefStateProvinceDO refStateProvinceDO = new RefStateProvinceDO();
-		refStateProvinceDO.setConfigLanguageCodeKey("1");
-		refStateProvinceDO.setCountryIsoRefkey("356"); // country defaulted to India
-		reqTxnTransferObj.getTxnPayload().setRefStateProvinceDO(refStateProvinceDO);
-		respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
-		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
-			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
-		} else {
-			respTxnPayload.setRefStateProvinceDOList( respTxnTransferObj.getTxnPayload().getRefStateProvinceDOList());
-		}
-		
-		// Country
-		/*reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "findAllRefCountryIsoByLanguageCodeBase");
-		RefCountryIsoDO refCountryIsoDO = new RefCountryIsoDO();
-		refCountryIsoDO.setConfigLanguageCodeKey("1");
-		reqTxnTransferObj.getTxnPayload().setRefCountryIsoDO(refCountryIsoDO);
-		respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
-		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
-			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
-		} else {
-			respTxnPayload.setRefCountryIsoDOList( respTxnTransferObj.getTxnPayload().getRefCountryIsoDOList());
-		}*/
-		//set model response
-		model.addAttribute("txnPayload", respTxnPayload);
-	}
-
-
-
 	@PostMapping("/createperson_do")
 	public String createperson_do(Model model, HttpServletRequest request, 
 			@ModelAttribute LegalentityDO legalentityDO ) {
 		
 		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "createLegalEntity");
 		legalentityDO.setEntityObjectTypeRefkey("1"); // LE tye person
+		PersonnamesDO thePersonnamesDO = legalentityDO.getLePersonDO().getPersonnamesDOList().get(0);
+		thePersonnamesDO.setPersonnameTypeRefkey("1"); // name usage type defaulted to registered Name
+		legalentityDO.setDisplayName(thePersonnamesDO.getNameOne());
 		reqTxnTransferObj.getTxnPayload().setLegalentityDO(legalentityDO);
 		TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
 		populateCreatepersonDropdown(model);
 		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
 			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
 		} else {
-			addInfoMessage(model, UIMessages.SUCCESS_BRAHMACHARI_CREATED);
+			addInfoMessage(model, UIMessages.SUCCESS_PERSON_CREATED);
 			model.addAttribute("legalentityDO", respTxnTransferObj.getTxnPayload().getLegalentityDO());
 		}
 		return "admin/createperson";
+	}
+	
+	
+	@PostMapping("/editdeleteperson")
+	public String editdeleteperson_pre(Model model, HttpServletRequest request,
+			@RequestParam(value="editperson", required=false) String legalEntityIdPkToEdit , @RequestParam(value="deleteperson", required=false) Integer deletePersonElementat) {
+
+		LegalentityDO legalentityDO = new LegalentityDO();
+		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "retrieveLegalEntityByLegalEntityId");
+		legalentityDO.setIdPk(legalEntityIdPkToEdit);
+		legalentityDO.setInquiryLevel("103");
+		reqTxnTransferObj.getTxnPayload().setLegalentityDO(legalentityDO);
+		TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+		populateCreatepersonDropdown(model);
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+		} else {
+			model.addAttribute("legalentityDO", respTxnTransferObj.getTxnPayload().getLegalentityDO());
+		}
+		
+		return "admin/editperson";
+	}
+	
+	
+	@PostMapping("/editdeleteperson_do")
+	public String editdeleteperson_do(Model model, HttpServletRequest request, @ModelAttribute() LegalentityDO legalentityDO ,
+			@RequestParam(value="action", required=false) String strRequestedAction) {
+		if(strRequestedAction.equals("editsave")) {
+			
+			TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "updateLegalEntity");
+			reqTxnTransferObj.getTxnPayload().setLegalentityDO(legalentityDO);
+			TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+
+			populateCreatepersonDropdown(model);
+			if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+				addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+				model.addAttribute("legalentityDO", legalentityDO);
+			} else {
+				addInfoMessage(model, UIMessages.SUCCESS_PERSON_UPDATED);
+				model.addAttribute("legalentityDO", respTxnTransferObj.getTxnPayload().getLegalentityDO());
+			}
+			
+		} else if(strRequestedAction.equals("delete")) {
+			TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "updateLegalentityBase"); // update the deleted_ts of the based LE table, all other data will not be modified
+			LegalentityDO theLegalentityDObase = new LegalentityDO(legalentityDO);
+			theLegalentityDObase.setDeletedTs(new Date());
+			reqTxnTransferObj.getTxnPayload().setLegalentityDO(theLegalentityDObase);
+			TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+			populateCreatepersonDropdown(model);
+			populateCreatepersonDropdown(model);
+			if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+				addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+				model.addAttribute("legalentityDO", legalentityDO);
+			} else {
+				addInfoMessage(model, UIMessages.SUCCESS_PERSON_DELETED);
+				model.addAttribute("legalentityDO", legalentityDO);
+				model.addAttribute("readonlyform", "true");
+			}
+			
+			
+			
+		}
+		
+		
+		return "admin/editperson";
+	}
+	
+	@GetMapping("/searchperson")
+	public String searchLegalEntityRequestDO_pre(Model model, HttpServletRequest request, @ModelAttribute LegalentityDO legalentityDO ) {
+		model.addAttribute("searchLegalEntityRequestDO", new SearchLegalEntityRequestDO());
+		return "admin/searchperson";
+	}
+	
+	
+	@PostMapping("/searchperson_do")
+	public String searchLegalEntityRequestDO_do(Model model, HttpServletRequest request, @ModelAttribute SearchLegalEntityRequestDO searchLegalEntityRequestDO ) {
+		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "searchLegalEntityByLEAttributes");
+		searchLegalEntityRequestDO.setInquiryLevel("103");
+		reqTxnTransferObj.getTxnPayload().setSearchLegalEntityRequestDO(searchLegalEntityRequestDO);
+		TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+			return "admin/searchperson";
+		} else {
+			model.addAttribute("txnPayload", respTxnTransferObj.getTxnPayload());
+		}
+		return "admin/searchpersonresults";
 	}
 	
 	public LegalentityDO initCreatePerson() {
@@ -147,6 +184,13 @@ public class InventoryMgmtWebController {
 		theLeAddressAssocDO_pimary.setAddressTypeRefkey("1"); //All Seasons regular address
 		theLeAddressAssocDO_pimary.setAddressSubtypeRefkey("1"); //Primary
 		leAddressAssocDOList.add(theLeAddressAssocDO_pimary);
+		
+		//person and person name
+		LePersonDO theLePersonDO = new LePersonDO();
+		PersonnamesDO thePersonnamesDO = new PersonnamesDO();
+		ArrayList<PersonnamesDO> thePersonnamesDOList = new ArrayList<PersonnamesDO>();
+		theLePersonDO.setPersonnamesDOList(thePersonnamesDOList);
+		legalentityDO.setLePersonDO(theLePersonDO);
 		
 		//create blank phone numbers
 		List<LePhoneAssocDO> lePhoneAssocDOList = new ArrayList<LePhoneAssocDO>();
@@ -225,8 +269,65 @@ public class InventoryMgmtWebController {
 	public void addErrorMessage(Model model, CommonValidationResponse theCommonValidationResponse) {
 		UIMessageWrapper theUIMessageWrapper = new UIMessageWrapper();
 		theUIMessageWrapper.getErrorMessageList().add(theCommonValidationResponse.getErrorMessage() );
-		//theUIMessageWrapper.getErrorMessageList().add(theCommonValidationResponse.getAdditionalErrorMessage() );
+		theUIMessageWrapper.getErrorMessageList().add(theCommonValidationResponse.getAdditionalErrorMessage() );
 		model.addAttribute("uimessagewrapper", theUIMessageWrapper);
+	}
+	
+	private void populateCreatepersonDropdown(Model model) {
+		TxnTransferObj reqTxnTransferObj;
+		TxnTransferObj respTxnTransferObj;
+		TxnPayload respTxnPayload = new TxnPayload();
+		// Gender, Phone Number Contact Details, Country, State-province
+		reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "findAllRefGenderByLanguageCodeBase");
+		RefGenderDO refGenderDO = new RefGenderDO();
+		refGenderDO.setConfigLanguageCodeKey("1");
+		reqTxnTransferObj.getTxnPayload().setRefGenderDO(refGenderDO);
+		respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+		} else {
+			respTxnPayload.setRefGenderDOList( respTxnTransferObj.getTxnPayload().getRefGenderDOList());
+		}
+		
+		// phone
+		
+		reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "findAllRefPhoneTypeByLanguageCodeBase");
+		RefPhoneTypeDO refPhoneTypeDO = new RefPhoneTypeDO();
+		refPhoneTypeDO.setConfigLanguageCodeKey("1");
+		reqTxnTransferObj.getTxnPayload().setRefPhoneTypeDO(refPhoneTypeDO);
+		respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+		} else {
+			respTxnPayload.setRefPhoneTypeDOList( respTxnTransferObj.getTxnPayload().getRefPhoneTypeDOList());
+		}
+		
+		// state-province
+		reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "findAllRefStateProvinceByLanguageCodeBase");
+		RefStateProvinceDO refStateProvinceDO = new RefStateProvinceDO();
+		refStateProvinceDO.setConfigLanguageCodeKey("1");
+		refStateProvinceDO.setCountryIsoRefkey("356"); // country defaulted to India
+		reqTxnTransferObj.getTxnPayload().setRefStateProvinceDO(refStateProvinceDO);
+		respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+		} else {
+			respTxnPayload.setRefStateProvinceDOList( respTxnTransferObj.getTxnPayload().getRefStateProvinceDOList());
+		}
+		
+		// Country
+		/*reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "findAllRefCountryIsoByLanguageCodeBase");
+		RefCountryIsoDO refCountryIsoDO = new RefCountryIsoDO();
+		refCountryIsoDO.setConfigLanguageCodeKey("1");
+		reqTxnTransferObj.getTxnPayload().setRefCountryIsoDO(refCountryIsoDO);
+		respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+		} else {
+			respTxnPayload.setRefCountryIsoDOList( respTxnTransferObj.getTxnPayload().getRefCountryIsoDOList());
+		}*/
+		//set model response
+		model.addAttribute("txnPayload", respTxnPayload);
 	}
 	
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<con:soapui-project id="c525f074-d6b3-4f41-b865-f723d7e4e511" activeEnvironment="Default" name="InventoryManagement" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d5565a95-8406-439a-b09d-4fcf644e27c3" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8091" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://localhost:8091</con:endpoint></con:endpoints><con:resource name="YugandharRequestProcessor" path="/inventory/rest/YugandharRequestProcessor" id="3b5ab9ab-e490-4ace-82fe-4601e350a7ac"><con:settings/><con:parameters/><con:method name="YugandharRequestProcessor 1" id="ed4109b6-27d4-461c-931b-7c0f8b9b3573" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:yug="http://localhost/rest/YugandharRequestProcessor">yug:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:yug="http://localhost/inventory/rest/YugandharRequestProcessor">yug:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="2cde7054-abfb-48e5-a221-e50046211db1" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
+<con:soapui-project id="c525f074-d6b3-4f41-b865-f723d7e4e511" activeEnvironment="Default" name="InventoryManagement" soapui-version="5.4.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d5565a95-8406-439a-b09d-4fcf644e27c3" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://localhost:8091" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://localhost:8091</con:endpoint></con:endpoints><con:resource name="YugandharRequestProcessor" path="/inventory/rest/YugandharRequestProcessor" id="3b5ab9ab-e490-4ace-82fe-4601e350a7ac"><con:settings/><con:parameters/><con:method name="YugandharRequestProcessor 1" id="ed4109b6-27d4-461c-931b-7c0f8b9b3573" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:yug="http://localhost/rest/YugandharRequestProcessor">yug:Response</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json;charset=UTF-8</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:yug="http://localhost/inventory/rest/YugandharRequestProcessor">yug:Fault</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType xsi:nil="true"/><con:status>0</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="2cde7054-abfb-48e5-a221-e50046211db1" mediaType="application/x-www-form-urlencoded" postQueryString="true"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
 	"txnHeader": {
 	 "requesterLanguage": "1",
       "requesterLocale": null,
@@ -67,14 +67,18 @@
       "userRole": "admin",
       "txnMessageId": "1234567890123",
       "transactionServiceName": "updateInventoryOrderBase",
-      "totalExecutionTimeMillies": "81"
+      "totalExecutionTimeMillies": "57"
    },
    "txnPayload": {"inventoryOrderDO":    {
-      "idPk": "c7b68d5a-ba10-4878-960c-9e0673a59ebf",
+      "idPk": "156519741747757125",
       "version": 0,
+      "createdTs": "2019-08-07T17.03.37.476+0000",
+      "updatedTs": "2019-08-07T17.03.37.476+0000",
+      "updatedByUser": "admin",
+      "updatedByTxnId": "1234567890123",
       "orderId": "12345",
       "productId": "12345",
-      "unitPrice": 102,
+      "unitPrice": 100,
       "unitQuantity": 100
    }}
 }</con:request><con:originalUri>http://localhost/inventory/rest/YugandharRequestProcessor</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="retrieve" id="c1013e59-dccf-46b3-9d84-f52dd37a4305"><con:settings/><con:config service="http://localhost:8091" methodName="YugandharRequestProcessor 1" resourcePath="/inventory/rest/YugandharRequestProcessor" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="retrieve" id="833ee155-b9f8-4e36-bcff-85833172dd60" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
@@ -680,4 +684,43 @@
      
 	}
 }
-}</con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+}</con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="77753f9c-40c2-4b12-b8bd-20b1eec0d04c" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="searchLE" searchProperties="true"><con:settings/><con:testStep type="restrequest" name="searchLE" id="008b2077-61ce-4a56-b823-f237f194b657"><con:settings/><con:config service="http://localhost:8091" methodName="YugandharRequestProcessor 1" resourcePath="/inventory/rest/YugandharRequestProcessor" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="searchLE" id="f1a51131-3d5c-4eed-af86-b3aa85e16b27" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8091</con:endpoint><con:request>{
+	"txnHeader": {
+	 "requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+      "paginationStartIndex": null,
+      "paginationEndIndex": null,
+      "paginationTotalResultCount": null,
+	  "transactionServiceName": "searchLegalEntityByLEAttributes"
+	},
+	"txnPayload": {
+	 "paginationIndexOfCurrentSlice":0,
+      "paginationPageSize": 100,	
+      	 "searchLegalEntityRequestDO":       {
+			"displayName": null,
+"personNameOne": null,
+"personLastName": null,
+"corporationName": null,
+"addressLineOne": null,
+"addressLineTwo": null,
+"city": null,
+"stateProvinceRefkey": null,
+"countryRefkey":null,
+"postalCode": null,
+"identificationTypeRefkey": null,
+"identificationNumber":null,
+"phoneNumber": "234234234",
+"systemKeysRegistryReferenceId": null,
+"inquiryFilter":"ACTIVE",
+"inquiryLevel": "103"
+	}
+}
+}
+	</con:request><con:originalUri>http://localhost/inventory/rest/YugandharRequestProcessor</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
