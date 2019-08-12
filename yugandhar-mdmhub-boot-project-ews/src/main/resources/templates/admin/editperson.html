@@ -235,7 +235,7 @@ div.div-outline {
 			</div>
 			
 			<button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#confirmSaveModal'" th:text="Save" th:disabled="${readonlyform}"> </button>
-			<button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#confirmDeleteModal'" th:text="Remove" th:disabled="${readonlyform}"> </button>
+			<button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#confirmDeleteModal'" th:text="Delete" th:disabled="${readonlyform}"> </button>
 			
 				<!--  Save confirmation Modal -->
 					 <div th:id="confirmSaveModal" class="modal" tabindex="-1" role="dialog">
@@ -280,11 +280,11 @@ div.div-outline {
 					</div>
 					
 
-					<script>
+					<!-- <script>
 						$('#btnconfirmSaveModalSave').click(function(){
 							$('#confirmSaveModal').modal('toggle');
 						});
-					</script>
+					</script> -->
 		</form>
 
 	</div>

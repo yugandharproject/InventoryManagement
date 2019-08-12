@@ -55,7 +55,7 @@ div.div-outline {
 						th:field="*{idPk}">
 				</div>
 			</div>
-			
+			<div class="row col-sm-5"><h5><small class="text-info bg-light">Basic Details</small></h5></div>
 			<div class=" row">
 				<label class="control-label col-sm-2 col-form-label-sm"
 					for="personnameone">First Name</label>
@@ -99,8 +99,8 @@ div.div-outline {
 			</div> 
 
 			<!-- Phone Number block -->
-			<div class="row">
-				<span class="control-label col-sm-2 col-form-label-sm">Contact Details</span>
+			<div class="row col-sm-5">
+				<h5><small class="text-info bg-light">Contact Details</small></h5>
 			</div>
 			<div class="row">
 				<label class="control-label  col-sm-2 col-form-label-sm"
@@ -173,7 +173,7 @@ div.div-outline {
 
 			<!-- Address block -->
 			<div class="row col-sm-2">
-				<span class="control-label col-form-label-sm">Address</span>
+				<h5><small class="text-info">Address</small></h5>
 			</div>
 			<div th:each="leAddressAssocDO, itemStat : *{leAddressAssocDOList}">
 				<div hidden="true"> <input type="text" hidden="true" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressTypeRefkey}" />

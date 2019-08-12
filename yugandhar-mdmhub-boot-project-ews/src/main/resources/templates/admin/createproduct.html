@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{admin/main_layout}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">`
+<head>
+<title>Create a Product entry</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width-device-width, initial-scale 1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popperjs/1.14.7/umd/poppermin.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+<style>
+div.div-outline {
+  border: 1px solid;
+  outline: 1px grey;
+}
+</style>
+</head>
+
+<body>
+	<div layout:fragment="content" class="col">
+	<!--  Error and Information messages and the header -->
+	<div th:if="${uimessagewrapper != null and !uimessagewrapper.successMessageList.empty}">
+		<div class="alert alert-success">
+			<h6 th:each="obj : ${uimessagewrapper.successMessageList}" th:text="${obj}" class="text-success" style="font--size:100%;font-weight:normal;margin-top:0px;margin-bottom:0px">--</h6>
+		</div>
+	</div>
+	<div th:if="${uimessagewrapper != null and !uimessagewrapper.errorMessageList.empty}">
+		<div class="alert alert-danger" role="alert">
+		<strong>Failed!</strong>
+			<h6 th:each="obj : ${uimessagewrapper.errorMessageList}" th:text="${obj}" class="text-danger" style="font-size:100%;font-color: maroon;font-weight:bold;margin-top:0px;margin-bottom:0px">--</h6>
+		</div>
+	</div>
+	
+	<header>
+		<h6 class="title-agile text-left" style="margin-top: 1px; margin-bottom: 30px; ">Add a new Product Entry</h6>
+	</header>
+	
+		<form name="createproductform" class="container-fluid  form-horizontal"
+			action="#" th:action="@{createproduct_do}"
+			th:object="${inventoryProductDO}" method="post">
+			<div class="row ">
+				<label class="control-label col-sm-2 col-form-label-sm" for="productId">Product Id</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm" id="productId" placeholder="" name="productId" th:field="*{productId}">
+				</div>
+				<label class="control-label col-sm-2 col-form-label-sm" for="hsnSacCode">HSN SAC Code</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm" id="hsnSacCode" placeholder="" name="hsnSacCode" th:field="*{hsnSacCode}">
+				</div>
+			</div>
+			
+			<div class="row ">
+				<label class="control-label col-sm-2 col-form-label-sm" for="productName">Product Name</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm" id="productName" placeholder="" name="productName" th:field="*{productName}">
+				</div>
+				<label class="control-label col-sm-2 col-form-label-sm" for="productType">Product Type</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm" id="productType" placeholder="" name="productType" th:field="*{productType}">
+				</div>
+			</div>
+			
+			<div class="row ">
+				<label class="control-label col-sm-2 col-form-label-sm" for="supplierId">Supplier Id</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm" id="supplierId" placeholder="" name="supplierId" th:field="*{supplierId}">
+				</div>
+			</div>
+			
+
+			
+			<div class="row ">
+				<label class="control-label col-sm-2 col-form-label-sm" for="productCategory">Product Category</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm" id="productCategory" placeholder="" name="productCategory" th:field="*{productCategory}">
+				</div>
+				<label class="control-label col-sm-2 col-form-label-sm" for="productStatus">Product Status</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm" id="productStatus" placeholder="" name="productStatus" th:field="*{productStatus}">
+				</div>
+			</div>
+			
+			<div class="row ">
+				<label class="control-label col-sm-2 col-form-label-sm" for="productArrivalDate">Arrival Date</label>
+				<div class="col-sm-3 date">
+					<input type="date" class="form-control form-control-sm date-secondary" id="productArrivalDate" placeholder="" name="productArrivalDate" th:field="*{productArrivalDate}">
+				</div>
+				<label class="control-label col-sm-2 col-form-label-sm" for="productExpiryDate">Expiry Date</label>
+				<div class="col-sm-3">
+					<input type="date" class="form-control form-control-sm date-secondary" id="productExpiryDate" placeholder="" name="productExpiryDate" th:field="*{productExpiryDate}">
+				</div>
+			</div>
+			
+			<div class="row ">
+				<label class="control-label col-sm-2 col-form-label-sm" for="quantityRecevied">Quantity Received</label>
+				<div class="col-sm-3">
+					<input type="number" class="form-control form-control-sm" id="quantityRecevied" placeholder="" name="quantityRecevied" th:field="*{quantityRecevied}">
+				</div>
+				<label class="control-label col-sm-2 col-form-label-sm" for="quantityInhand">Quantity In-Hand</label>
+				<div class="col-sm-3">
+					<input type="number" class="form-control form-control-sm" id="quantityInhand" placeholder="" name="quantityInhand" th:field="*{quantityInhand}">
+				</div>
+			</div>
+			
+			<div class="row">
+				<label class="control-label col-sm-2 col-form-label-sm" for="unitOfMeasureRefKey">Unit Of Measure</label>
+				<div class="col-sm-3">
+				<select class="form-control form-control-sm" id="unitOfMeasureRefKey" name="unitOfMeasureRefKey"  th:field="*{unitOfMeasureRefKey}">
+					<option th:each="refStateProvinceDO, itemStatphone : ${txnPayload.refUnitofmeasureDOList}" th:value="${txnPayload.refUnitofmeasureDOList[__${itemStatphone.index}__].key}" 
+				    th:text="${txnPayload.refUnitofmeasureDOList[__${itemStatphone.index}__].value}">
+					</option>
+				</select>
+				</div>
+			</div>
+			
+			<div class="row ">
+				<label class="control-label col-sm-2 col-form-label-sm" for="billNumber">Bill Number</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm" id="billNumber" placeholder="" name="billNumber" th:field="*{billNumber}">
+				</div>
+			</div>
+			
+			<button type="submit" class="btn btn-primary">Save</button>
+			
+		</form>
+
+	</div>
+	</div>
+</body>
+</html>

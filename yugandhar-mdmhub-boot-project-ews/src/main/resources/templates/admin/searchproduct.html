@@ -4,7 +4,7 @@
 	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Search person</title>
+<title>search product</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width-device-width, initial-scale 1">
 <link rel="stylesheet"
@@ -40,39 +40,50 @@ div.div-outline {
 	</div>
 	
 	<header>
-		<h6 class="title-agile text-left" style="margin-top: 1px; margin-bottom: 30px; ">Search Person</h6>
+		<h6 class="title-agile text-left" style="margin-top: 1px; margin-bottom: 30px; ">Search Product in Inventory</h6>
 	</header>
 	
-		<form name="searchpersonform" class="container-fluid  form-horizontal"
-			action="#" th:action="@{searchperson_do}"
-			th:object="${searchLegalEntityRequestDO}" method="post">
+		<form name="searchInventoryProductForm" class="container-fluid  form-horizontal"
+			action="#" th:action="@{searchproduct_do}"
+			th:object="${searchInventoryProductDO}" method="post">
 			
 			<div class=" row">
 				<label class="control-label col-sm-2 col-form-label-sm"
-					for="brahmachari_name">Brahamachari Name</label>
+					for="productName">Product Name</label>
 				<div class="col-sm-3">
 					<input type="text" class="form-control form-control-sm"
-						id="brahmachari_name" placeholder="" name="brahmachari_name"
-						th:field="*{displayName}">
-				</div>
-			</div>
-			<div class=" row">
-				<label class="control-label col-sm-2 col-form-label-sm"
-					for="brahmachari_name">Phone Number or Email</label>
-				<div class="col-sm-3">
-					<input type="text" class="form-control form-control-sm"
-						id="brahmachari_name" placeholder="" name="brahmachari_name"
-						th:field="*{phoneNumber}">
+						id="productName" placeholder="" name="productName"
+						th:field="*{productName}">
 				</div>
 			</div>
 			
 			<div class=" row">
 				<label class="control-label col-sm-2 col-form-label-sm"
-					for="brahmachari_name">City</label>
+					for="productId">Product Id</label>
 				<div class="col-sm-3">
 					<input type="text" class="form-control form-control-sm"
-						id="brahmachari_name" placeholder="" name="brahmachari_name"
-						th:field="*{city}">
+						id="productId" placeholder="" name="productId"
+						th:field="*{productId}">
+				</div>
+			</div>
+			
+			<div class=" row">
+				<label class="control-label col-sm-2 col-form-label-sm"
+					for="productType">Product Type</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm"
+						id="productType" placeholder="" name="productType"
+						th:field="*{productType}">
+				</div>
+			</div>
+			
+			<div class=" row">
+				<label class="control-label col-sm-2 col-form-label-sm"
+					for="productCategory">product Category</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control form-control-sm"
+						id="productCategory" placeholder="" name="productCategory"
+						th:field="*{productCategory}">
 				</div>
 			</div>
 			

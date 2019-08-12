@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -25,6 +24,7 @@ import com.yugandhar.common.extern.transferobj.TxnPayload;
 import com.yugandhar.common.transobj.TxnHeader;
 import com.yugandhar.common.transobj.TxnTransferObj;
 import com.yugandhar.common.util.CommonValidationUtil;
+import com.yugandhar.mdm.extern.dobj.InventoryProductDO;
 import com.yugandhar.mdm.extern.dobj.LeAddressAssocDO;
 import com.yugandhar.mdm.extern.dobj.LePersonDO;
 import com.yugandhar.mdm.extern.dobj.LePhoneAssocDO;
@@ -33,6 +33,8 @@ import com.yugandhar.mdm.extern.dobj.PersonnamesDO;
 import com.yugandhar.mdm.extern.dobj.RefGenderDO;
 import com.yugandhar.mdm.extern.dobj.RefPhoneTypeDO;
 import com.yugandhar.mdm.extern.dobj.RefStateProvinceDO;
+import com.yugandhar.mdm.extern.dobj.RefUnitofmeasureDO;
+import com.yugandhar.mdm.extern.dobj.SearchInventoryProductDO;
 import com.yugandhar.mdm.extern.dobj.SearchLegalEntityRequestDO;
 import com.yugandhar.mdm.misc.dobj.CommonValidationResponse;
 import com.yugandhar.rest.controller.RequestProcessor;
@@ -56,8 +58,6 @@ public class InventoryMgmtWebController {
 		return "admin/home";
 	}
 	
-	
-
 	@GetMapping("/createperson")
 	public String createperson_pre(Model model, HttpServletRequest request, @ModelAttribute LegalentityDO legalentityDO ) {
 		populateCreatepersonDropdown(model);
@@ -129,12 +129,11 @@ public class InventoryMgmtWebController {
 			}
 			
 		} else if(strRequestedAction.equals("delete")) {
-			TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "updateLegalentityBase"); // update the deleted_ts of the based LE table, all other data will not be modified
+			TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "updateLegalentityBase"); // update the deleted_ts of the base table, all other data will not be modified
 			LegalentityDO theLegalentityDObase = new LegalentityDO(legalentityDO);
 			theLegalentityDObase.setDeletedTs(new Date());
 			reqTxnTransferObj.getTxnPayload().setLegalentityDO(theLegalentityDObase);
 			TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
-			populateCreatepersonDropdown(model);
 			populateCreatepersonDropdown(model);
 			if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
 				addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
@@ -154,14 +153,14 @@ public class InventoryMgmtWebController {
 	}
 	
 	@GetMapping("/searchperson")
-	public String searchLegalEntityRequestDO_pre(Model model, HttpServletRequest request, @ModelAttribute LegalentityDO legalentityDO ) {
+	public String searchperson(Model model, HttpServletRequest request, @ModelAttribute LegalentityDO legalentityDO ) {
 		model.addAttribute("searchLegalEntityRequestDO", new SearchLegalEntityRequestDO());
 		return "admin/searchperson";
 	}
 	
 	
 	@PostMapping("/searchperson_do")
-	public String searchLegalEntityRequestDO_do(Model model, HttpServletRequest request, @ModelAttribute SearchLegalEntityRequestDO searchLegalEntityRequestDO ) {
+	public String searchperson_do(Model model, HttpServletRequest request, @ModelAttribute SearchLegalEntityRequestDO searchLegalEntityRequestDO ) {
 		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "searchLegalEntityByLEAttributes");
 		searchLegalEntityRequestDO.setInquiryLevel("103");
 		reqTxnTransferObj.getTxnPayload().setSearchLegalEntityRequestDO(searchLegalEntityRequestDO);
@@ -176,6 +175,112 @@ public class InventoryMgmtWebController {
 		return "admin/searchpersonresults";
 	}
 	
+	@GetMapping("/createproduct")
+	public String createprodut_pre(Model model, HttpServletRequest request, @ModelAttribute InventoryProductDO inventoryProductDO ) {
+		populateCreateProductDropdown(model);
+		model.addAttribute("inventoryProductDO", new InventoryProductDO());
+		return "admin/createproduct";
+	}
+	
+	@PostMapping("/createproduct_do")
+	public String createproduct_do(Model model, HttpServletRequest request, 
+			@ModelAttribute InventoryProductDO inventoryProductDO ) {
+		populateCreateProductDropdown(model);
+		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "createInventoryProductBase");
+		reqTxnTransferObj.getTxnPayload().setInventoryProductDO(inventoryProductDO);
+		TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+		} else {
+			addInfoMessage(model, UIMessages.SUCCESS_PRODUCT_CREATED);
+			model.addAttribute("inventoryProductDO", respTxnTransferObj.getTxnPayload().getInventoryProductDO());
+		}
+		return "admin/createproduct";
+	}
+		
+
+
+	@GetMapping("/searchproduct")
+	public String searchproduct_pre(Model model, HttpServletRequest request, @ModelAttribute SearchInventoryProductDO searchInventoryProductDO ) {
+		model.addAttribute("searchInventoryProductDO", new SearchInventoryProductDO());
+		return "admin/searchproduct"; //searchproduct.html
+	}
+
+	
+	@PostMapping("/searchproduct_do")
+	public String searchproduct_do(Model model, HttpServletRequest request, @ModelAttribute SearchInventoryProductDO searchInventoryProductDO ) {
+		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "searchInventoryProduct");
+		searchInventoryProductDO.setInquiryFilter("ACTIVE");
+		reqTxnTransferObj.getTxnPayload().setSearchInventoryProductDO(searchInventoryProductDO);
+		TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+			return "admin/searchperson";
+		} else {
+			model.addAttribute("txnPayload", respTxnTransferObj.getTxnPayload());
+		}
+		return "admin/searchproductresults";
+	}
+	
+	
+	@PostMapping("/editdeleteproduct")
+	public String editdeleteproduct_pre(Model model, HttpServletRequest request,
+			@RequestParam(value="editproduct", required=false) String productIdPkToEdit ,
+			@RequestParam(value="deleteproduct", required=false) Integer deleteProductElementat) {
+
+		InventoryProductDO inventoryProductDO = new InventoryProductDO();
+		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "retrieveInventoryProductBase");
+		inventoryProductDO.setIdPk(productIdPkToEdit);
+		reqTxnTransferObj.getTxnPayload().setInventoryProductDO(inventoryProductDO);
+		TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+		populateCreateProductDropdown(model);
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+		} else {
+			model.addAttribute("inventoryProductDO", respTxnTransferObj.getTxnPayload().getInventoryProductDO());
+		}
+		
+		return "admin/editproduct";
+	}
+	
+	@PostMapping("/editdeleteproduct_do")
+	public String editdeleteperson_do(Model model, HttpServletRequest request, @ModelAttribute() InventoryProductDO inventoryProductDO ,
+			@RequestParam(value="action", required=false) String strRequestedAction) {
+		if(strRequestedAction.equals("editsave")) {
+			
+			TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "updateInventoryProductBase");
+			reqTxnTransferObj.getTxnPayload().setInventoryProductDO(inventoryProductDO);
+			TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+
+			populateCreateProductDropdown(model);
+			if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+				addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+				model.addAttribute("inventoryProductDO", inventoryProductDO);
+			} else {
+				addInfoMessage(model, UIMessages.SUCCESS_PRODUCT_UPDATED);
+				model.addAttribute("inventoryProductDO", respTxnTransferObj.getTxnPayload().getInventoryProductDO());
+			}
+			
+		} else if(strRequestedAction.equals("delete")) {
+			TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "updateInventoryProductBase"); // update the deleted_ts of the base table, all other data will not be modified
+			InventoryProductDO theInventoryProductDObase = new InventoryProductDO(inventoryProductDO);
+			theInventoryProductDObase.setDeletedTs(new Date());
+			reqTxnTransferObj.getTxnPayload().setInventoryProductDO(theInventoryProductDObase);
+			TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+			populateCreateProductDropdown(model);
+			if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){			
+				addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+				model.addAttribute("inventoryProductDO", inventoryProductDO);
+			} else {
+				addInfoMessage(model, UIMessages.SUCCESS_PRODUCT_DELETED);
+				model.addAttribute("inventoryProductDO", inventoryProductDO);
+				model.addAttribute("readonlyform", "true");
+			}
+		}
+		return "admin/editproduct";
+	}
+	
 	public LegalentityDO initCreatePerson() {
 		LegalentityDO legalentityDO = new LegalentityDO();
 		//create blank addresses
@@ -187,7 +292,6 @@ public class InventoryMgmtWebController {
 		
 		//person and person name
 		LePersonDO theLePersonDO = new LePersonDO();
-		PersonnamesDO thePersonnamesDO = new PersonnamesDO();
 		ArrayList<PersonnamesDO> thePersonnamesDOList = new ArrayList<PersonnamesDO>();
 		theLePersonDO.setPersonnamesDOList(thePersonnamesDOList);
 		legalentityDO.setLePersonDO(theLePersonDO);
@@ -328,6 +432,27 @@ public class InventoryMgmtWebController {
 		}*/
 		//set model response
 		model.addAttribute("txnPayload", respTxnPayload);
+	}
+	
+	
+	
+	private void populateCreateProductDropdown(Model model) {
+		TxnTransferObj reqTxnTransferObj;
+		TxnTransferObj respTxnTransferObj;
+		TxnPayload respTxnPayload = new TxnPayload();
+		// state-province
+		reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "findAllRefUnitofmeasureByLanguageCodeBase");
+		RefUnitofmeasureDO refUnitofmeasureDO = new RefUnitofmeasureDO();
+		refUnitofmeasureDO.setConfigLanguageCodeKey("1");
+		reqTxnTransferObj.getTxnPayload().setRefUnitofmeasureDO(refUnitofmeasureDO);
+		respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){
+		addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+		} else {
+		respTxnPayload.setRefUnitofmeasureDOList( respTxnTransferObj.getTxnPayload().getRefUnitofmeasureDOList());
+		}		
+		model.addAttribute("txnPayload", respTxnPayload);
+		
 	}
 	
 }

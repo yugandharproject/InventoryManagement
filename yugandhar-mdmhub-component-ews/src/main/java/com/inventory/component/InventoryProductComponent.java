@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.inventory.componentref.RefUnitofmeasureComponent;
 import com.yugandhar.common.constant.yugandharConstants;
 import com.yugandhar.common.exception.YugandharCommonException;
 import com.yugandhar.common.transobj.TxnTransferObj;
@@ -23,6 +24,7 @@ import com.yugandhar.common.util.CommonValidationUtil;
 import com.yugandhar.common.util.IgnoreAttributesUtil;
 import com.yugandhar.mdm.component.util.ReferenceTableHelper;
 import com.yugandhar.mdm.extern.dobj.InventoryProductDO;
+import com.yugandhar.mdm.extern.dobj.RefUnitofmeasureDO;
 import com.yugandhar.mdm.keygen.YugandharKeygenerator;
 
 /**
@@ -54,6 +56,9 @@ public class InventoryProductComponent {
 
 	//default transaction response object
 	TxnTransferObj respTxnTransferObj;
+	
+	@Autowired
+	RefUnitofmeasureComponent RefUnitofmeasureComponent;
 
 	// default constructor
 	public InventoryProductComponent() {
@@ -324,15 +329,13 @@ public class InventoryProductComponent {
 	//Implement this method to get the Key-Value pair of reference data attributes
 	protected void populateReferenceDataAttributes(String requesterLanguage, InventoryProductDO theInventoryProductDO) {
 
-		/*	// SAMPLEREFLOVRefkey
-		if (!(null == theInventoryProductDO.getSAMPLEREFLOVRefkey() || theInventoryProductDO.getSAMPLEREFLOVRefkey().isEmpty())) {
-			RefSAMPLEREFLOVDO theRefSAMPLEREFLOVDO = referenceTableHelper.getRefSAMPLEREFLOVValueByKey(
-					requesterLanguage, theInventoryProductDO.getSAMPLEREFLOVRefkey(),
-					yugandharConstants.FILTER_VALUE_ACTIVE);
-			if (null != theRefSAMPLEREFLOVDO) {
-				theInventoryProductDO.setSAMPLEREFLOVRefValue(theRefSAMPLEREFLOVDO.getValue());
+		if (!(null == theInventoryProductDO.getUnitOfMeasureRefKey() || theInventoryProductDO.getUnitOfMeasureRefKey().isEmpty())) {
+			RefUnitofmeasureDO theRefUnitofmeasureDO = RefUnitofmeasureComponent.executeRepositoryQuery(requesterLanguage, 
+					theInventoryProductDO.getUnitOfMeasureRefKey(), yugandharConstants.FILTER_VALUE_ACTIVE);
+			if (null != theRefUnitofmeasureDO) {
+				theInventoryProductDO.setUnitOfMeasureRefValue(theRefUnitofmeasureDO.getValue());
 			}
-		} */
+		} 
 
 	}
 

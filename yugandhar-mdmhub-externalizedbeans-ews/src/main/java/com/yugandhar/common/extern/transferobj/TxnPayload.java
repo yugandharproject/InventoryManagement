@@ -6,12 +6,14 @@ import com.yugandhar.common.transobj.AbstractTxnPayload;
 import com.yugandhar.mdm.extern.dobj.InventoryOrderDO;
 import com.yugandhar.mdm.extern.dobj.InventoryProductDO;
 import com.yugandhar.mdm.extern.dobj.RefUnitofmeasureDO;
+import com.yugandhar.mdm.extern.dobj.SearchInventoryProductDO;
 
 
 public class TxnPayload extends AbstractTxnPayload {
 	
 	protected InventoryOrderDO inventoryOrderDO;
 	protected List<InventoryOrderDO> inventoryOrderDOList;
+	protected SearchInventoryProductDO searchInventoryProductDO;
 	/**
 	 * @return the demoDO
 	 */
@@ -91,5 +93,18 @@ public class TxnPayload extends AbstractTxnPayload {
 	public void setRefUnitofmeasureDOList(List<RefUnitofmeasureDO> refUnitofmeasureDOList) {
 		this.refUnitofmeasureDOList = refUnitofmeasureDOList;
 	}
+	/**
+	 * @return the searchInventoryProductDO
+	 */
+	public SearchInventoryProductDO getSearchInventoryProductDO() {
+		return searchInventoryProductDO;
+	}
+	/**
+	 * @param searchInventoryProductDO the searchInventoryProductDO to set
+	 */
+	public void setSearchInventoryProductDO(SearchInventoryProductDO searchInventoryProductDO) {
+		this.searchInventoryProductDO = searchInventoryProductDO;
+	}
 
+	
 }

@@ -3,6 +3,7 @@ package com.yugandhar.mdm.abstractdobj;
 Generated and to be used in accordance with Yugandhar Licensing Terms. */
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -11,8 +12,11 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 
-import com.yugandhar.mdm.misc.dobj.PrimaryKeyDO;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.yugandhar.mdm.extern.dobj.InventoryProductDO;
+import com.yugandhar.mdm.misc.dobj.PrimaryKeyDO;
 
 /**
  * Abstract DO class for InventoryProductDO class mapped to database inventory_product entity
@@ -40,11 +44,16 @@ public abstract class AbstractInventoryProductDO implements java.io.Serializable
 	protected String productCategory;
 	protected String hsnSacCode;
 	protected String productStatus;
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected Date productExpiryDate;
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	protected Date productArrivalDate;
 	protected Integer quantityRecevied;
 	protected Integer quantityInhand;
-	protected String quantityUnitOfMeasure;
+	protected String unitOfMeasureRefKey;
+	protected String unitOfMeasureRefValue;
 	protected String billNumber;
 	protected String inquiryFilter;
 	protected PrimaryKeyDO primaryKeyDO;
@@ -71,7 +80,7 @@ public abstract class AbstractInventoryProductDO implements java.io.Serializable
 		productArrivalDate = theInventoryProductDO.productArrivalDate;
 		quantityRecevied = theInventoryProductDO.quantityRecevied;
 		quantityInhand = theInventoryProductDO.quantityInhand;
-		quantityUnitOfMeasure = theInventoryProductDO.quantityUnitOfMeasure;
+		unitOfMeasureRefKey = theInventoryProductDO.unitOfMeasureRefKey;
 		billNumber = theInventoryProductDO.billNumber;
 		inquiryFilter = theInventoryProductDO.inquiryFilter;
 	}
@@ -190,7 +199,7 @@ public abstract class AbstractInventoryProductDO implements java.io.Serializable
 		this.productCategory = productCategory;
 	}
 
-	@Column(name = "HSN-SAC Code", length = 10)
+	@Column(name = "hsn_sac_code", length = 10)
 	public String getHsnSacCode() {
 		return this.hsnSacCode;
 	}
@@ -247,14 +256,32 @@ public abstract class AbstractInventoryProductDO implements java.io.Serializable
 	}
 
 	@Column(name = "Quantity_Unitofmeasure", length = 50)
-	public String getQuantityUnitOfMeasure() {
-		return this.quantityUnitOfMeasure;
+	public String getUnitOfMeasureRefKey() {
+		return this.unitOfMeasureRefKey;
 	}
 
-	public void setQuantityUnitOfMeasure(String quantityUnitOfMeasure) {
-		this.quantityUnitOfMeasure = quantityUnitOfMeasure;
+	public void setUnitOfMeasureRefKey(String quantityUnitOfMeasure) {
+		this.unitOfMeasureRefKey = quantityUnitOfMeasure;
+	}
+	
+	
+
+	/**
+	 * @return the unitOfMeasureRefValue
+	 */
+	@Transient
+	public String getUnitOfMeasureRefValue() {
+		return unitOfMeasureRefValue;
 	}
 
+	/**
+	 * @param unitOfMeasureRefValue the unitOfMeasureRefValue to set
+	 */
+	public void setUnitOfMeasureRefValue(String unitOfMeasureRefValue) {
+		this.unitOfMeasureRefValue = unitOfMeasureRefValue;
+	}
+
+	
 	@Column(name = "Bill_number", length = 100)
 	public String getBillNumber() {
 		return this.billNumber;
@@ -294,4 +321,6 @@ public abstract class AbstractInventoryProductDO implements java.io.Serializable
 		this.primaryKeyDO = primaryKeyDO;
 	}
 
+	
+	
 }
