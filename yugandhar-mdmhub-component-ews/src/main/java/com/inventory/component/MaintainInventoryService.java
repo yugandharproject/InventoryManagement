@@ -206,6 +206,12 @@ if(reqInventoryRunningLedgerDO.getTransactionType().equals(yugandharConstants.IN
 //deduct the transaction quantity from total quantity: Inventory_product.Quant1ty_Inhand - reqInventoryRunningLedgerDO.transactionQuantity 
 
 Integer currentQuantityInhand = respTxnTransferObj.getTxnPayload().getInventoryProductDO().getQuantityInhand(); 
+
+if(currentQuantityInhand < reqInventoryRunningLedgerDO.getTransactionQuantity()) {
+	throw commonValidationUtil.populateValidationErrorResponse(txnTransferObj, "1", 
+			"Not sufficient quantity balance to Issue. Quantity in Hand:" + currentQuantityInhand + " Quantity to be issued: " + reqInventoryRunningLedgerDO.getTransactionQuantity());
+}
+
 currentQuantityInhand = currentQuantityInhand - reqInventoryRunningLedgerDO.getTransactionQuantity(); 
 respTxnTransferObj.getTxnPayload().getInventoryProductDO().setQuantityInhand(currentQuantityInhand); 
 transitTxnTransferObj.getTxnPayload().setInventoryProductDO (respTxnTransferObj.getTxnPayload().getInventoryProductDO()); 
@@ -221,17 +227,27 @@ transitTxnTransferObj.getTxnPayload().setInventoryProductDO (respTxnTransferObj.
 
 } else if(reqInventoryRunningLedgerDO.getTransactionType().equals(yugandharConstants.INV_MAINTAINCE_TXN_TYPE_LOST) ){
 // perform issue with below logic 
-//deduct the transaction quantity from total quantity: inventory_product.Quantity_Inhand - reqInventoryRunningLedgerDO.transactionQuantity 
+//deduct the transaction quantity from total quantity: inventory_product.Quantity_Inhand - reqInventoryRunningLedgerDO.transactionQuantity
+	if(respTxnTransferObj.getTxnPayload().getInventoryProductDO().getQuantityRecevied() < reqInventoryRunningLedgerDO.getTransactionQuantity()) {
+		throw commonValidationUtil.populateValidationErrorResponse(txnTransferObj, "1", 
+				"Quantity to be marked as LOST should be less then Quantity Recieved in inventory. "
+				+ "Quantity Recieved so far:" + respTxnTransferObj.getTxnPayload().getInventoryProductDO().getQuantityRecevied() + 
+				" Quantity to be marked as LOST: " + reqInventoryRunningLedgerDO.getTransactionQuantity());
+	}
 	Integer currentQuantityInhand = respTxnTransferObj.getTxnPayload().getInventoryProductDO().getQuantityInhand(); 
 	currentQuantityInhand = currentQuantityInhand - reqInventoryRunningLedgerDO.getTransactionQuantity(); 
 	respTxnTransferObj.getTxnPayload().getInventoryProductDO().setQuantityInhand(currentQuantityInhand); 
 	transitTxnTransferObj.getTxnPayload().setInventoryProductDO(respTxnTransferObj.getTxnPayload().getInventoryProductDO()); 
 	
 } else if(reqInventoryRunningLedgerDO.getTransactionType().equals(yugandharConstants.INV_MAINTAINCE_TXN_TYPE_DAMAGED) ){
-
 // perform issue with below logic 
 //deduct the transaction quantity from total quantity: inventory_product.Quantity_ Inhand reqInventoryRunningLedgerDO.transactionQuantity 
-
+	if(respTxnTransferObj.getTxnPayload().getInventoryProductDO().getQuantityRecevied() < reqInventoryRunningLedgerDO.getTransactionQuantity()) {
+		throw commonValidationUtil.populateValidationErrorResponse(txnTransferObj, "1", 
+				"Quantity to be marked as DAMAGED should be less then Quantity Recieved in inventory. "
+				+ "Quantity Recieved so far:" + respTxnTransferObj.getTxnPayload().getInventoryProductDO().getQuantityRecevied() + 
+				" Quantity to be marked as DAMAGED: " + reqInventoryRunningLedgerDO.getTransactionQuantity());
+	}
 Integer currentQuantityInhand= respTxnTransferObj.getTxnPayload ().getInventoryProductDO().getQuantityInhand(); 
 currentQuantityInhand = currentQuantityInhand - reqInventoryRunningLedgerDO.getTransactionQuantity(); 
 respTxnTransferObj.getTxnPayload().getInventoryProductDO().setQuantityInhand(currentQuantityInhand); 
