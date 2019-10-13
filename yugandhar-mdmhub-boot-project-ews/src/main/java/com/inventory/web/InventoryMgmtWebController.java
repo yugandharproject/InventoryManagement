@@ -493,13 +493,17 @@ public class InventoryMgmtWebController {
 	if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){ 
 
 		addErrorMessage(model, respTxnTransferObj.getTxnPayload().getErrorResponseObj()); 
-	
+		TxnPayload tempTxnPayload= new TxnPayload(); 
+		model.addAttribute("txnPayload", tempTxnPayload); 
 		return "admin/maintaininvt"; 
 
 	} else { 
 		theTxnPayload.setInventoryRunningLedgerDOList(respTxnTransferObj.getTxnPayload().getInventoryRunningLedgerDOList()); 
 		model.addAttribute("txnPayload", respTxnTransferObj.getTxnPayload()); 
 		} 
+	theInventoryRunningLedgerDO = new InventoryRunningLedgerDO(); 
+	theInventoryRunningLedgerDO.setTransactionType("ISSUE");
+	theTxnPayload.setInventoryRunningLedgerDO(theInventoryRunningLedgerDO);
 	model.addAttribute("txnPayload", theTxnPayload); 
 	model.addAttribute("ledgerTablepageNumber", 4); 
 	return "admin/maintaininvt"; 
@@ -519,7 +523,7 @@ public class InventoryMgmtWebController {
 	//search the product 
 	LegalentityDO reqLegalentityDO = txnPayload.getLegalentityDO(); 
 	model.addAttribute("searchproductresult", "Y"); 
-	TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","l", "searchInventoryProduct");
+	TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "searchInventoryProduct");
 	txnPayload.getSearchInventoryProductDO().setInquiryFilter("ACTIVE"); 
 	reqTxnTransferObj.getTxnPayload().setSearchInventoryProductDO(txnPayload.getSearchInventoryProductDO()); 
 	TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj); 
@@ -548,8 +552,8 @@ public class InventoryMgmtWebController {
 		return "admin/maintaininvt"; 
 	} else { 
 		respTxnTransferObj.getTxnPayload().setLegalentityDO(reqLegalentityDO); 
-		respTxnTransferObj.getTxnPayload().setInventoryRunningLedgerDO( 
-		txnPayload.getInventoryRunningLedgerDO()); model.addAttribute("txnPayload", respTxnTransferObj.getTxnPayload()); 
+		respTxnTransferObj.getTxnPayload().setInventoryRunningLedgerDO(txnPayload.getInventoryRunningLedgerDO()); 
+		model.addAttribute("txnPayload", respTxnTransferObj.getTxnPayload()); 
 	}
 
 	} else if(null != searchpersonflag && searchpersonflag.equals("Y")) {
@@ -625,9 +629,9 @@ public class InventoryMgmtWebController {
 			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj()); 
 			return "admin/maintaininvt"; 
 		} else { 
-			theTxnPayload. setInventoryRunningLedgerDOList(respTxnTransferObj.getTxnPayload().getInventoryRunningLedgerDOList()); 
+			theTxnPayload.setInventoryRunningLedgerDOList(respTxnTransferObj.getTxnPayload().getInventoryRunningLedgerDOList()); 
 		} 
-		model.addAttribute("TxnPayload", theTxnPayload);
+		model.addAttribute("txnPayload", theTxnPayload);
 		model.addAttribute("ledgerTablepageNumber", 1); 
 		model.addAttribute("pagesize", 2); 
 		return "admin/runningledger"; 
@@ -643,7 +647,7 @@ public class InventoryMgmtWebController {
 		TxnPayload theTxnPayload= new TxnPayload(); 
 		InventoryRunningLedgerDO theInventoryRunningLedgerDO = new InventoryRunningLedgerDO(); 
 		theInventoryRunningLedgerDO.setInquiryFilter("ACTIVE"); 
-		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("adMin","admin","1", "fetchInventoryRunningLedger"); 
+		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "fetchInventoryRunningLedger"); 
 		reqTxnTransferObj.getTxnPayload().setPaginationIndexOfCurrentSlice(ledgerTablepageNumber-1);
 		reqTxnTransferObj.getTxnPayload().setPaginationPageSize(2);
 		
@@ -657,11 +661,11 @@ public class InventoryMgmtWebController {
 			return "admin/maintaininvt"; 
 		} else { 
 		theTxnPayload.setInventoryRunningLedgerDOList( respTxnTransferObj.getTxnPayload().getInventoryRunningLedgerDOList()); 
-		model.addAttribute("TxnPayload", respTxnTransferObj.getTxnPayload()); 
+		model.addAttribute("txnPayload", respTxnTransferObj.getTxnPayload()); 
 		}
 		
-		model.addAttribute("TxnPayload", theTxnPayload); 
-		model.addAttribute("1edgerTablepageNumber", ledgerTablepageNumber); 
+		model.addAttribute("txnPayload", theTxnPayload); 
+		model.addAttribute("ledgerTablepageNumber", ledgerTablepageNumber); 
 		model.addAttribute("pagesize", pagesize); 
 		return "admin/runningledger"; 
 		}

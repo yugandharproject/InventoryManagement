@@ -1,5 +1,5 @@
 -- --------------------------------------------------------
--- Host:                         localhost
+-- Host:                         127.0.0.1
 -- Server version:               10.3.13-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win64
 -- HeidiSQL Version:             9.4.0.5125
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `address` (
   KEY `INDX_ADDRESS_1` (`ADDRESS_LINE_ONE`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.address: ~23 rows (approximately)
+-- Dumping data for table inventorydb.address: ~24 rows (approximately)
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
 INSERT INTO `address` (`ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `ADDRESS_LINE_ONE`, `ADDRESS_LINE_TWO`, `ADDRESS_LINE_THREE`, `ADDRESS_LINE_FOUR`, `STREET_NUMBER`, `STREET_NAME`, `HOUSE_NUMBER`, `BUILDING_NUMBER`, `COUNTY`, `CITY`, `DISTRICT_ZONE`, `STATE_PROVINCE_REFKEY`, `COUNTRY_REFKEY`, `POSTAL_CODE`, `NEAREST_LANDMARK`, `BOX_DESIGNATOR`, `BOX_IDENTIFIER`, `NEAREST_RAILWAY_STATION`, `NEAREST_AIRPORT`, `PHONETIC_ADDRESS_LINE_ONE`, `PHONETIC_ADDRESS_LINE_TWO`, `PHONETIC_ADDRESS_LINE_THREE`, `PHONETIC_ADDRESS_LINE_FOUR`, `PHONETIC_STREET_NAME`, `PHONETIC_COUNTY`, `PHONETIC_CITY`, `PHONETIC_DISTRICT_ZONE`) VALUES
 	('0870c645-b6f6-409b-a122-17968c538bf3', 0, '2019-08-04 20:40:21.618000', NULL, '2019-08-04 20:40:21.618000', 'admin', 'f17bc1b9-dd49-46f0-9a7e-30c6afbcf584', '234234', '', '234234', NULL, NULL, NULL, '234234234', NULL, NULL, 'pune', NULL, '', '356', '12123', NULL, NULL, NULL, NULL, NULL, '', NULL, '', NULL, NULL, NULL, 'PAN', NULL),
@@ -191,6 +191,7 @@ INSERT INTO `address` (`ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_
 	('156540875702749184', 0, '2019-08-10 09:15:57.024000', NULL, '2019-08-10 09:15:57.024000', 'admin', '156540875523247134', 'MP Residency', 'Marunji', '', NULL, NULL, NULL, 'Flat E14', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'MPRASA', 'MARANJ', NULL, NULL, NULL, NULL, 'PAN', NULL),
 	('156540991678378211', 0, '2019-08-10 09:35:16.780000', NULL, '2019-08-10 09:35:16.780000', 'admin', '156540991490057809', 'Society', 'Pimple Saudagar', '', NULL, NULL, NULL, 'Flat X', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'SACATY', 'PANPLA', NULL, NULL, NULL, NULL, 'PAN', NULL),
 	('156541033678182275', 0, '2019-08-10 09:42:16.776000', NULL, '2019-08-10 09:42:16.776000', 'admin', '1565410335634484', 'Society', 'Pimple Saudagar', '', NULL, NULL, NULL, 'Flat X', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'SACATY', 'PANPLA', NULL, NULL, NULL, NULL, 'PAN', NULL),
+	('157097659011841297', 0, '2019-10-13 19:53:10.101000', NULL, '2019-10-13 19:53:10.101000', 'admin', '157097658527985000', 'sf', 'sdf12', 'sf', NULL, NULL, NULL, 'E14', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'SF', 'SDF', 'SF', NULL, NULL, NULL, 'PAN', NULL),
 	('1996b93f-fafa-4aaa-a13d-8dd0592b3dfb', 0, '2019-08-06 23:14:27.644000', NULL, '2019-08-06 23:14:27.644000', 'admin', '2d9ef403-d53b-4ed9-b138-d5915524ecde', 'MP Residency', 'Marunji', '', NULL, NULL, NULL, 'Flat E14', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'MPRASA', 'MARANJ', NULL, NULL, NULL, NULL, 'PAN', NULL),
 	('2df107eb-4536-4b13-935d-ae8f2a044ba9', 0, '2019-08-06 23:55:58.700000', NULL, '2019-08-06 23:55:58.700000', 'admin', '44ad158a-0953-42a2-a6fd-085b16470977', 'Pimple Saudagar', '', '', NULL, NULL, NULL, '123', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'PANPLA', NULL, NULL, NULL, NULL, NULL, 'PAN', NULL),
 	('7a6bce04-18c2-467c-a117-60d6b056af8c', 0, '2019-08-04 01:25:38.673000', NULL, '2019-08-04 01:25:38.673000', 'admin', '999b8b77-50cd-411e-8f0d-5bc351cf7b5e', 'asdfasdfasdf', '', '', NULL, NULL, NULL, 'dsfasdfasdf', NULL, NULL, 'pune', NULL, '', '356', '123123', NULL, NULL, NULL, NULL, NULL, 'ASDFAS', NULL, NULL, NULL, NULL, NULL, 'PAN', NULL),
@@ -334,7 +335,7 @@ CREATE TABLE IF NOT EXISTS `al_address` (
   KEY `IDXAL_ADDRESS` (`ID_PK`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.al_address: ~23 rows (approximately)
+-- Dumping data for table inventorydb.al_address: ~24 rows (approximately)
 /*!40000 ALTER TABLE `al_address` DISABLE KEYS */;
 INSERT INTO `al_address` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUDITLOG_ACTION_CODE`, `ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `ADDRESS_LINE_ONE`, `ADDRESS_LINE_TWO`, `ADDRESS_LINE_THREE`, `ADDRESS_LINE_FOUR`, `STREET_NUMBER`, `STREET_NAME`, `HOUSE_NUMBER`, `BUILDING_NUMBER`, `COUNTY`, `CITY`, `DISTRICT_ZONE`, `STATE_PROVINCE_REFKEY`, `COUNTRY_REFKEY`, `POSTAL_CODE`, `NEAREST_LANDMARK`, `BOX_DESIGNATOR`, `BOX_IDENTIFIER`, `NEAREST_RAILWAY_STATION`, `NEAREST_AIRPORT`, `PHONETIC_ADDRESS_LINE_ONE`, `PHONETIC_ADDRESS_LINE_TWO`, `PHONETIC_ADDRESS_LINE_THREE`, `PHONETIC_ADDRESS_LINE_FOUR`, `PHONETIC_STREET_NAME`, `PHONETIC_COUNTY`, `PHONETIC_CITY`, `PHONETIC_DISTRICT_ZONE`) VALUES
 	('05baafd6-ba9b-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:14:19.032296', 'I', '156535105897480975', 0, '2019-08-09 17:14:18.968000', NULL, '2019-08-09 17:14:18.968000', 'admin', '156535105782933267', 'MP Residency', 'Marunji', '', NULL, NULL, NULL, 'Flat E14', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'MPRASA', 'MARANJ', NULL, NULL, NULL, NULL, 'PAN', NULL),
@@ -343,6 +344,7 @@ INSERT INTO `al_address` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUDITLOG_ACT
 	('0bdb58a7-ba98-11e9-9a58-a4badbc6f7f0', '2019-08-09 16:53:00.822178', 'I', '15653497806361563', 0, '2019-08-09 16:53:00.633000', NULL, '2019-08-09 16:53:00.633000', 'admin', '156534977974415164', 'MP Residency', 'Marunji', '', NULL, NULL, NULL, 'Flat E14', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'MPRASA', 'MARANJ', NULL, NULL, NULL, NULL, 'PAN', NULL),
 	('0fbf582e-bb24-11e9-80ad-a4badbc6f7f0', '2019-08-10 09:35:16.891961', 'I', '156540991678378211', 0, '2019-08-10 09:35:16.780000', NULL, '2019-08-10 09:35:16.780000', 'admin', '156540991490057809', 'Society', 'Pimple Saudagar', '', NULL, NULL, NULL, 'Flat X', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'SACATY', 'PANPLA', NULL, NULL, NULL, NULL, 'PAN', NULL),
 	('20bc4eb0-ba9a-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:07:54.844658', 'I', '156535067479590190', 0, '2019-08-09 17:07:54.792000', NULL, '2019-08-09 17:07:54.792000', 'admin', '156535067396395474', 'MP Residency', 'Marunji', '', NULL, NULL, NULL, 'Flat E14', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'MPRASA', 'MARANJ', NULL, NULL, NULL, NULL, 'PAN', NULL),
+	('2d4a981b-edc5-11e9-b5db-2c5b4750bec6', '2019-10-13 19:53:10.301485', 'I', '157097659011841297', 0, '2019-10-13 19:53:10.101000', NULL, '2019-10-13 19:53:10.101000', 'admin', '157097658527985000', 'sf', 'sdf12', 'sf', NULL, NULL, NULL, 'E14', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'SF', 'SDF', 'SF', NULL, NULL, NULL, 'PAN', NULL),
 	('54b4c948-b793-11e9-b463-4cb6ad424387', '2019-08-05 20:41:42.071221', 'I', '0a12b662-1575-48b4-8c27-82a2abd3d8b6', 0, '2019-08-05 20:41:41.911000', NULL, '2019-08-05 20:41:41.911000', 'admin', '3ca1ade7-c78b-4e48-9bd1-f29ed6381c9c', '123', '123', '123', NULL, NULL, NULL, '123', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, 'PAN', NULL),
 	('5c7b259a-bb21-11e9-80ad-a4badbc6f7f0', '2019-08-10 09:15:57.111732', 'I', '156540875702749184', 0, '2019-08-10 09:15:57.024000', NULL, '2019-08-10 09:15:57.024000', 'admin', '156540875523247134', 'MP Residency', 'Marunji', '', NULL, NULL, NULL, 'Flat E14', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'MPRASA', 'MARANJ', NULL, NULL, NULL, NULL, 'PAN', NULL),
 	('5ebe3a8b-b9d4-11e9-a944-7506bfad22a5', '2019-08-08 17:32:18.448745', 'I', '156526573838642055', 0, '2019-08-08 17:32:18.382000', NULL, '2019-08-08 17:32:18.382000', 'admin', '156526573670245542', 'MP Residency', 'Marunji', '', NULL, NULL, NULL, 'Flat E14', NULL, NULL, 'Pune', NULL, '1016', '356', '411057', NULL, NULL, NULL, NULL, NULL, 'MPRASA', 'MARANJ', NULL, NULL, NULL, NULL, 'PAN', NULL),
@@ -597,16 +599,27 @@ CREATE TABLE IF NOT EXISTS `al_config_txn_registry` (
   KEY `IDXAL_CONFIG_TXN_REGISTRY` (`ID_PK`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.al_config_txn_registry: ~11 rows (approximately)
+-- Dumping data for table inventorydb.al_config_txn_registry: ~24 rows (approximately)
 /*!40000 ALTER TABLE `al_config_txn_registry` DISABLE KEYS */;
 INSERT INTO `al_config_txn_registry` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUDITLOG_ACTION_CODE`, `ID_PK`, `VERSION`, `TXNSERVICE_NAME`, `TXNSERVICE_CLASS`, `TXNSERVICE_CLASSMETHOD`, `DESCRIPTION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_TXN_REF_ID`) VALUES
 	('03f67c58-b09d-11e9-b647-a4badbc6f7f0', '2019-07-28 00:02:37.363996', 'I', '100000', 0, 'createInventoryOrderBase', 'com.inventory.component.InventoryOrderService', 'add', 'create record in the database', '2019-07-28 00:02:37.000000', NULL, '2019-07-28 00:02:37.000000', 'Generator', '000000000'),
 	('03fe98f4-b09d-11e9-b647-a4badbc6f7f0', '2019-07-28 00:02:37.516337', 'I', '100001', 0, 'updateInventoryOrderBase', 'com.inventory.component.InventoryOrderService', 'merge', 'update the database record based on primary key i.e. idpk', '2019-07-28 00:02:37.000000', NULL, '2019-07-28 00:02:37.000000', 'Generator', '000000000'),
 	('04054572-b09d-11e9-b647-a4badbc6f7f0', '2019-07-28 00:02:37.560075', 'I', '100002', 0, 'retrieveInventoryOrderBase', 'com.inventory.component.InventoryOrderService', 'findById', 'retrieve the record from database based on primary key i.e. idpk', '2019-07-28 00:02:37.000000', NULL, '2019-07-28 00:02:37.000000', 'Generator', '000000000'),
 	('32911b29-bc62-11e9-b32e-a4badbc6f7f0', '2019-08-11 23:32:35.175101', 'I', '101000', 0, 'searchInventoryProductService', 'com.inventory.component.searchInventoryProductService', 'process', 'search inventory product', '2019-08-11 23:32:35.000000', NULL, '2019-08-11 23:32:35.000000', 'Generator', '000000000'),
+	('3ffe7792-ec59-11e9-b5db-2c5b4750bec6', '2019-10-12 00:29:28.137018', 'I', '102000', 0, 'createInventoryRunningLedgerBase', 'com.inventory.component.InventoryRunningLedgerService', 'add', 'create record in the database', '2019-10-12 00:29:28.000000', NULL, '2019-10-12 00:29:28.000000', 'Generator', '000000000'),
+	('401477a4-ec59-11e9-b5db-2c5b4750bec6', '2019-10-12 00:29:28.283064', 'I', '102001', 0, 'updateInventoryRunningLedgerBase', 'com.inventory.component.InventoryRunningLedgerService', 'merge', 'update the database record based on primary key i.e. idpk', '2019-10-12 00:29:28.000000', NULL, '2019-10-12 00:29:28.000000', 'Generator', '000000000'),
+	('402a8198-ec59-11e9-b5db-2c5b4750bec6', '2019-10-12 00:29:28.427750', 'I', '102002', 0, 'retrieveInventoryRunningLedgerBase', 'com.inventory.component.InventoryRunningLedgerService', 'findById', 'retrieve the record from database based on primary key i.e. idpk', '2019-10-12 00:29:28.000000', NULL, '2019-10-12 00:29:28.000000', 'Generator', '000000000'),
+	('484d461f-edbf-11e9-b5db-2c5b4750bec6', '2019-10-13 19:10:58.716283', 'U', '102006', 0, 'fetchInventoryRunningLedger', 'com.inventory.component.fetchInventoryRunningLedgerService', 'add', 'create record in the database', '2019-10-12 23:11:09.000000', NULL, '2019-10-12 23:11:09.000000', 'Generator', '000000000'),
+	('5acffda7-edc6-11e9-b5db-2c5b4750bec6', '2019-10-13 20:01:36.311032', 'U', '102006', 0, 'fetchInventoryRunningLedger', 'com.inventory.component.fetchInventoryRunningLedgerService', 'fetchInventoryRunningLedger', 'fetchInventoryRunningLedger', '2019-10-12 23:11:09.000000', NULL, '2019-10-12 23:11:09.000000', 'Generator', '000000000'),
+	('61f833ef-edc8-11e9-b5db-2c5b4750bec6', '2019-10-13 20:16:07.312174', 'U', '102008', 0, 'maintainInventoryService', 'com.inventory.component.maintainInventoryService', 'process', 'create record in the database', '2019-10-13 19:21:28.000000', NULL, '2019-10-13 19:21:28.000000', 'Generator', '000000000'),
+	('751081ae-ec59-11e9-b5db-2c5b4750bec6', '2019-10-12 00:30:57.176562', 'I', '102003', 0, 'createInventorySummaryBase', 'com.inventory.component.InventorySummaryService', 'add', 'create record in the database', '2019-10-12 00:30:57.000000', NULL, '2019-10-12 00:30:57.000000', 'Generator', '000000000'),
+	('751efcf4-ec59-11e9-b5db-2c5b4750bec6', '2019-10-12 00:30:57.271274', 'I', '102004', 0, 'updateInventorySummaryBase', 'com.inventory.component.InventorySummaryService', 'merge', 'update the database record based on primary key i.e. idpk', '2019-10-12 00:30:57.000000', NULL, '2019-10-12 00:30:57.000000', 'Generator', '000000000'),
+	('75286299-ec59-11e9-b5db-2c5b4750bec6', '2019-10-12 00:30:57.333108', 'I', '102005', 0, 'retrieveInventorySummaryBase', 'com.inventory.component.InventorySummaryService', 'findById', 'retrieve the record from database based on primary key i.e. idpk', '2019-10-12 00:30:57.000000', NULL, '2019-10-12 00:30:57.000000', 'Generator', '000000000'),
 	('79561264-b09d-11e9-b647-a4badbc6f7f0', '2019-07-28 00:05:54.383200', 'I', '100003', 0, 'createInventoryProductBase', 'com.inventory.component.InventoryProductService', 'add', 'create record in the database', '2019-07-28 00:05:54.000000', NULL, '2019-07-28 00:05:54.000000', 'Generator', '000000000'),
 	('795f2cad-b09d-11e9-b647-a4badbc6f7f0', '2019-07-28 00:05:54.442752', 'I', '100004', 0, 'updateInventoryProductBase', 'com.inventory.component.InventoryProductService', 'merge', 'update the database record based on primary key i.e. idpk', '2019-07-28 00:05:54.000000', NULL, '2019-07-28 00:05:54.000000', 'Generator', '000000000'),
 	('79695c7e-b09d-11e9-b647-a4badbc6f7f0', '2019-07-28 00:05:54.509594', 'I', '100005', 0, 'retrieveInventoryProductBase', 'com.inventory.component.InventoryProductService', 'findById', 'retrieve the record from database based on primary key i.e. idpk', '2019-07-28 00:05:54.000000', NULL, '2019-07-28 00:05:54.000000', 'Generator', '000000000'),
+	('ab590c06-ed17-11e9-b5db-2c5b4750bec6', '2019-10-12 23:11:09.519908', 'I', '102006', 0, 'fetchInventoryRunningLedgerService', 'com.inventory.component.fetchInventoryRunningLedgerService', 'add', 'create record in the database', '2019-10-12 23:11:09.000000', NULL, '2019-10-12 23:11:09.000000', 'Generator', '000000000'),
+	('bfcafed8-edc0-11e9-b5db-2c5b4750bec6', '2019-10-13 19:21:28.747848', 'I', '102008', 0, 'maintainInventoryService', 'com.inventory.component.maintainInventoryService', 'add', 'create record in the database', '2019-10-13 19:21:28.000000', NULL, '2019-10-13 19:21:28.000000', 'Generator', '000000000'),
 	('e1555ec4-bc62-11e9-b32e-a4badbc6f7f0', '2019-08-11 23:37:28.384695', 'U', '101000', 0, 'searchInventoryProduct', 'com.inventory.component.searchInventoryProductService', 'process', 'search inventory product', '2019-08-11 23:32:35.000000', NULL, '2019-08-11 23:32:35.000000', 'Generator', '000000000'),
 	('f900bedd-b130-11e9-b647-a4badbc6f7f0', '2019-07-28 17:41:24.677697', 'I', '100006', 0, 'createRefUnitofmeasureBase', 'com.inventory.componentref.RefUnitofmeasureService', 'add', 'create record in the database', '2019-07-28 17:41:24.000000', NULL, '2019-07-28 17:41:24.000000', 'Generator', '000000000'),
 	('f911a99d-b130-11e9-b647-a4badbc6f7f0', '2019-07-28 17:41:24.852509', 'I', '100007', 0, 'updateRefUnitofmeasureBase', 'com.inventory.componentref.RefUnitofmeasureService', 'merge', 'update the database record based on primary key i.e. idpk', '2019-07-28 17:41:24.000000', NULL, '2019-07-28 17:41:24.000000', 'Generator', '000000000'),
@@ -741,7 +754,7 @@ CREATE TABLE IF NOT EXISTS `al_legalentity` (
   KEY `IDXAL_LEGALENTITY` (`ID_PK`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.al_legalentity: ~37 rows (approximately)
+-- Dumping data for table inventorydb.al_legalentity: ~38 rows (approximately)
 /*!40000 ALTER TABLE `al_legalentity` DISABLE KEYS */;
 INSERT INTO `al_legalentity` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUDITLOG_ACTION_CODE`, `ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `DISPLAY_NAME`, `ENTITY_OBJECT_TYPE_REFKEY`, `CLASSIFICATION_CODE_REFKEY`, `IMPORTANCE_TYPE_REFKEY`, `LE_RATING_REFKEY`, `STATUS_TYPE_REFKEY`, `SOURCE_SYSTEM_REFKEY`, `ONBOARDING_DATE`, `OFFBOARDING_DATE`, `KYC_VERIFICATION_FLAG`, `DESCRIPTION`, `PHONETIC_DISPLAY_NAME`) VALUES
 	('057fede0-ba9b-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:14:18.626149', 'U', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', 20, '2019-08-06 23:14:26.603000', NULL, '2019-08-09 17:14:18.537000', 'admin', '156535105782933267', 'Rakesh', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'RAC'),
@@ -751,6 +764,7 @@ INSERT INTO `al_legalentity` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUDITLOG
 	('0f957ec6-bb24-11e9-80ad-a4badbc6f7f0', '2019-08-10 09:35:16.617788', 'I', '156540991659337365', 0, '2019-08-10 09:35:16.590000', NULL, '2019-08-10 09:35:16.590000', 'admin', '156540991490057809', 'Prasad', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PRASAD'),
 	('0ffb6503-b9d1-11e9-a944-7506bfad22a5', '2019-08-08 17:08:37.894313', 'U', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', 7, '2019-08-06 23:14:26.603000', NULL, '2019-08-08 17:06:45.221000', 'admin', '15652642051277535', 'Rakesh', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'RAC'),
 	('208bb0c8-ba9a-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:07:54.526076', 'U', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', 19, '2019-08-06 23:14:26.603000', NULL, '2019-08-09 17:07:54.448000', 'admin', '156535067396395474', 'Rakesh', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'RAC'),
+	('2cd30c33-edc5-11e9-b5db-2c5b4750bec6', '2019-10-13 19:53:09.659140', 'I', '157097658928337170', 0, '2019-10-13 19:53:09.260000', NULL, '2019-10-13 19:53:09.260000', 'admin', '157097658527985000', 'Rakesh', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'RAC'),
 	('2fe2087e-b9d3-11e9-a944-7506bfad22a5', '2019-08-08 17:23:50.408176', 'U', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', 9, '2019-08-06 23:14:26.603000', '2019-08-08 17:23:50.202000', '2019-08-08 17:23:50.293000', 'admin', '156526523020854861', 'Rakesh', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'RAC'),
 	('37d2740b-b9d1-11e9-a944-7506bfad22a5', '2019-08-08 17:09:44.734492', 'U', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', 8, '2019-08-06 23:14:26.603000', '2019-08-08 17:09:44.516000', '2019-08-08 17:09:44.596000', 'admin', '156526438452146157', 'Rakesh', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'RAC'),
 	('38cce809-b9d4-11e9-a944-7506bfad22a5', '2019-08-08 17:31:14.865997', 'U', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', 10, '2019-08-06 23:14:26.603000', '2019-08-08 17:31:14.682000', '2019-08-08 17:31:14.745000', 'admin', '156526567468575573', 'Rakesh', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'RAC'),
@@ -833,7 +847,7 @@ CREATE TABLE IF NOT EXISTS `al_le_address_assoc` (
   KEY `IDXAL_LE_ADDRESS_ASSOC` (`ID_PK`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.al_le_address_assoc: ~23 rows (approximately)
+-- Dumping data for table inventorydb.al_le_address_assoc: ~24 rows (approximately)
 /*!40000 ALTER TABLE `al_le_address_assoc` DISABLE KEYS */;
 INSERT INTO `al_le_address_assoc` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUDITLOG_ACTION_CODE`, `ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `LEGALENTITY_IDPK`, `ADDRESS_IDPK`, `ADDRESS_TYPE_REFKEY`, `ADDRESS_SUBTYPE_REFKEY`, `PREFERRED_FLAG`, `SOLICITATION_FLAG`) VALUES
 	('05c759aa-ba9b-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:14:19.115260', 'U', 'c5e3ba85-f48b-4152-a536-f506cdb5b120', 14, '2019-08-06 23:14:27.910000', NULL, '2019-08-09 17:14:19.049000', 'admin', '156535105782933267', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '156535105897480975', '1', '1', NULL, NULL),
@@ -842,6 +856,7 @@ INSERT INTO `al_le_address_assoc` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUD
 	('0bea05a3-ba98-11e9-9a58-a4badbc6f7f0', '2019-08-09 16:53:00.894802', 'U', 'c5e3ba85-f48b-4152-a536-f506cdb5b120', 11, '2019-08-06 23:14:27.910000', NULL, '2019-08-09 16:53:00.834000', 'admin', '156534977974415164', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '15653497806361563', '1', '1', NULL, NULL),
 	('0fc59d44-bb24-11e9-80ad-a4badbc6f7f0', '2019-08-10 09:35:16.000000', 'I', '156540991690920488', 0, '2019-08-10 09:35:16.905000', NULL, '2019-08-10 09:35:16.905000', 'admin', '156540991490057809', '156540991659337365', '156540991678378211', '1', '1', NULL, NULL),
 	('20d0009f-ba9a-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:07:54.973782', 'U', 'c5e3ba85-f48b-4152-a536-f506cdb5b120', 13, '2019-08-06 23:14:27.910000', NULL, '2019-08-09 17:07:54.857000', 'admin', '156535067396395474', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '156535067479590190', '1', '1', NULL, NULL),
+	('2d70ca93-edc5-11e9-b5db-2c5b4750bec6', '2019-10-13 19:53:10.000000', 'I', '157097659050955456', 0, '2019-10-13 19:53:10.481000', NULL, '2019-10-13 19:53:10.481000', 'admin', '157097658527985000', '157097658928337170', '157097659011841297', '1', '1', NULL, NULL),
 	('54db8a40-b793-11e9-b463-4cb6ad424387', '2019-08-05 20:41:42.000000', 'I', '75e92273-86ed-492d-8c89-790aaa0a0301', 0, '2019-08-05 20:41:42.097000', NULL, '2019-08-05 20:41:42.097000', 'admin', '3ca1ade7-c78b-4e48-9bd1-f29ed6381c9c', '63147fd0-46e7-49d7-a673-3d307812ff0a', '0a12b662-1575-48b4-8c27-82a2abd3d8b6', '1', '1', NULL, NULL),
 	('5c899917-bb21-11e9-80ad-a4badbc6f7f0', '2019-08-10 09:15:57.212776', 'U', 'c5e3ba85-f48b-4152-a536-f506cdb5b120', 15, '2019-08-06 23:14:27.910000', NULL, '2019-08-10 09:15:57.153000', 'admin', '156540875523247134', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '156540875702749184', '1', '1', NULL, NULL),
 	('5edde9cf-b9d4-11e9-a944-7506bfad22a5', '2019-08-08 17:32:18.731249', 'U', 'c5e3ba85-f48b-4152-a536-f506cdb5b120', 7, '2019-08-06 23:14:27.910000', NULL, '2019-08-08 17:32:18.666000', 'admin', '156526573670245542', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '156526573838642055', '1', '1', NULL, NULL),
@@ -947,7 +962,7 @@ CREATE TABLE IF NOT EXISTS `al_le_person` (
   KEY `IDXAL_LE_PERSON` (`LEGALENTITY_IDPK`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.al_le_person: ~23 rows (approximately)
+-- Dumping data for table inventorydb.al_le_person: ~24 rows (approximately)
 /*!40000 ALTER TABLE `al_le_person` DISABLE KEYS */;
 INSERT INTO `al_le_person` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUDITLOG_ACTION_CODE`, `LEGALENTITY_IDPK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `PERSON_TYPE_REFKEY`, `GENDER_REFKEY`, `DATE_OF_BIRTH`, `COUNTRY_OF_BIRTH__REFKEY`, `COUNTRY_CITIZENSHIP_REFKEY`, `COUNTRY_OF_DOMICILE__REFKEY`, `MARITAL_STATUS`, `HIGHEST_EDU_QUAL_REFKEY`, `IS_DECEASED_FLAG`, `DECEASED_DATE`, `IS_HANDICAPPED_FLAG`, `HANDICAPPED_SINCE_DATE`, `NUMBER_OF_DEPENDENTS`, `NUMBER_OF_CHILDREN`, `PREFERRED_LANGUAGE_REFKEY`) VALUES
 	('0591eb78-ba9b-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:14:18.764887', 'U', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', 14, '2019-08-06 23:14:27.222000', NULL, '2019-08-09 17:14:18.661000', 'admin', '156535105782933267', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -956,6 +971,7 @@ INSERT INTO `al_le_person` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUDITLOG_A
 	('0ba61fdf-ba98-11e9-9a58-a4badbc6f7f0', '2019-08-09 16:53:00.473646', 'U', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', 11, '2019-08-06 23:14:27.222000', NULL, '2019-08-09 16:53:00.385000', 'admin', '156534977974415164', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('0f9d2324-bb24-11e9-80ad-a4badbc6f7f0', '2019-08-10 09:35:16.667957', 'I', '156540991659337365', 0, '2019-08-10 09:35:16.629000', NULL, '2019-08-10 09:35:16.629000', 'admin', '156540991490057809', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('2099c118-ba9a-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:07:54.618169', 'U', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', 13, '2019-08-06 23:14:27.222000', NULL, '2019-08-09 17:07:54.537000', 'admin', '156535067396395474', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('2cea90f3-edc5-11e9-b5db-2c5b4750bec6', '2019-10-13 19:53:09.813365', 'I', '157097658928337170', 0, '2019-10-13 19:53:09.698000', NULL, '2019-10-13 19:53:09.699000', 'admin', '157097658527985000', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('54946850-b793-11e9-b463-4cb6ad424387', '2019-08-05 20:41:41.859292', 'I', '63147fd0-46e7-49d7-a673-3d307812ff0a', 0, '2019-08-05 20:41:41.761000', NULL, '2019-08-05 20:41:41.761000', 'admin', '3ca1ade7-c78b-4e48-9bd1-f29ed6381c9c', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('5c4e7adf-bb21-11e9-80ad-a4badbc6f7f0', '2019-08-10 09:15:56.831839', 'U', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', 15, '2019-08-06 23:14:27.222000', NULL, '2019-08-10 09:15:56.754000', 'admin', '156540875523247134', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('5e8e4b3d-b9d4-11e9-a944-7506bfad22a5', '2019-08-08 17:32:18.172044', 'U', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', 7, '2019-08-06 23:14:27.222000', NULL, '2019-08-08 17:32:18.091000', 'admin', '156526573670245542', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -998,7 +1014,7 @@ CREATE TABLE IF NOT EXISTS `al_le_phone_assoc` (
   KEY `IDXAL_LE_PHONE_ASSOC` (`ID_PK`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.al_le_phone_assoc: ~69 rows (approximately)
+-- Dumping data for table inventorydb.al_le_phone_assoc: ~72 rows (approximately)
 /*!40000 ALTER TABLE `al_le_phone_assoc` DISABLE KEYS */;
 INSERT INTO `al_le_phone_assoc` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUDITLOG_ACTION_CODE`, `ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `LEGALENTITY_IDPK`, `PHONE_TYPE_REFKEY`, `PHONE_SUBTYPE_REFKEY`, `PREFERRED_FLAG`, `PHONE_NUMBER`, `PHONE_STANDARDIZED_IDPK`) VALUES
 	('0007fce6-b874-11e9-a128-a77b75d7d8b3', '2019-08-06 23:29:56.774684', 'I', '9bcc2ea3-951b-4568-842f-ed5a0a8b4b56', 0, '2019-08-06 23:29:56.747000', NULL, '2019-08-06 23:29:56.747000', 'admin', 'ead45d5d-9e6f-45a2-ab6c-78c6aa15db66', '184277d4-c20f-4a20-898e-e27c9f6b8e0f', '3', NULL, NULL, 'prasadjoshi@unknown.com', NULL),
@@ -1020,6 +1036,9 @@ INSERT INTO `al_le_phone_assoc` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUDIT
 	('20dd9e43-ba9a-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:07:55.063091', 'U', '81dcbf51-5d89-4f1c-80dc-759f034f04bd', 13, '2019-08-06 23:14:28.355000', NULL, '2019-08-09 17:07:55.004000', 'admin', '156535067396395474', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '2', NULL, NULL, '02067931547', NULL),
 	('20eaa3c5-ba9a-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:07:55.148431', 'U', '89c7b392-ec1d-4387-adf4-9c7c4033bc1d', 13, '2019-08-06 23:14:28.484000', NULL, '2019-08-09 17:07:55.095000', 'admin', '156535067396395474', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '3', NULL, NULL, 'rakeshvikhar@gmail.com', NULL),
 	('20f9519e-ba9a-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:07:55.244633', 'U', '8eba73fc-6d76-417c-9634-ef2f13709930', 13, '2019-08-06 23:14:28.192000', NULL, '2019-08-09 17:07:55.184000', 'admin', '156535067396395474', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '1', NULL, NULL, '9657700433', NULL),
+	('2d8aa1b6-edc5-11e9-b5db-2c5b4750bec6', '2019-10-13 19:53:10.862345', 'I', '157097659078786874', 0, '2019-10-13 19:53:10.758000', NULL, '2019-10-13 19:53:10.758000', 'admin', '157097658527985000', '157097658928337170', '1', NULL, NULL, '234234', NULL),
+	('2d9dacab-edc5-11e9-b5db-2c5b4750bec6', '2019-10-13 19:53:10.987130', 'I', '157097659092120904', 0, '2019-10-13 19:53:10.918000', NULL, '2019-10-13 19:53:10.918000', 'admin', '157097658527985000', '157097658928337170', '2', NULL, NULL, '2342342', NULL),
+	('2db00611-edc5-11e9-b5db-2c5b4750bec6', '2019-10-13 19:53:11.107398', 'I', '157097659104366564', 0, '2019-10-13 19:53:11.038000', NULL, '2019-10-13 19:53:11.038000', 'admin', '157097658527985000', '157097658928337170', '3', NULL, NULL, 'rakeshvikhar@gmail.com', NULL),
 	('54f81ad3-b793-11e9-b463-4cb6ad424387', '2019-08-05 20:41:42.512781', 'I', '30d0a175-ce94-4c74-9835-e8dd5ed0dbfe', 0, '2019-08-05 20:41:42.435000', NULL, '2019-08-05 20:41:42.435000', 'admin', '3ca1ade7-c78b-4e48-9bd1-f29ed6381c9c', '63147fd0-46e7-49d7-a673-3d307812ff0a', '1', NULL, NULL, '123123123', NULL),
 	('5513126a-b793-11e9-b463-4cb6ad424387', '2019-08-05 20:41:42.619153', 'I', '20f74642-fbfc-4f97-ad4d-8a425dc59395', 0, '2019-08-05 20:41:42.561000', NULL, '2019-08-05 20:41:42.561000', 'admin', '3ca1ade7-c78b-4e48-9bd1-f29ed6381c9c', '63147fd0-46e7-49d7-a673-3d307812ff0a', '2', NULL, NULL, '123123', NULL),
 	('5537828c-b793-11e9-b463-4cb6ad424387', '2019-08-05 20:41:42.786184', 'I', '540be454-f399-4ef2-88d5-3512ed4dbcf0', 0, '2019-08-05 20:41:42.728000', NULL, '2019-08-05 20:41:42.728000', 'admin', '3ca1ade7-c78b-4e48-9bd1-f29ed6381c9c', '63147fd0-46e7-49d7-a673-3d307812ff0a', '3', NULL, NULL, '123123@yahoo.com', NULL),
@@ -1329,7 +1348,7 @@ CREATE TABLE IF NOT EXISTS `al_personnames` (
   KEY `IDXAL_PERSONNAMES` (`ID_PK`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.al_personnames: ~18 rows (approximately)
+-- Dumping data for table inventorydb.al_personnames: ~19 rows (approximately)
 /*!40000 ALTER TABLE `al_personnames` DISABLE KEYS */;
 INSERT INTO `al_personnames` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUDITLOG_ACTION_CODE`, `ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `LEGALENTITY_IDPK`, `PERSONNAME_TYPE_REFKEY`, `PREFIX_NAME_REFKEY`, `PREFIX_MISC`, `NAME_ONE`, `NAME_TWO`, `NAME_THREE`, `NAME_FOUR`, `LAST_NAME`, `NICK_NAME`, `POPULAR_NAME`, `SUFFIX_NAME_REFKEY`, `SUFFIX_MISC`, `NAME_STANDARDISED_FLAG`, `SOURCE_SYSTEM_REFKEY`, `PHONETIC_NAME_ONE`, `PHONETIC_NAME_TWO`, `PHONETIC_NAME_THREE`, `PHONETIC_LAST_NAME`) VALUES
 	('05aba499-ba9b-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:14:18.933611', 'U', 'd1814620-3e38-44ea-9589-0fa8bae6383f', 14, '2019-08-06 23:14:27.389000', NULL, '2019-08-09 17:14:18.841000', 'admin', '156535105782933267', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '1', NULL, NULL, 'Rakesh', NULL, NULL, NULL, 'Vikhar', 'Rakesh P', NULL, NULL, NULL, NULL, NULL, 'RAC', NULL, NULL, 'VACAR'),
@@ -1337,6 +1356,7 @@ INSERT INTO `al_personnames` (`AUDITLOG_ID_PK`, `AUDITLOG_CREATED_TS`, `AUDITLOG
 	('0bb9ea00-ba98-11e9-9a58-a4badbc6f7f0', '2019-08-09 16:53:00.603319', 'U', 'd1814620-3e38-44ea-9589-0fa8bae6383f', 11, '2019-08-06 23:14:27.389000', NULL, '2019-08-09 16:53:00.533000', 'admin', '156534977974415164', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '1', NULL, NULL, 'Rakesh', NULL, NULL, NULL, 'Vikhar', 'Rakesh P', NULL, NULL, NULL, NULL, NULL, 'RAC', NULL, NULL, 'VACAR'),
 	('0faa76f2-bb24-11e9-80ad-a4badbc6f7f0', '2019-08-10 09:35:16.755103', 'I', '156540991668085627', 0, '2019-08-10 09:35:16.677000', NULL, '2019-08-10 09:35:16.677000', 'admin', '156540991490057809', '156540991659337365', '1', NULL, NULL, 'Prasad', NULL, NULL, NULL, 'Joshi', 'Prasad Prabhu', NULL, NULL, NULL, NULL, NULL, 'PRASAD', NULL, NULL, 'JAS'),
 	('20b06ed8-ba9a-11e9-9a58-a4badbc6f7f0', '2019-08-09 17:07:54.766784', 'U', 'd1814620-3e38-44ea-9589-0fa8bae6383f', 13, '2019-08-06 23:14:27.389000', NULL, '2019-08-09 17:07:54.698000', 'admin', '156535067396395474', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '1', NULL, NULL, 'Rakesh', NULL, NULL, NULL, 'Vikhar', 'Rakesh P', NULL, NULL, NULL, NULL, NULL, 'RAC', NULL, NULL, 'VACAR'),
+	('2d0cb6c8-edc5-11e9-b5db-2c5b4750bec6', '2019-10-13 19:53:10.036946', 'I', '15709765898754297', 0, '2019-10-13 19:53:09.851000', NULL, '2019-10-13 19:53:09.851000', 'admin', '157097658527985000', '157097658928337170', '1', NULL, NULL, 'Rakesh', NULL, NULL, NULL, 'Vikhar', 'Rakesh', NULL, NULL, NULL, NULL, NULL, 'RAC', NULL, NULL, 'VACAR'),
 	('5c641c67-bb21-11e9-80ad-a4badbc6f7f0', '2019-08-10 09:15:56.979297', 'U', 'd1814620-3e38-44ea-9589-0fa8bae6383f', 15, '2019-08-06 23:14:27.389000', NULL, '2019-08-10 09:15:56.909000', 'admin', '156540875523247134', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '1', NULL, NULL, 'Rakesh', NULL, NULL, NULL, 'Vikhar', 'Rakesh P', NULL, NULL, NULL, NULL, NULL, 'RAC', NULL, NULL, 'VACAR'),
 	('5ea2c819-b9d4-11e9-a944-7506bfad22a5', '2019-08-08 17:32:18.343705', 'U', 'd1814620-3e38-44ea-9589-0fa8bae6383f', 7, '2019-08-06 23:14:27.389000', NULL, '2019-08-08 17:32:18.273000', 'admin', '156526573670245542', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '1', NULL, NULL, 'Rakesh', NULL, NULL, NULL, 'Vikhar', 'Rakesh P', NULL, NULL, NULL, NULL, NULL, 'RAC', NULL, NULL, 'VACAR'),
 	('704f895c-b9c3-11e9-a944-7506bfad22a5', '2019-08-08 15:31:06.541889', 'U', 'd1814620-3e38-44ea-9589-0fa8bae6383f', 1, '2019-08-06 23:14:27.389000', NULL, '2019-08-08 15:31:06.450000', 'admin', '156525846495462869', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '1', NULL, NULL, 'Rakesh', NULL, NULL, NULL, 'Vikhar', 'Rakesh', NULL, NULL, NULL, NULL, NULL, 'RAC', NULL, NULL, 'VACAR'),
@@ -3329,7 +3349,7 @@ CREATE TABLE IF NOT EXISTS `config_txn_registry` (
   UNIQUE KEY `UNIQUESERVICENAME` (`TXNSERVICE_NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.config_txn_registry: ~448 rows (approximately)
+-- Dumping data for table inventorydb.config_txn_registry: ~455 rows (approximately)
 /*!40000 ALTER TABLE `config_txn_registry` DISABLE KEYS */;
 INSERT INTO `config_txn_registry` (`ID_PK`, `VERSION`, `TXNSERVICE_NAME`, `TXNSERVICE_CLASS`, `TXNSERVICE_CLASSMETHOD`, `DESCRIPTION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_TXN_REF_ID`) VALUES
 	('1', 0, 'createConfigTxnRegistryBase', 'com.yugandhar.mdm.config.txnregistry.ConfigTxnRegistryService', 'add', 'find by business key method search properties based on transaction Name', '2018-04-16 18:35:32.000000', NULL, '2018-04-16 18:35:32.000000', 'Generator', '000000000'),
@@ -3348,6 +3368,14 @@ INSERT INTO `config_txn_registry` (`ID_PK`, `VERSION`, `TXNSERVICE_NAME`, `TXNSE
 	('101', 0, 'createRefIdentificationTypeBase', 'com.yugandhar.mdm.corecomponentref.RefIdentificationTypeService', 'add', 'find by business key method search properties based on transaction Name', '2018-04-16 18:35:31.000000', NULL, '2018-04-16 18:35:31.000000', 'Generator', '000000000'),
 	('101000', 0, 'searchInventoryProduct', 'com.inventory.component.searchInventoryProductService', 'process', 'search inventory product', '2019-08-11 23:32:35.000000', NULL, '2019-08-11 23:32:35.000000', 'Generator', '000000000'),
 	('102', 0, 'updateRefIdentificationTypeBase', 'com.yugandhar.mdm.corecomponentref.RefIdentificationTypeService', 'merge', 'find by business key method search properties based on transaction Name', '2018-04-16 18:35:31.000000', NULL, '2018-04-16 18:35:31.000000', 'Generator', '000000000'),
+	('102000', 0, 'createInventoryRunningLedgerBase', 'com.inventory.component.InventoryRunningLedgerService', 'add', 'create record in the database', '2019-10-12 00:29:28.000000', NULL, '2019-10-12 00:29:28.000000', 'Generator', '000000000'),
+	('102001', 0, 'updateInventoryRunningLedgerBase', 'com.inventory.component.InventoryRunningLedgerService', 'merge', 'update the database record based on primary key i.e. idpk', '2019-10-12 00:29:28.000000', NULL, '2019-10-12 00:29:28.000000', 'Generator', '000000000'),
+	('102002', 0, 'retrieveInventoryRunningLedgerBase', 'com.inventory.component.InventoryRunningLedgerService', 'findById', 'retrieve the record from database based on primary key i.e. idpk', '2019-10-12 00:29:28.000000', NULL, '2019-10-12 00:29:28.000000', 'Generator', '000000000'),
+	('102003', 0, 'createInventorySummaryBase', 'com.inventory.component.InventorySummaryService', 'add', 'create record in the database', '2019-10-12 00:30:57.000000', NULL, '2019-10-12 00:30:57.000000', 'Generator', '000000000'),
+	('102004', 0, 'updateInventorySummaryBase', 'com.inventory.component.InventorySummaryService', 'merge', 'update the database record based on primary key i.e. idpk', '2019-10-12 00:30:57.000000', NULL, '2019-10-12 00:30:57.000000', 'Generator', '000000000'),
+	('102005', 0, 'retrieveInventorySummaryBase', 'com.inventory.component.InventorySummaryService', 'findById', 'retrieve the record from database based on primary key i.e. idpk', '2019-10-12 00:30:57.000000', NULL, '2019-10-12 00:30:57.000000', 'Generator', '000000000'),
+	('102006', 0, 'fetchInventoryRunningLedger', 'com.inventory.component.fetchInventoryRunningLedgerService', 'fetchInventoryRunningLedger', 'fetchInventoryRunningLedger', '2019-10-12 23:11:09.000000', NULL, '2019-10-12 23:11:09.000000', 'Generator', '000000000'),
+	('102008', 0, 'maintainInventoryService', 'com.inventory.component.maintainInventoryService', 'process', 'create record in the database', '2019-10-13 19:21:28.000000', NULL, '2019-10-13 19:21:28.000000', 'Generator', '000000000'),
 	('103', 0, 'retrieveRefIdentificationTypeBase', 'com.yugandhar.mdm.corecomponentref.RefIdentificationTypeService', 'findById', 'find by business key method search properties based on transaction Name', '2018-04-16 18:35:32.000000', NULL, '2018-04-16 18:35:32.000000', 'Generator', '000000000'),
 	('104', 0, 'findRefIdentificationTypeByBusinessKeyBase', 'com.yugandhar.mdm.corecomponentref.RefIdentificationTypeService', 'findByBusinessKey', 'find by business key method search properties based on transaction Name', '2018-04-16 18:35:32.000000', NULL, '2018-04-16 18:35:32.000000', 'Generator', '000000000'),
 	('105', 0, 'findAllRefIdentificationTypeByLanguageCodeBase', 'com.yugandhar.mdm.corecomponentref.RefIdentificationTypeService', 'findAllRecordsByLanguageCode', 'find All records by language code', '2018-04-16 18:35:32.000000', NULL, '2018-04-16 18:35:32.000000', 'Generator', '000000000'),
@@ -3893,32 +3921,6 @@ CREATE TABLE IF NOT EXISTS `inactive_le_registry` (
 /*!40000 ALTER TABLE `inactive_le_registry` DISABLE KEYS */;
 /*!40000 ALTER TABLE `inactive_le_registry` ENABLE KEYS */;
 
--- Dumping structure for table inventorydb.inventory_order
-CREATE TABLE IF NOT EXISTS `inventory_order` (
-  `ID_PK` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `VERSION` decimal(22,0) NOT NULL,
-  `CREATED_TS` datetime(6) NOT NULL,
-  `DELETED_TS` datetime(6) DEFAULT NULL,
-  `UPDATED_TS` datetime(6) NOT NULL,
-  `UPDATED_BY_USER` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `UPDATED_BY_TXN_ID` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `ORDER_ID` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `PRODUCT_ID` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `UNIT_PRICE` decimal(22,0) NOT NULL,
-  `UNIT_QUANTITY` decimal(22,0) NOT NULL,
-  PRIMARY KEY (`ID_PK`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Dumping data for table inventorydb.inventory_order: ~5 rows (approximately)
-/*!40000 ALTER TABLE `inventory_order` DISABLE KEYS */;
-INSERT INTO `inventory_order` (`ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `ORDER_ID`, `PRODUCT_ID`, `UNIT_PRICE`, `UNIT_QUANTITY`) VALUES
-	('156519738875860523', 0, '2019-08-07 22:33:08.754000', NULL, '2019-08-07 22:33:08.754000', 'admin', '1234567890123', '12345', '12345', 100, 100),
-	('156519741747757125', 1, '2019-08-07 22:33:37.476000', NULL, '2019-08-07 22:34:07.185000', 'admin', '1234567890123', '12345', '12345', 100, 100),
-	('c7b68d5a-ba10-4878-960c-9e0673a59ebf', 1, '2019-07-28 00:24:05.763000', NULL, '2019-07-28 00:25:04.245000', 'admin', '1234567890123', '12345', '12345', 102, 100),
-	('d279deaf-4590-47ea-ad4a-17bbc9354a65', 0, '2019-07-28 00:19:35.479000', NULL, '2019-07-28 00:19:35.479000', 'admin', '1234567890123', '12345', '12345', 100, 100),
-	('d2bec2e9-88ad-4014-b994-2c5972cb9301', 0, '2019-07-28 00:24:35.120000', NULL, '2019-07-28 00:24:35.120000', 'admin', '1234567890123', '12345', '12345', 102, 100);
-/*!40000 ALTER TABLE `inventory_order` ENABLE KEYS */;
-
 -- Dumping structure for table inventorydb.inventory_product
 CREATE TABLE IF NOT EXISTS `inventory_product` (
   `ID_PK` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
@@ -3944,15 +3946,56 @@ CREATE TABLE IF NOT EXISTS `inventory_product` (
   PRIMARY KEY (`ID_PK`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table inventorydb.inventory_product: ~5 rows (approximately)
+-- Dumping data for table inventorydb.inventory_product: ~0 rows (approximately)
 /*!40000 ALTER TABLE `inventory_product` DISABLE KEYS */;
 INSERT INTO `inventory_product` (`ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `PRODUCT_ID`, `Supplier_ID`, `Product_Name`, `Product_Type`, `Product_Category`, `hsn_sac_code`, `Product_Status`, `Product_Expiry_Date`, `Product_Arrival_Date`, `Quantity_Recevied`, `Quantity_Inhand`, `Quantity_UnitOfMeasure`, `Bill_number`) VALUES
-	('156545950972279881', 0, '2019-08-10 23:21:49.721000', NULL, '2019-08-10 23:21:49.721000', 'admin', '15654595090854544', '12311111', 'SUP12309999999', 'Ink Pen', 'Pen', 'Office Stationary', 'CVBCC', '', '2022-10-31 00:00:00.000000', '2019-08-10 00:00:00.000000', 10, 10, 'Units', ''),
-	('15655069684138642', 2, '2019-08-11 12:32:48.412000', NULL, '2019-08-12 21:57:31.397000', 'admin', '15656272513025613', '123123', '123123123', 'Pencil', 'Stationary', 'Stationary', '', '', NULL, NULL, 1, NULL, '2', ''),
-	('156554935995863106', 0, '2019-08-12 00:19:19.957000', NULL, '2019-08-12 00:19:19.957000', 'admin', '156554935984864952', '8282828', '', 'Bhavad Geeta', 'Book', 'Book', '123123', '', '2024-08-31 00:00:00.000000', '2019-08-12 00:00:00.000000', 10, 5, '2', ''),
-	('156562760930932624', 2, '2019-08-12 22:03:29.308000', NULL, '2019-08-12 22:04:18.088000', 'admin', '156562765803188757', '1111222', '', 'Laptop', 'Device', 'Electronic Devices', '', 'In Stock', '2030-08-31 00:00:00.000000', '2019-08-12 00:00:00.000000', 3, 3, '2', ''),
-	('d5185033-58d7-43c7-b6d7-2e42c89df1b9', 1, '2019-07-28 17:02:02.871000', NULL, '2019-07-28 17:02:57.520000', 'admin', '1234567890123', '100', 'asdlfkjasdlfkjsdf1111', 'Product 1', 'roduct type', 'Product Cat', NULL, 'ACTIVE', '2022-07-28 00:25:04.245000', '2019-07-28 00:25:04.245000', 10, 5, 'Units', 'Anb810308-09234');
+	('157099503358850864', 3, '2019-10-14 01:00:33.588000', NULL, '2019-10-14 01:03:43.261000', 'admin', '157099522313986116', 'dummy', '123', 'Pen', 'Stationary', 'Stationary', '', '1', '2020-10-31 00:00:00.000000', '2019-10-14 00:00:00.000000', 100, 99, '2', '');
 /*!40000 ALTER TABLE `inventory_product` ENABLE KEYS */;
+
+-- Dumping structure for table inventorydb.inventory_running_ledger
+CREATE TABLE IF NOT EXISTS `inventory_running_ledger` (
+  `ID_PK` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `VERSION` decimal(22,0) NOT NULL,
+  `CREATED_TS` datetime(6) NOT NULL,
+  `DELETED_TS` datetime(6) DEFAULT NULL,
+  `UPDATED_TS` datetime(6) NOT NULL,
+  `UPDATED_BY_USER` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `UPDATED_BY_TXN_ID` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `LEGALENTITY_IDPK` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `PRODUCT_ID` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `TRANSACTION_TYPE` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `TRANSACTION_QUANTITY` decimal(22,0) NOT NULL,
+  PRIMARY KEY (`ID_PK`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table inventorydb.inventory_running_ledger: ~0 rows (approximately)
+/*!40000 ALTER TABLE `inventory_running_ledger` DISABLE KEYS */;
+INSERT INTO `inventory_running_ledger` (`ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `LEGALENTITY_IDPK`, `PRODUCT_ID`, `TRANSACTION_TYPE`, `TRANSACTION_QUANTITY`) VALUES
+	('157099511231126952', 0, '2019-10-14 01:01:52.310000', NULL, '2019-10-14 01:01:52.310000', 'admin', '157099511203380033', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '157099503358850864', 'ISSUE', 2),
+	('157099522338135474', 0, '2019-10-14 01:03:43.380000', NULL, '2019-10-14 01:03:43.380000', 'admin', '157099522313986116', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '157099503358850864', 'RETURN', 1);
+/*!40000 ALTER TABLE `inventory_running_ledger` ENABLE KEYS */;
+
+-- Dumping structure for table inventorydb.inventory_summary
+CREATE TABLE IF NOT EXISTS `inventory_summary` (
+  `ID_PK` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `VERSION` decimal(22,0) NOT NULL,
+  `CREATED_TS` datetime(6) NOT NULL,
+  `DELETED_TS` datetime(6) DEFAULT NULL,
+  `UPDATED_TS` datetime(6) NOT NULL,
+  `UPDATED_BY_USER` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `UPDATED_BY_TXN_ID` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
+  `LEGALENTITY_IDPK` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `PRODUCT_ID` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `QUANTITY_RUNNING_BALANCE` decimal(22,0) NOT NULL,
+  `QUANTITY_YEAR_TO_DATE` decimal(22,0) NOT NULL,
+  PRIMARY KEY (`ID_PK`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table inventorydb.inventory_summary: ~0 rows (approximately)
+/*!40000 ALTER TABLE `inventory_summary` DISABLE KEYS */;
+INSERT INTO `inventory_summary` (`ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `LEGALENTITY_IDPK`, `PRODUCT_ID`, `QUANTITY_RUNNING_BALANCE`, `QUANTITY_YEAR_TO_DATE`) VALUES
+	('15709951122745869', 1, '2019-10-14 01:01:52.273000', NULL, '2019-10-14 01:03:43.343000', 'admin', '157099522313986116', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '157099503358850864', 1, 1);
+/*!40000 ALTER TABLE `inventory_summary` ENABLE KEYS */;
 
 -- Dumping structure for table inventorydb.legalentity
 CREATE TABLE IF NOT EXISTS `legalentity` (
@@ -3989,10 +4032,11 @@ CREATE TABLE IF NOT EXISTS `legalentity` (
   KEY `INDX_LEGALENTITY_1` (`DISPLAY_NAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.legalentity: ~7 rows (approximately)
+-- Dumping data for table inventorydb.legalentity: ~8 rows (approximately)
 /*!40000 ALTER TABLE `legalentity` DISABLE KEYS */;
 INSERT INTO `legalentity` (`ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `DISPLAY_NAME`, `ENTITY_OBJECT_TYPE_REFKEY`, `CLASSIFICATION_CODE_REFKEY`, `IMPORTANCE_TYPE_REFKEY`, `LE_RATING_REFKEY`, `STATUS_TYPE_REFKEY`, `SOURCE_SYSTEM_REFKEY`, `ONBOARDING_DATE`, `OFFBOARDING_DATE`, `KYC_VERIFICATION_FLAG`, `DESCRIPTION`, `PHONETIC_DISPLAY_NAME`) VALUES
 	('156540991659337365', 1, '2019-08-10 09:35:16.590000', NULL, '2019-08-10 09:42:16.337000', 'admin', '1565410335634484', 'Prasad', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PRASAD'),
+	('157097658928337170', 0, '2019-10-13 19:53:09.260000', NULL, '2019-10-13 19:53:09.260000', 'admin', '157097658527985000', 'Rakesh', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'RAC'),
 	('184277d4-c20f-4a20-898e-e27c9f6b8e0f', 0, '2019-08-06 23:29:56.259000', NULL, '2019-08-06 23:29:56.259000', 'admin', 'ead45d5d-9e6f-45a2-ab6c-78c6aa15db66', 'Prasad', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'PRASAD'),
 	('1ed461f9-30e7-41b8-a301-a11373b2694b', 0, '2019-08-04 20:47:52.301000', NULL, '2019-08-04 20:47:52.301000', 'admin', '8f15c02a-01e5-42c5-99fa-72c7196d3e5c', '1123123', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
 	('63147fd0-46e7-49d7-a673-3d307812ff0a', 0, '2019-08-05 20:41:41.427000', NULL, '2019-08-05 20:41:41.427000', 'admin', '3ca1ade7-c78b-4e48-9bd1-f29ed6381c9c', 'Test Brahmachari 1', '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'TASTBR'),
@@ -4056,10 +4100,11 @@ CREATE TABLE IF NOT EXISTS `le_address_assoc` (
   KEY `INDX_LE_ADDRESS_ASSOC_1` (`LEGALENTITY_IDPK`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.le_address_assoc: ~8 rows (approximately)
+-- Dumping data for table inventorydb.le_address_assoc: ~9 rows (approximately)
 /*!40000 ALTER TABLE `le_address_assoc` DISABLE KEYS */;
 INSERT INTO `le_address_assoc` (`ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `LEGALENTITY_IDPK`, `ADDRESS_IDPK`, `ADDRESS_TYPE_REFKEY`, `ADDRESS_SUBTYPE_REFKEY`, `PREFERRED_FLAG`, `SOLICITATION_FLAG`) VALUES
 	('156540991690920488', 1, '2019-08-10 09:35:16.905000', NULL, '2019-08-10 09:42:16.891000', 'admin', '1565410335634484', '156540991659337365', '156541033678182275', '1', '1', NULL, NULL),
+	('157097659050955456', 0, '2019-10-13 19:53:10.481000', NULL, '2019-10-13 19:53:10.481000', 'admin', '157097658527985000', '157097658928337170', '157097659011841297', '1', '1', NULL, NULL),
 	('5aa3b7c7-a531-4fd4-ab6f-29954f29af5b', 0, '2019-08-04 20:40:21.937000', NULL, '2019-08-04 20:40:21.937000', 'admin', 'f17bc1b9-dd49-46f0-9a7e-30c6afbcf584', 'b20e0e38-4864-4138-9455-2681042cec9a', '0870c645-b6f6-409b-a122-17968c538bf3', '1', '1', NULL, NULL),
 	('75e92273-86ed-492d-8c89-790aaa0a0301', 0, '2019-08-05 20:41:42.097000', NULL, '2019-08-05 20:41:42.097000', 'admin', '3ca1ade7-c78b-4e48-9bd1-f29ed6381c9c', '63147fd0-46e7-49d7-a673-3d307812ff0a', '0a12b662-1575-48b4-8c27-82a2abd3d8b6', '1', '1', NULL, NULL),
 	('7b2fd9b8-7eaf-4971-81fa-ab444716b658', 0, '2019-08-04 20:47:52.595000', NULL, '2019-08-04 20:47:52.595000', 'admin', '8f15c02a-01e5-42c5-99fa-72c7196d3e5c', '1ed461f9-30e7-41b8-a301-a11373b2694b', '95f3ae63-9342-4f61-a65e-7fda270125e1', '1', '1', NULL, NULL),
@@ -4157,10 +4202,11 @@ CREATE TABLE IF NOT EXISTS `le_person` (
   KEY `INDX_LE_PERSON_5` (`PREFERRED_LANGUAGE_REFKEY`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.le_person: ~8 rows (approximately)
+-- Dumping data for table inventorydb.le_person: ~9 rows (approximately)
 /*!40000 ALTER TABLE `le_person` DISABLE KEYS */;
 INSERT INTO `le_person` (`LEGALENTITY_IDPK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `PERSON_TYPE_REFKEY`, `GENDER_REFKEY`, `DATE_OF_BIRTH`, `COUNTRY_OF_BIRTH__REFKEY`, `COUNTRY_CITIZENSHIP_REFKEY`, `COUNTRY_OF_DOMICILE__REFKEY`, `MARITAL_STATUS`, `HIGHEST_EDU_QUAL_REFKEY`, `IS_DECEASED_FLAG`, `DECEASED_DATE`, `IS_HANDICAPPED_FLAG`, `HANDICAPPED_SINCE_DATE`, `NUMBER_OF_DEPENDENTS`, `NUMBER_OF_CHILDREN`, `PREFERRED_LANGUAGE_REFKEY`) VALUES
 	('156540991659337365', 1, '2019-08-10 09:35:16.629000', NULL, '2019-08-10 09:42:16.456000', 'admin', '1565410335634484', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('157097658928337170', 0, '2019-10-13 19:53:09.698000', NULL, '2019-10-13 19:53:09.699000', 'admin', '157097658527985000', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('184277d4-c20f-4a20-898e-e27c9f6b8e0f', 0, '2019-08-06 23:29:56.321000', NULL, '2019-08-06 23:29:56.321000', 'admin', 'ead45d5d-9e6f-45a2-ab6c-78c6aa15db66', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('19a15f9e-75db-4076-90ef-0b5dcb0cc712', 0, '2019-08-04 01:25:38.613000', NULL, '2019-08-04 01:25:38.613000', 'admin', '999b8b77-50cd-411e-8f0d-5bc351cf7b5e', NULL, '1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 	('1ed461f9-30e7-41b8-a301-a11373b2694b', 0, '2019-08-04 20:47:52.375000', NULL, '2019-08-04 20:47:52.375000', 'admin', '8f15c02a-01e5-42c5-99fa-72c7196d3e5c', NULL, '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -4194,7 +4240,7 @@ CREATE TABLE IF NOT EXISTS `le_phone_assoc` (
   KEY `INDX_LE_PHONE_ASSOC_1` (`LEGALENTITY_IDPK`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.le_phone_assoc: ~24 rows (approximately)
+-- Dumping data for table inventorydb.le_phone_assoc: ~27 rows (approximately)
 /*!40000 ALTER TABLE `le_phone_assoc` DISABLE KEYS */;
 INSERT INTO `le_phone_assoc` (`ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `LEGALENTITY_IDPK`, `PHONE_TYPE_REFKEY`, `PHONE_SUBTYPE_REFKEY`, `PREFERRED_FLAG`, `PHONE_NUMBER`, `PHONE_STANDARDIZED_IDPK`) VALUES
 	('08aac0fa-f11d-4922-90ad-aa3ee052a0ae', 0, '2019-08-06 23:55:58.817000', NULL, '2019-08-06 23:55:58.817000', 'admin', '44ad158a-0953-42a2-a6fd-085b16470977', 'd178b722-8f2e-40ae-b6c7-23c1147975cc', '1', NULL, NULL, '222222', NULL),
@@ -4202,6 +4248,9 @@ INSERT INTO `le_phone_assoc` (`ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `U
 	('156540991696587807', 1, '2019-08-10 09:35:16.962000', NULL, '2019-08-10 09:42:17.023000', 'admin', '1565410335634484', '156540991659337365', '1', NULL, NULL, '0888811111111', NULL),
 	('156540991702919379', 1, '2019-08-10 09:35:17.025000', NULL, '2019-08-10 09:42:17.323000', 'admin', '1565410335634484', '156540991659337365', '2', NULL, NULL, '020888888888', NULL),
 	('156540991707858809', 1, '2019-08-10 09:35:17.075000', NULL, '2019-08-10 09:42:17.442000', 'admin', '1565410335634484', '156540991659337365', '3', NULL, NULL, 'abc@yahoo.com', NULL),
+	('157097659078786874', 0, '2019-10-13 19:53:10.758000', NULL, '2019-10-13 19:53:10.758000', 'admin', '157097658527985000', '157097658928337170', '1', NULL, NULL, '234234', NULL),
+	('157097659092120904', 0, '2019-10-13 19:53:10.918000', NULL, '2019-10-13 19:53:10.918000', 'admin', '157097658527985000', '157097658928337170', '2', NULL, NULL, '2342342', NULL),
+	('157097659104366564', 0, '2019-10-13 19:53:11.038000', NULL, '2019-10-13 19:53:11.038000', 'admin', '157097658527985000', '157097658928337170', '3', NULL, NULL, 'rakeshvikhar@gmail.com', NULL),
 	('1878eff2-d699-4f4c-b52b-1a2403d2b780', 0, '2019-08-04 01:25:39.060000', NULL, '2019-08-04 01:25:39.060000', 'admin', '999b8b77-50cd-411e-8f0d-5bc351cf7b5e', '19a15f9e-75db-4076-90ef-0b5dcb0cc712', '3', NULL, NULL, 'asdfasdf', NULL),
 	('1b06083a-6787-4eb6-ad8a-5c1bbd600b2b', 0, '2019-08-04 20:47:52.807000', NULL, '2019-08-04 20:47:52.807000', 'admin', '8f15c02a-01e5-42c5-99fa-72c7196d3e5c', '1ed461f9-30e7-41b8-a301-a11373b2694b', '3', NULL, NULL, '234234234', NULL),
 	('20f74642-fbfc-4f97-ad4d-8a425dc59395', 0, '2019-08-05 20:41:42.561000', NULL, '2019-08-05 20:41:42.561000', 'admin', '3ca1ade7-c78b-4e48-9bd1-f29ed6381c9c', '63147fd0-46e7-49d7-a673-3d307812ff0a', '2', NULL, NULL, '123123', NULL),
@@ -4492,10 +4541,11 @@ CREATE TABLE IF NOT EXISTS `personnames` (
   KEY `INDX_PERSONNAMES_2` (`PERSONNAME_TYPE_REFKEY`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- Dumping data for table inventorydb.personnames: ~4 rows (approximately)
+-- Dumping data for table inventorydb.personnames: ~5 rows (approximately)
 /*!40000 ALTER TABLE `personnames` DISABLE KEYS */;
 INSERT INTO `personnames` (`ID_PK`, `VERSION`, `CREATED_TS`, `DELETED_TS`, `UPDATED_TS`, `UPDATED_BY_USER`, `UPDATED_BY_TXN_ID`, `LEGALENTITY_IDPK`, `PERSONNAME_TYPE_REFKEY`, `PREFIX_NAME_REFKEY`, `PREFIX_MISC`, `NAME_ONE`, `NAME_TWO`, `NAME_THREE`, `NAME_FOUR`, `LAST_NAME`, `NICK_NAME`, `POPULAR_NAME`, `SUFFIX_NAME_REFKEY`, `SUFFIX_MISC`, `NAME_STANDARDISED_FLAG`, `SOURCE_SYSTEM_REFKEY`, `PHONETIC_NAME_ONE`, `PHONETIC_NAME_TWO`, `PHONETIC_NAME_THREE`, `PHONETIC_LAST_NAME`) VALUES
 	('156540991668085627', 1, '2019-08-10 09:35:16.677000', NULL, '2019-08-10 09:42:16.645000', 'admin', '1565410335634484', '156540991659337365', '1', NULL, NULL, 'Prasad', NULL, NULL, NULL, 'Joshi', 'Prasad Prabhu', NULL, NULL, NULL, NULL, NULL, 'PRASAD', NULL, NULL, 'JAS'),
+	('15709765898754297', 0, '2019-10-13 19:53:09.851000', NULL, '2019-10-13 19:53:09.851000', 'admin', '157097658527985000', '157097658928337170', '1', NULL, NULL, 'Rakesh', NULL, NULL, NULL, 'Vikhar', 'Rakesh', NULL, NULL, NULL, NULL, NULL, 'RAC', NULL, NULL, 'VACAR'),
 	('5495eb1a-d004-4d71-bd7d-4506c9a2ab8b', 0, '2019-08-06 23:55:58.542000', NULL, '2019-08-06 23:55:58.542000', 'admin', '44ad158a-0953-42a2-a6fd-085b16470977', 'd178b722-8f2e-40ae-b6c7-23c1147975cc', '1', NULL, NULL, 'Lakshman', NULL, NULL, NULL, 'Gupta', 'LK', NULL, NULL, NULL, NULL, NULL, 'LACSNA', NULL, NULL, 'GAPT'),
 	('90646570-1e43-4ec6-8285-c94a638c9cc6', 0, '2019-08-06 23:29:56.379000', NULL, '2019-08-06 23:29:56.379000', 'admin', 'ead45d5d-9e6f-45a2-ab6c-78c6aa15db66', '184277d4-c20f-4a20-898e-e27c9f6b8e0f', '1', NULL, NULL, 'Prasad', NULL, NULL, NULL, 'Joshi', 'Prasad Prabhu', NULL, NULL, NULL, NULL, NULL, 'PRASAD', NULL, NULL, 'JAS'),
 	('d1814620-3e38-44ea-9589-0fa8bae6383f', 15, '2019-08-06 23:14:27.389000', NULL, '2019-08-10 09:15:56.909000', 'admin', '156540875523247134', 'cb510c89-42ef-4ed6-9c81-c8f42d181320', '1', NULL, NULL, 'Rakesh', NULL, NULL, NULL, 'Vikhar', 'Rakesh P', NULL, NULL, NULL, NULL, NULL, 'RAC', NULL, NULL, 'VACAR');
@@ -6553,7 +6603,7 @@ CREATE TABLE IF NOT EXISTS `yug_registry_seq` (
 -- Dumping data for table inventorydb.yug_registry_seq: ~1 rows (approximately)
 /*!40000 ALTER TABLE `yug_registry_seq` DISABLE KEYS */;
 INSERT INTO `yug_registry_seq` (`next_not_cached_value`, `minimum_value`, `maximum_value`, `start_value`, `increment`, `cache_size`, `cycle_option`, `cycle_count`) VALUES
-	(102000, 1, 1000000, 100000, 1, 1000, 0, 0);
+	(103000, 1, 1000000, 100000, 1, 1000, 0, 0);
 /*!40000 ALTER TABLE `yug_registry_seq` ENABLE KEYS */;
 
 -- Dumping structure for trigger inventorydb.D_ACCOUNT

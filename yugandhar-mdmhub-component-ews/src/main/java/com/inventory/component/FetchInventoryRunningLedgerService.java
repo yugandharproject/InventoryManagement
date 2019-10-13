@@ -38,9 +38,11 @@ InventoryRunningLedgerDO respInventoryRunningLedgerDO;
 TxnTransferObj respTxnTransferObj; 
 TxnPayload respTxnPayload; 
 
-@Autowired CommonValidationUtil commonValidationUtil; 
+@Autowired
+CommonValidationUtil commonValidationUtil; 
 
-@Autowired ConfigAppPropertiesComponent configAppPropertiesComponent; 
+@Autowired
+ConfigAppPropertiesComponent configAppPropertiesComponent; 
 
 @PersistenceContext 
 private EntityManager entityManager; 
@@ -70,7 +72,7 @@ public TxnTransferObj fetchInventoryRunningLedger(TxnTransferObj txnTransferObj)
 
 		Iterator itrResultIterator = searchResults.iterator(); 
 
-		List<InventoryRunningLedgerDO> searchResultInventoryRunningdgerDOList = new ArrayList<InventoryRunningLedgerDO>(); 
+		List<InventoryRunningLedgerDO> searchResultInventoryRunningLedgerDOList = new ArrayList<InventoryRunningLedgerDO>(); 
 
 		//map the search results 
 		while(itrResultIterator.hasNext()) { 
@@ -91,26 +93,27 @@ public TxnTransferObj fetchInventoryRunningLedger(TxnTransferObj txnTransferObj)
 			itrInventoryRunningLedgerDO.setCreatedTs((Date) obj[7]); 
 			itrInventoryRunningLedgerDO.setUpdatedByUser((String) obj[8]); 
 			//itrInventoryRunningLedgerDO.setVersion((String) obj[9]); 
-			//itrInventoryRunningLedgerDO.setDeletede((String) obj[10]); 
-			//itrInventoryRunningLedgerDO.setUpdatede((String) obj[ll]); 
+			//itrInventoryRunningLedgerDO.setDeletedTs((String) obj[10]); 
+			//itrInventoryRunningLedgerDO.setUpdatedTs((String) obj[ll]); 
 			itrInventoryRunningLedgerDO.setUpdatedByTxnId((String) obj[12]); 
 			
-			searchResultInventoryRunningdgerDOList.add(itrInventoryRunningLedgerDO); 
+			searchResultInventoryRunningLedgerDOList.add(itrInventoryRunningLedgerDO); 
 
 		}
 
 
-		respTxnPayload.setInventoryRunningLedgerDOList(searchResultInventoryRunningdgerDOList); 
+		respTxnPayload.setInventoryRunningLedgerDOList(searchResultInventoryRunningLedgerDOList); 
 		// Final Response object 
 
 		respTxnTransferObj.setTxnPayload(respTxnPayload); 
 
 		} catch (YugandharCommonException yce) { 
-				logger.error("Composite Service failed", yce); throw yce; 
+				logger.error("Composite Service failed", yce); 
+				throw yce; 
 
 		} catch (Exception e) { 
 				// write the logic to get error message based on error code. Error ‘ // code is hard-coded here 
-				logger.error("Search Composite service FetchInventoryRunningLedgerService failed", 9); 
+				logger.error("Search Composite service FetchInventoryRunningLedgerService failed", e); 
 				e.printStackTrace(); 
 				throw commonValidationUtil.populateErrorResponse(txnTransferObj, "5", e, "FetchInventoryRunningLedgerService failed unexpectedly"); 
 		} 
@@ -153,9 +156,9 @@ private void setPaginationProperties(Query searchQuery, TxnTransferObj txnTransf
 } 
 
 		private Query buildSearchQuery(TxnTransferObj txnTransferObj) { 
-		InventoryRunningLedgerDO rqunventoryRunningLedgerDo = txnTransferObj.getTxnPayload().getInventoryRunningLedgerDO(); 
+		InventoryRunningLedgerDO reqInventoryRunningLedgerDO = txnTransferObj.getTxnPayload().getInventoryRunningLedgerDO(); 
 		// parameters 
-		String inquiryFilter = rqunventoryRunningLedgerDo.getInquiryFilter(); 
+		String inquiryFilter = reqInventoryRunningLedgerDO.getInquiryFilter(); 
 
 		// String buffer for SQL 
 		StringBuffer queryJoinString = new StringBuffer();
@@ -165,7 +168,7 @@ private void setPaginationProperties(Query searchQuery, TxnTransferObj txnTransf
 		" SELECT inventory_running_ledger.ID_PK, " + 
 		" inventory_running_ledger.TRANSACTION_TYPE, " + 
 		" inventory_product.Product_Name productname, " + 
-		" 1egalentity.DISPLAY_NAME displayname, " + 
+		" legalentity.DISPLAY_NAME displayname, " + 
 		" inventory_running_ledger.TRANSACTION_QUANTITY, " + 
 		" inventory_running_ledger.PRODUCT_ID, " +  
 		" inventory_running_ledger.LEGALENTITY_IDPK, " +

@@ -79,12 +79,14 @@ try {
 } 
 
 	saveInventoryRunningLedgerDO(reqInventoryRunningLedgerDO, txnTransferObj); 
-	//retrive the ledger and send in response TxnPayload theTxnPayload = new TxnPayload(); 
+	//retrive the ledger and send in response 
+	TxnPayload theTxnPayload = new TxnPayload(); 
 
 	TxnTransferObj transitTxnTransferObj = new TxnTransferObj(); 
 	transitTxnTransferObj.setTxnHeader(txnTransferObj.getTxnHeader()); 
 	InventoryRunningLedgerDO theInventoryRunningLedgerDO = new InventoryRunningLedgerDO(); 
-	theInventoryRunningLedgerDO.setInquiryFilter("ACTIVE"); transitTxnTransferObj.getTxnPayload().setInventoryRunningLedgerDO(theInventoryRunningLedgerDO); 
+	theInventoryRunningLedgerDO.setInquiryFilter("ACTIVE"); 
+	transitTxnTransferObj.getTxnPayload().setInventoryRunningLedgerDO(theInventoryRunningLedgerDO); 
 
 	respTxnTransferObj = theFetchInventoryRunningLedgerService.fetchInventoryRunningLedger(transitTxnTransferObj); 
 
@@ -135,7 +137,7 @@ try {
 	reqInventoryRunningLedgerDO.getTransactionType().equals(yugandharConstants.INV_MAINTAINCE_TXN_TYPE_RETURN)){ 
 	yce.setAdditionalErrorMessage("Not sufficient quantity balance to return.Brahmachari can only return items he/she is issued."); 
 	logger.error("MaintainInventoryService.maintainInventorySummary failed: ' + "
-			+ "Not suff1c1ent quantity balance to return.Brahmachari can only return items he/she is issued.", yce); 
+			+ "Not sufficient quantity balance to return.Brahmachari can only return items he/she is issued.", yce); 
 	throw yce; 
 	} else if(yce.getErrorCode().equals("102") && 
 			reqInventoryRunningLedgerDO.getTransactionType().equals (yugandharConstants.INV_MAINTAINCE_TXN_TYPE_ISSUE)){ 
@@ -195,7 +197,7 @@ InventoryProductDO inventoryProductDO = new InventoryProductDO();
 inventoryProductDO.setIdPk(reqInventoryRunningLedgerDO.getProductId()); 
 transitTxnTransferObj.getTxnPayload().setInventoryProductDO(inventoryProductDO); 
 
-TxnTransferObj respTanransferODj = theInventoryProductService.findById(transitTxnTransferObj); 
+TxnTransferObj respTxnTransferObj = theInventoryProductService.findById(transitTxnTransferObj); 
 
 // check type of transaction 
 if(reqInventoryRunningLedgerDO.getTransactionType().equals(yugandharConstants.INV_MAINTAINCE_TXN_TYPE_ISSUE) ){ 

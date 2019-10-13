@@ -190,5 +190,13 @@ set SQL_MODE=ORACLE;
 Insert into CONFIG_TXN_REGISTRY
    (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION, CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
  Values
-   (YUG_REGISTRY_SEQ.nextval, 0, 'fetchInventoryRunningLedgerService', 'com.inventory.component.fetchInventoryRunningLedgerService', 'add', 
+   (YUG_REGISTRY_SEQ.nextval, 0, 'fetchInventoryRunningLedger', 'com.inventory.component.fetchInventoryRunningLedgerService', 'add', 
+    'create record in the database', CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, 'Generator', '000000000'); 
+    
+  
+
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION, CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+   (YUG_REGISTRY_SEQ.nextval, 0, 'maintainInventoryService', 'com.inventory.component.maintainInventoryService', 'process', 
     'create record in the database', CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, 'Generator', '000000000'); 

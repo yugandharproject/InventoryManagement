@@ -375,7 +375,8 @@ public class InventorySummaryComponent {
 
 	} catch (RuntimeException re) { 
 		logger.error("RefInventorySummaryComponent findByBusinessKey failed", re); 
-		re.printStackTrace(); throw commonValidationUtil.populateErrorResponse(txnTransferObj, "1", re, 
+		re.printStackTrace(); 
+		throw commonValidationUtil.populateErrorResponse(txnTransferObj, "1", re, 
 				"RefInventorySummaryComponent.findByBusinessKey failed unexpectedly"); 
 	}
 	return respTxnTransferObj; 

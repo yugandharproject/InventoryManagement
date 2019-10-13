@@ -225,7 +225,7 @@ public abstract class AbstractInventoryRunningLedgerDO implements java.io.Serial
 	/**
 	 * @param dislayname the dislayname to set
 	 */
-	public void setDisplayname(String dislayname) {
+	public void setDisplayname(String displayname) {
 		this.displayname = displayname;
 	}
 

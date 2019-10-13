@@ -128,7 +128,7 @@ public class InventorySummaryService {
 	*@return  txnTransferObj Returns the Transfer Object TxnTransferObj instance populated with database instance 
 	*@throws YugandharCommonException if InventorySummaryDO object is not present in the request or mandatory attributes legalentityId and productId is not present
 	*/
-	@Transactional(readOnly = true)
+	//@Transactional(readOnly = true)
 	public TxnTransferObj findByBusinessKey(TxnTransferObj txnTransferObj) throws YugandharCommonException {
 		TxnTransferObj respTxnTransferObj;
 		try {
