@@ -5,6 +5,8 @@ import java.util.List;
 import com.yugandhar.common.transobj.AbstractTxnPayload;
 import com.yugandhar.mdm.extern.dobj.InventoryOrderDO;
 import com.yugandhar.mdm.extern.dobj.InventoryProductDO;
+import com.yugandhar.mdm.extern.dobj.InventoryRunningLedgerDO;
+import com.yugandhar.mdm.extern.dobj.InventorySummaryDO;
 import com.yugandhar.mdm.extern.dobj.RefUnitofmeasureDO;
 import com.yugandhar.mdm.extern.dobj.SearchInventoryProductDO;
 
@@ -106,5 +108,60 @@ public class TxnPayload extends AbstractTxnPayload {
 		this.searchInventoryProductDO = searchInventoryProductDO;
 	}
 
+	
+	protected InventoryRunningLedgerDO inventoryRunningLedgerDO;
+	protected List<InventoryRunningLedgerDO> inventoryRunningLedgerDOList;
+	/**
+	 * @return the demoDO
+	 */
+	public InventoryRunningLedgerDO getInventoryRunningLedgerDO() {
+		return inventoryRunningLedgerDO;
+	}
+	/**
+	 * @param demoDO the demoDO to set
+	 */
+	public void setInventoryRunningLedgerDO(InventoryRunningLedgerDO inventoryRunningLedgerDO) {
+		this.inventoryRunningLedgerDO = inventoryRunningLedgerDO;
+	}
+	/**
+	 * @return the demoDOList
+	 */
+	public List<InventoryRunningLedgerDO> getInventoryRunningLedgerDOList() {
+		return inventoryRunningLedgerDOList;
+	}
+	/**
+	 * @param demoDOList the demoDOList to set
+	 */
+	public void setInventoryRunningLedgerDOList(List<InventoryRunningLedgerDO> inventoryRunningLedgerDOList) {
+		this.inventoryRunningLedgerDOList = inventoryRunningLedgerDOList;
+	}
+	
+	
+	protected InventorySummaryDO inventorySummaryDO;
+	protected List<InventorySummaryDO> inventorySummaryDOList;
+	/**
+	 * @return the demoDO
+	 */
+	public InventorySummaryDO getInventorySummaryDO() {
+		return inventorySummaryDO;
+	}
+	/**
+	 * @param demoDO the demoDO to set
+	 */
+	public void setInventorySummaryDO(InventorySummaryDO inventorySummaryDO) {
+		this.inventorySummaryDO = inventorySummaryDO;
+	}
+	/**
+	 * @return the demoDOList
+	 */
+	public List<InventorySummaryDO> getInventorySummaryDOList() {
+		return inventorySummaryDOList;
+	}
+	/**
+	 * @param demoDOList the demoDOList to set
+	 */
+	public void setInventorySummaryDOList(List<InventorySummaryDO> inventorySummaryDOList) {
+		this.inventorySummaryDOList = inventorySummaryDOList;
+	}
 	
 }

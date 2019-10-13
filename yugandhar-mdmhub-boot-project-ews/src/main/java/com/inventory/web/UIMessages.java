@@ -10,4 +10,5 @@ public class UIMessages {
 	public static String SUCCESS_PRODUCT_UPDATED = "Product updated in database";
 	public static String SUCCESS_PRODUCT_DELETED = "Product deleted from database";
 	
+	public static String TXN_SUCCESSFULL = "Transaction Completed Successfully";
 }

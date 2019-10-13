@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{admin/main_layout}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Running Ledger</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width-device-width, initial-scale 1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popperjs/1.14.7/umd/poppermin.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<style>
+div.div-outline {
+	border: 1px solid;
+	outline: 1px grey;
+}
+
+.nopadding {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+</style>
+</head>
+
+<body>
+	<div layout:fragment="content" class="col">
+		<!--  Error and Information messages and the header -->
+		<div
+			th:if="${uimessagewrapper != null and !uimessagewrapper.successMessageList.empty}">
+			<div class="alert alert-success">
+				<h6 th:each="obj : ${uimessagewrapper.successMessageList}"
+					th:text="${obj}" class="text-success"
+					style="font--size: 100%; font-weight: normal; margin-top: 0px; margin-bottom: 0px">--</h6>
+			</div>
+		</div>
+		<div
+			th:if="${uimessagewrapper != null and !uimessagewrapper.errorMessageList.empty}">
+			<div class="alert alert-danger" role="alert">
+				<strong>Failed!</strong>
+				<h6 th:each="obj : ${uimessagewrapper.errorMessageList}"
+					th:text="${obj}" class="text-danger"
+					style="font-size: 100%; font-color: maroon; font-weight: bold; margin-top: 0px; margin-bottom: 0px">--</h6>
+			</div>
+		</div>
+
+		<header>
+			<h6 class="title-agile text-left"
+				style="margin-top: 1px; margin-bottom: 30px;">Running Ledger</h6>
+		</header>
+
+		<Form name="runningLedgerForm" class="container-fluid form-horizontal"
+			action="#" th:action="@{runningledger_do}" th:object="${txnPayload}"
+			method="post">
+			<!-- Show latest transactions from ledger book -->
+			<div class="row">
+				<div class="table-responsive">
+					<table id="inventoryRunninglLedgerTable" align="center"
+						class="table table-sm table-stiped table-hover">
+						<thead class="thead-light ">
+							<tr>
+								<th style="font-size: 80%;" rowspan="1">Ledger Id</th>
+								<th style="font-size: 80%;" rowspan="1">Transaction Type</th>
+								<th style="font-size: 80%;" rowspan="1">Product Name</th>
+								<th style="font-size: 80%;" rowspan="1">Person Name</th>
+								<th style="font-size: 80%;" rowspan="1">Quantity</th>
+								<th style="font-size: 80%;" rowspan="1">Product Id</th>
+								<th style="font-size: 80%;" rowspan="1">Legal EntitY Id</th>
+								<th style="font-size: 80%;" rowspan="1">Transaction
+									TimeStamp</th>
+								<th style="font-size: 80%;" rowspan="1">Updated By</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr
+								th:each="inventoryRunningLedgerDO, itemStat : $(txnPayload.inventoryRunningLedgerDOList}">
+
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].idPk" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].idPk"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].transactionType" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].transactionType"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].productname" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].productname"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].dislayname" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].dislayname"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].transactionQuantity" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].transactionQuantity"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].productId" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].productId"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].legalentityIdpk" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].legalentityIdpk"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].createdTs" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].createdTs"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].updatedByUser" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].updatedByUser"></td>
+							</tr>
+						</tbody>
+					</table>
+
+					<ul class="pagination pagination-sm justify-content-end"
+						style="margin: 20px 0">
+						<li class="page-item"
+							th:classappend="${ledgerTablepageNumber == 1} ? disabLed : enabled">
+							<button type="submit" id="btnledgerpage" name="btnledgerpage"
+								th:value="${ledgerTablepageNumber}-1" class="page-link"
+								th:text="Previous "></button>
+						</li>
+						<li class="page-item"><button type="submit"
+								id="btnledgerpage" name="btnledgerpage"
+								th:value="${ledgerTablepageNumber}" class="page-link"
+								th:text="${ledgerTablepageNumber} "></button></li>
+						<li class="page-item"><button type="submit"
+								id="btnledgerpage" name="btnledgerpage"
+								th:value="${ledgerTablepageNumber}+1" class="page-link"
+								th:text="${ledgerTablepageNumber}+1 "></button></li>
+						<li class="page-item"><button type="submit"
+								id="btnledgerpage" name="btnledgerpage"
+								th:value="${ledgerTablepageNumber}+2" class="page-link"
+								th:text="Next "></button></li>
+					</ul>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</body>
+</html>

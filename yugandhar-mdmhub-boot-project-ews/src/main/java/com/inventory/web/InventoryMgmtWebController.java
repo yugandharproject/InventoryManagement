@@ -25,6 +25,7 @@ import com.yugandhar.common.transobj.TxnHeader;
 import com.yugandhar.common.transobj.TxnTransferObj;
 import com.yugandhar.common.util.CommonValidationUtil;
 import com.yugandhar.mdm.extern.dobj.InventoryProductDO;
+import com.yugandhar.mdm.extern.dobj.InventoryRunningLedgerDO;
 import com.yugandhar.mdm.extern.dobj.LeAddressAssocDO;
 import com.yugandhar.mdm.extern.dobj.LePersonDO;
 import com.yugandhar.mdm.extern.dobj.LePhoneAssocDO;
@@ -186,6 +187,16 @@ public class InventoryMgmtWebController {
 	public String createproduct_do(Model model, HttpServletRequest request, 
 			@ModelAttribute InventoryProductDO inventoryProductDO ) {
 		populateCreateProductDropdown(model);
+		//if quantity recieved is not set then set it to zero
+		if(null == inventoryProductDO.getQuantityRecevied()) {
+			inventoryProductDO.setQuantityRecevied(0);
+		}
+		//if quantity in hand is not set then set it to same as Quantity recieved
+		if(null == inventoryProductDO.getQuantityInhand()) {
+			inventoryProductDO.setQuantityInhand(inventoryProductDO.getQuantityRecevied());
+		}
+		
+		
 		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "createInventoryProductBase");
 		reqTxnTransferObj.getTxnPayload().setInventoryProductDO(inventoryProductDO);
 		TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
@@ -377,6 +388,12 @@ public class InventoryMgmtWebController {
 		model.addAttribute("uimessagewrapper", theUIMessageWrapper);
 	}
 	
+	public void addErrorMessage(Model model, String message) {
+		UIMessageWrapper theUIMessageWrapper= new UIMessageWrapper();
+		theUIMessageWrapper.getErrorMessageList().add(message);
+		model.addAttribute("uimessagewrapper", theUIMessageWrapper);
+	}
+	
 	private void populateCreatepersonDropdown(Model model) {
 		TxnTransferObj reqTxnTransferObj;
 		TxnTransferObj respTxnTransferObj;
@@ -455,4 +472,199 @@ public class InventoryMgmtWebController {
 		
 	}
 	
+	
+	//Issue a Product 
+	@GetMapping("/maintaininvt") 
+	public String maintaininvt_pre(Model model, HttpServletRequest request, @ModelAttribute 
+	LegalentityDO legalentityDO, @ModelAttribute SearchInventoryProductDO searchInventoryProductDO ) { 
+
+	TxnPayload theTxnPayload= new TxnPayload(); 
+	theTxnPayload.setSearchInventoryProductDO(new SearchInventoryProductDO()); 
+	theTxnPayload.setSearchLegalEntityRequestDO(new SearchLegalEntityRequestDO()); 
+
+	InventoryRunningLedgerDO theInventoryRunningLedgerDO = new InventoryRunningLedgerDO(); 
+
+	theInventoryRunningLedgerDO.setInquiryFilter("ACTIVE"); 
+	TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "fetchInventoryRunningLedger"); 
+	reqTxnTransferObj.getTxnPayload().setInventoryRunningLedgerDO (theInventoryRunningLedgerDO); 
+
+	TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj); 
+
+	if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){ 
+
+		addErrorMessage(model, respTxnTransferObj.getTxnPayload().getErrorResponseObj()); 
+	
+		return "admin/maintaininvt"; 
+
+	} else { 
+		theTxnPayload.setInventoryRunningLedgerDOList(respTxnTransferObj.getTxnPayload().getInventoryRunningLedgerDOList()); 
+		model.addAttribute("txnPayload", respTxnTransferObj.getTxnPayload()); 
+		} 
+	model.addAttribute("txnPayload", theTxnPayload); 
+	model.addAttribute("ledgerTablepageNumber", 4); 
+	return "admin/maintaininvt"; 
+	}
+	
+	
+	
+	@PostMapping("/maintaininvt_do") 
+	public String maintaininvt_do(Model model, HttpServletRequest request, @ModelAttribute TxnPayload txnPayload, 
+			@RequestParam(value="searchproduct", required=false) String searchproductflag, 
+			@RequestParam(value="searchperson", required=false) String searchpersonflag, 
+			@RequestParam(value="btnselectproduct", required=false) String btnselectproductIdpk, 
+			@RequestParam(value="btnselectperson", required=false) String btnselectpersonIdpk, 
+			@RequestParam(value="action", required=false) String straction) { 
+
+	if(null != searchproductflag && searchproductflag.equals("Y")) {
+	//search the product 
+	LegalentityDO reqLegalentityDO = txnPayload.getLegalentityDO(); 
+	model.addAttribute("searchproductresult", "Y"); 
+	TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","l", "searchInventoryProduct");
+	txnPayload.getSearchInventoryProductDO().setInquiryFilter("ACTIVE"); 
+	reqTxnTransferObj.getTxnPayload().setSearchInventoryProductDO(txnPayload.getSearchInventoryProductDO()); 
+	TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj); 
+
+	if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)) 
+	{ 
+		addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj()); 
+		return "admin/maintaininvt"; 
+	} else { 
+
+			respTxnTransferObj.getTxnPayload().setLegalentityDO(reqLegalentityDO); 
+			respTxnTransferObj.getTxnPayload().setInventoryRunningLedgerDO(txnPayload.getInventoryRunningLedgerDO()); 
+			model.addAttribute("txnPayload", respTxnTransferObj.getTxnPayload()); 
+			} 
+
+	} else if(null != btnselectproductIdpk) {
+		LegalentityDO reqLegalentityDO = txnPayload.getLegalentityDO(); 
+		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "retrieveInventoryProductBase"); 
+		InventoryProductDO theInventoryProductDO = new InventoryProductDO(); 
+		theInventoryProductDO.setIdPk(btnselectproductIdpk); 
+		reqTxnTransferObj.getTxnPayload().setInventoryProductDO(theInventoryProductDO); 
+		TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+
+	if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)) {
+		addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+		return "admin/maintaininvt"; 
+	} else { 
+		respTxnTransferObj.getTxnPayload().setLegalentityDO(reqLegalentityDO); 
+		respTxnTransferObj.getTxnPayload().setInventoryRunningLedgerDO( 
+		txnPayload.getInventoryRunningLedgerDO()); model.addAttribute("txnPayload", respTxnTransferObj.getTxnPayload()); 
+	}
+
+	} else if(null != searchpersonflag && searchpersonflag.equals("Y")) {
+		InventoryProductDO reqInventoryProductDO = txnPayload.getInventoryProductDO(); 
+		//search the person
+		model.addAttribute("searchpersonresult", "Y"); 
+		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "searchLegalEntityByLEAttributes"); 
+		txnPayload.getSearchLegalEntityRequestDO().setInquiryFilter("ACTIVE"); 
+		txnPayload.getSearchLegalEntityRequestDO().setInquiryLevel("103"); 
+		reqTxnTransferObj.getTxnPayload().setSearchLegalEntityRequestDO( txnPayload.getSearchLegalEntityRequestDO()); 
+		TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj); 
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){ 
+			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj()); 
+			return "admin/maintaininvt"; 
+		} else { 
+			respTxnTransferObj.getTxnPayload().setInventoryProductDO(reqInventoryProductDO); 
+			respTxnTransferObj.getTxnPayload().setInventoryRunningLedgerDO(txnPayload.getInventoryRunningLedgerDO());
+			model.addAttribute("txnPayload",respTxnTransferObj.getTxnPayload());
+		}
+
+	} else if(null != btnselectpersonIdpk) {
+		InventoryProductDO reqInventoryProductDO  = txnPayload.getInventoryProductDO(); 
+		LegalentityDO legalentityDO = new LegalentityDO(); 
+		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1", "retrieveLegalEntityByLegalEntityId"); 
+		legalentityDO.setIdPk(btnselectpersonIdpk); 
+		legalentityDO.setInquiryLevel("103"); 
+		reqTxnTransferObj.getTxnPayload().setLegalentityDO(legalentityDO); 
+		TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj);
+			if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){
+					addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+					return "admin/maintaininvt"; 
+
+			} else { 
+				respTxnTransferObj.getTxnPayload().setInventoryProductDO(reqInventoryProductDO); 
+				respTxnTransferObj.getTxnPayload().setInventoryRunningLedgerDO(txnPayload.getInventoryRunningLedgerDO());
+				 model.addAttribute("txnPayload", respTxnTransferObj.getTxnPayload()); 
+			}
+	} else if(null != straction && straction.equals("save")) { 
+
+	InventoryRunningLedgerDO reqInventoryRunningLedgerDO= txnPayload.getInventoryRunningLedgerDO(); 
+	reqInventoryRunningLedgerDO.setLegalentityIdpk(txnPayload.getLegalentityDO().getIdPk()); 
+	reqInventoryRunningLedgerDO.setProductId(txnPayload. getInventoryProductDO().getIdPk()); 
+	TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin", "1", "maintainInventoryService"); 
+	reqTxnTransferObj. getTxnPayload().setInventoryRunningLedgerDO(reqInventoryRunningLedgerDO);
+	
+	TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj); 
+	if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){ 
+		addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj());
+		return "admin/maintaininvt"; 
+	} else {
+		addInfoMessage(model, UIMessages.TXN_SUCCESSFULL);
+		respTxnTransferObj.getTxnPayload().setSearchInventoryProductDO(new SearchInventoryProductDO()); 
+		respTxnTransferObj. getTxnPayload().setSearchLegalEntityRequestDO( new SearchLegalEntityRequestDO()); 
+		model.addAttribute("txnPayload", respTxnTransferObj.getTxnPayload()); 
+	}
+	}
+	return "admin/maintaininvt"; 
+
+	} 
+	
+	//Display Running Ledger 
+		@GetMapping("/runningledger") 
+		public String runningledger_pre(Model model, HttpServletRequest request, @ModelAttribute LegalentityDO legalentityDO, 
+		@ModelAttribute SearchInventoryProductDO searchInventoryProductDO){ 
+			TxnPayload theTxnPayload= new TxnPayload(); 
+
+		InventoryRunningLedgerDO theInventoryRunningLedgerDO = new InventoryRunningLedgerDO(); 
+		theInventoryRunningLedgerDO.setInquiryFilter("ACTIVE"); 
+		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("admin","admin","1" , "fetchInventoryRunningLedger"); 
+		reqTxnTransferObj.getTxnPayload().setInventoryRunningLedgerDO(theInventoryRunningLedgerDO);
+		TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj); 
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){ 
+			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj()); 
+			return "admin/maintaininvt"; 
+		} else { 
+			theTxnPayload. setInventoryRunningLedgerDOList(respTxnTransferObj.getTxnPayload().getInventoryRunningLedgerDOList()); 
+		} 
+		model.addAttribute("TxnPayload", theTxnPayload);
+		model.addAttribute("ledgerTablepageNumber", 1); 
+		model.addAttribute("pagesize", 2); 
+		return "admin/runningledger"; 
+		}
+
+		
+		@PostMapping("/runningledger_do") 
+		public String runningledger_do(Model model, HttpServletRequest request, 
+			@ModelAttribute LegalentityDO legalentityDO, 
+		@ModelAttribute SearchInventoryProductDO searchInventoryProductDO, 
+		@RequestParam(value="btnledgerpage", required=false) Integer ledgerTablepageNumber, 
+		@RequestParam(value="pagesize", required=false) Integer pagesize) { 
+		TxnPayload theTxnPayload= new TxnPayload(); 
+		InventoryRunningLedgerDO theInventoryRunningLedgerDO = new InventoryRunningLedgerDO(); 
+		theInventoryRunningLedgerDO.setInquiryFilter("ACTIVE"); 
+		TxnTransferObj reqTxnTransferObj = initTxnTransferObj("adMin","admin","1", "fetchInventoryRunningLedger"); 
+		reqTxnTransferObj.getTxnPayload().setPaginationIndexOfCurrentSlice(ledgerTablepageNumber-1);
+		reqTxnTransferObj.getTxnPayload().setPaginationPageSize(2);
+		
+		reqTxnTransferObj.getTxnPayload().setInventoryRunningLedgerDO(theInventoryRunningLedgerDO); 
+		TxnTransferObj respTxnTransferObj = invokeYugandharRequestProcessor(reqTxnTransferObj); 
+		
+		
+		
+		if(respTxnTransferObj.getResponseCode().equals(yugandharConstants.RESPONSE_CODE_FAIL)){ 
+			addErrorMessage(model,respTxnTransferObj.getTxnPayload().getErrorResponseObj()); 
+			return "admin/maintaininvt"; 
+		} else { 
+		theTxnPayload.setInventoryRunningLedgerDOList( respTxnTransferObj.getTxnPayload().getInventoryRunningLedgerDOList()); 
+		model.addAttribute("TxnPayload", respTxnTransferObj.getTxnPayload()); 
+		}
+		
+		model.addAttribute("TxnPayload", theTxnPayload); 
+		model.addAttribute("1edgerTablepageNumber", ledgerTablepageNumber); 
+		model.addAttribute("pagesize", pagesize); 
+		return "admin/runningledger"; 
+		}
+	
+
 }

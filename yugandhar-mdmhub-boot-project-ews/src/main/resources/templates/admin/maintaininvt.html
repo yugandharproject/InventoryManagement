@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+	layout:decorate="~{admin/main_layout}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Maintain Inventory</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width-device-width, initial-scale 1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popperjs/1.14.7/umd/poppermin.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
+<style>
+div.div-outline {
+  border: 1px solid;
+  outline: 1px grey;
+}
+
+.nopadding {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+</style>
+
+<script>
+
+</script>
+
+
+</head>
+
+<body>
+	<div layout:fragment="content" class="col">
+	<!--  Error and Information messages and the header -->
+	<div th:if="${uimessagewrapper != null and !uimessagewrapper.successMessageList.empty}">
+		<div class="alert alert-success">
+			<h6 th:each="obj : ${uimessagewrapper.successMessageList}" th:text="${obj}" class="text-success" style="font--size:100%;font-weight:normal;margin-top:0px;margin-bottom:0px">--</h6>
+		</div>
+	</div>
+	<div th:if="${uimessagewrapper != null and !uimessagewrapper.errorMessageList.empty}">
+		<div class="alert alert-danger" role="alert">
+		<strong>Failed!</strong>
+			<h6 th:each="obj : ${uimessagewrapper.errorMessageList}" th:text="${obj}" class="text-danger" style="font-size:100%;font-color: maroon;font-weight:bold;margin-top:0px;margin-bottom:0px">--</h6>
+		</div>
+	</div>
+	
+	<header>
+		<h6 class="title-agile text-left" style="margin-top: 1px; margin-bottom: 30px; ">Maintain Inventory</h6>
+	</header>
+	
+			<Form name="MaintainInventoryForm" class="container-fluid form-horizontal"
+			action="#" th:action="@{maintaininvt_do}" th:object="${txnPayload}" method="post">
+			<div class="row">
+			<label class="control-label col-sm-2 col-form-label-sm" for="invokedTransactinoType">Transaction Type</label>
+				<div class="col-sm-2 nopadding">
+					<select class="form-control form-control-sm" name="invokedTransactinoType" 
+					th:field="${txnPayload.inventoryRunningLedgerDO.transactionType}">
+						<option th::value="'ISSUE'" th:text="'ISSUE'"></option>
+						<option th::value="'RETURN'" th:text="'RETURN'"></option>
+						<option th::value="'LOST'" th:text="'LOST'"></option>
+						<option th::value="'DAMAGED'" th:text="'DAMAGED'"></option>
+						<option th::value="'PROCURE'" th:text="'PROCURE'"></option>
+					</select>
+				</div>
+			</div>
+		
+			<!--  Product Search -->
+			<div class="row">
+				<label class="control-label col-sm-2 col-form-label-sm" for="selectedproductidpk">Product Id</label>
+				<input readonly type="text" class="form-control form-control-sm col-sm-2" id="selectedproductidpk" 
+					name="selectedproductidpk"  th:field=${txnPayload.inventoryProductDO.idPk}>
+				<label class="control-label col-sm-2 col-form-label-sm" for="selectedproductname">Product Name</label>
+				<input readonly type="text" class="form-control form-control-sm col-sm-2" id="selectedproductidpk" 
+					name="selectedproductidpk"  th:field=${txnPayload.inventoryProductDO.productName}>
+				<input hidden="true" type="text" class="form-control form-control-sm col-sm-2" id="unitOfMeasureRefValue" 
+					name="unitOfMeasureRefValue"  th:field=${txnPayload.inventoryProductDO.unitOfMeasureRefValue}>
+				<div class="col-sm-4">
+					<button type="button" class="btn btn-primary btn-sm col-sm-7" id="btnsearchprodouct" data-toggle="collapse"
+					data-target="#divproductsearch">Search Product in Inventory</button>
+				</div>
+			</div>
+			
+			<div id="divproductsearch" class="collapse" th:classappend="${searchproductresult == 'Y'} ? show : hide">
+				<button type="button" class="btn btn-light btn-sm" id="btndivproductsearchclose" >X</button>
+				<div class="card card-body shadow" style="background-color:#f2f2f2">
+			
+				<div class="row">
+					<label class="control-label col-sm-2 col-form-label-sm" for="productName">Product Name</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control form-control-sm" id="productName" placeholder="" name="productName"
+							th:field="${txnPayload.searchInventoryProductDO.productName}">
+					</div>
+					
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="productId">Product Id</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control form-control-sm" id="productId" placeholder="" name="productId"
+							th:field="${txnPayload.searchInventoryProductDO.productId}">
+					</div>
+				</div>
+				<div class="row">
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="productType">Product Type</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control form-control-sm" id="productType" placeholder="" name="productType" 
+								th:field="${txnPayload.searchInventoryProductDO.productType}">
+					</div>
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="productCategory">product Category</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control form-control-sm" id="productCategory" placeholder="" name="productCategory"
+							th:field="${txnPayload.searchInventoryProductDO.productCategory}">
+					</div>
+				</div>
+				<div class="row">
+				<button type="submit" class="btn btn-primary btn-sm" name="searchproduct" th:value="Y" th:text="Search"></button>
+				</div>
+				
+				<div class="row">
+					<table id="searchproductresultsTable" align="center" class="table table-sm table-stiped">
+						<thead class="thead-light">
+							<tr>
+								<th style="font-size:90%;" rowspan="1">Product IdPk</th>
+								<th style="font-size:90%;" rowspan="1">Product Id</th>
+								<th style="font-size:90%;" rowspan="1">Product Name</th>
+								<th style="font-size:90%;" rowspan="1">Product Type</th>
+								<th style="font-size:90%;" rowspan="1">Product Category</th>
+								<th style="font-size:90%;" rowspan="1">Action</th>
+							</tr>
+						</thead>
+					<tbody>
+						<tr th:each="inventoryProductDO, itemStat: ${txnPayload.inventoryProductDOList}">
+							<td style="font-size:90%" th:text="${txnPayload.inventoryProductDOList[__${itemStat.index}__].idPk}" ></td>
+							<td style="font-size:90%" th:text="${txnPayload.inventoryProductDOList[__${itemStat.index}__].productId}" ></td>
+							<td style="font-size:90%" th:text="${txnPayload.inventoryProductDOList[__${itemStat.index}__].productName}" ></td>
+							<td style="font-size:90%" th:text="${txnPayload.inventoryProductDOList[__${itemStat.index}__].productType}" ></td>
+							<td style="font-size:90%" th:text="${txnPayload.inventoryProductDOList[__${itemStat.index}__].productCategory}" ></td>
+							
+							 <td> <button type="submit" id="btnselectprodouct" class="btn btn-outline-secondary btn-sm"  name="btnselectprodouct" th:value="${txnPayload.inventoryProductDOList[__${itemStat.index}__].idPk}" th:text="Select"></button>				 
+							 </td>
+						</tr>
+						
+					</tbody>
+					</table>
+				</div></div></div>
+
+			<!--  person search -->
+			<div class="row">
+				<label class="control-label col-sm-2 col-form-label-sm" for="selectedpersonidpk">Person Id</label>
+				<input readonly type="text" class="form-control form-control-sm col-sm-2" id="selectedpersonidpk" 
+					name="selectedpersonidpk"  th:field=${txnPayload.legalentityDO.idPk}>
+				<label class="control-label col-sm-2 col-form-label-sm" for="selectedpersonname">Person Name</label>
+				<input readonly type="text" class="form-control form-control-sm col-sm-2" id="selectedpersonname" 
+					name="selectedpersonname"  th:field=${txnPayload.legalentityDO.displayName}>
+				<div class="col-sm-4">
+					<button type="button" class="btn btn-primary btn-sm col-sm-7" id="btnsearchperson" data-toggle="collapse"
+					data-target="#divpersonsearch">Search Person Master</button>
+				</div>
+			</div>
+			<div id="divpersonsearch" class="collapse" th:classappend="${searchpersonresult == 'Y'} ? show : hide">
+				<button type="button" class="btn btn-light btn-sm" id="btndivpersonsearchclose" >X</button>
+				<div class="card card-body shadow" style="background-color:#f2f2f2">
+			
+			<div class=" row">
+				<label class="control-label col-sm-2 col-form-label-sm"
+					for="brahmachari_name">Brahamachari Name</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control form-control-sm"
+						id="brahmachari_name" placeholder="" name="brahmachari_name"
+						th:field="${txnPayload.searchLegalEntityRequestDO.displayName}">
+				</div>
+			</div>
+			<div class=" row">
+				<label class="control-label col-sm-2 col-form-label-sm"
+					for="brahmachari_name">Phone Number or Email</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control form-control-sm"
+						id="brahmachari_name" placeholder="" name="brahmachari_name"
+						th:field="${txnPayload.searchLegalEntityRequestDO.phoneNumber}">
+				</div>
+			</div>
+			
+			<div class=" row">
+				<label class="control-label col-sm-2 col-form-label-sm"
+					for="brahmachari_name">City</label>
+				<div class="col-sm-2">
+					<input type="text" class="form-control form-control-sm"
+						id="brahmachari_name" placeholder="" name="brahmachari_name"
+						th:field="${txnPayload.searchLegalEntityRequestDO.city}">
+				</div>
+			</div>
+			<div class=" row">
+				<button type="submit" class="btn btn-primary btn-sm" name="searchperson" th:value="Y" th:text="Search"></button>
+			</div>
+			
+			
+			<div class="row">
+				<table id="searchpersonresultsTable" align="center" class="table table-sm table-striped">
+				<thead class="thead-light">
+					<tr>
+						<th style="font-size:90%;" rowspan="1">Person Id</th>
+						<th style="font-size:90%;" rowspan="1">First Name</th>
+						<th style="font-size:90%;" rowspan="1">Last Name</th>
+						<th style="font-size:90%;" rowspan="1">Nick Name</th>
+						<th style="font-size:90%;" rowspan="1">Phone Number</th>
+						<th style="font-size:90%;" rowspan="1">Alternate phone</th>
+						<th style="font-size:90%;" rowspan="1">email</th>
+						<th style="font-size:90%;" rowspan="1">Actions</th>
+					</tr>
+				</thead>
+			<tbody>
+				<tr th:each="legalentityDO, itemStat: ${txnPayload.legalentityDOList}">
+					<td style="font-size:90%" th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].idPk}" th:field="${txnPayload.legalentityDOList[__${itemStat.index}__].idPk}" ></td>
+					<!-- <td style="font-size:90%" th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].displayName}" ></td> -->
+					<td style="font-size:90%" th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].lePersonDO.personnamesDOList[__0__].nameOne}" th:field="${txnPayload.legalentityDOList[__${itemStat.index}__].lePersonDO.personnamesDOList[__0__].nameOne}"></td>
+					<td style="font-size:90%" th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].lePersonDO.personnamesDOList[__0__].lastName}" ></td>
+					<td style="font-size:90%" th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].lePersonDO.personnamesDOList[__0__].nickName}" ></td>
+					<!-- phone type =1 MOBILE -->
+					<td style="font-size:90%" th:each="lePhoneAssocDO, phoneCounter: ${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList}"  
+					 th:if="${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList[__${phoneCounter.index}__].phoneTypeRefkey} == '1'" 
+					 th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList[__${phoneCounter.index}__].phoneNumber}"></td> 
+					 <!-- phone type =2 PHONE -->
+					 <td style="font-size:90%" th:each="lePhoneAssocDO, phoneCounter: ${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList}"  
+					 th:if="${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList[__${phoneCounter.index}__].phoneTypeRefkey} == '2'" 
+					 th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList[__${phoneCounter.index}__].phoneNumber}"></td> 
+					 
+					 <!-- phone type =3 EMAIL -->
+					 <td style="font-size:90%" th:each="lePhoneAssocDO, phoneCounter: ${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList}"  
+					 th:if="${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList[__${phoneCounter.index}__].phoneTypeRefkey} == '3'" 
+					 th:text="${txnPayload.legalentityDOList[__${itemStat.index}__].lePhoneAssocDOList[__${phoneCounter.index}__].phoneNumber}"></td>
+					 <td>
+					 <button type="submit" class="btn btn-outline-secondary btn-sm"  name="editperson" th:value="${txnPayload.legalentityDOList[__${itemStat.index}__].idPk}" th:text="Edit"></button>				 
+					 
+					 
+					 </td>
+				</tr>
+				
+			</tbody>
+			</table>
+			
+			</div> </div></div>
+			
+			<div class="row">
+			<p class="text-body col-sm-2 col-form-label-sm" th:text="'Quantity:'"></p>
+			<div class="col-sm-2 nopadding">
+				<input type="number" class="form-control form-control-sm" id="quantity" name="quantity" 
+					th:field="${txnPayload.inventoryRunningLedgerDO.transactionQuantity}">
+			</div>
+			<div class="col-sm-1 nopadding" th:text="${txnPayload.inventoryRunningLedgerDO.unitOfMeasureRefValue}"></div>
+			</div>
+			
+			<button type="button" class="btn btn-primary" data-toggle="modal" th:data-target="'#confirmSaveModal'" th:text="Save" th:disabled="${readonlyform}"> </button>
+
+				<!--  Save confirmation Modal -->
+					 <div th:id="confirmSaveModal" class="modal" tabindex="-1" role="dialog">
+					<div class="modal-dialog" role="document">
+					<div class="modal-content">
+					<div class="modal-header">
+					<h5 class="modal-title">Confirm</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden= "true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body">
+					<p style="color: maroon ">Do you wish to continue making the changes?</p>
+					</div>
+					<div class="modal-footer">
+					<button id="btnconfirmSaveModalSave" type="submit" name="action" th:value="save" th:text="Save" class="btn btn-primary"></button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					</div>
+					</div>
+					</div>
+					</div>
+			
+			<div class="row">
+				<div class="col-sm-6"><p class="text-body col-form-label-sm"></p></div></div>
+			<!-- Show latest transactions from ledger book -->
+			<div class="row">
+				<div class="table-responsive">
+					<table id="inventoryRunninglLedgerTable" align="center" class="table table-sm table-stiped table-hover">
+					<caption class="table-primary" style="caption-side: top;">Recent Ledger Entries</caption>
+						<thead class="thead-light ">
+							<tr>
+								<th style="font-size: 80%;" rowspan="1">Ledger Id</th>
+								<th style="font-size: 80%;" rowspan="1">Transaction Type</th>
+								<th style="font-size: 80%;" rowspan="1">Product Name</th>
+								<th style="font-size: 80%;" rowspan="1">Person Name</th>
+								<th style="font-size: 80%;" rowspan="1">Quantity</th>
+								<th style="font-size: 80%;" rowspan="1">Product Id</th>
+								<th style="font-size: 80%;" rowspan="1">Legal EntitY Id</th>
+								<th style="font-size: 80%;" rowspan="1">Transaction timeStamp</th>
+								<th style="font-size: 80%;" rowspan="1">Updated By</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr
+								th:each="inventoryRunningLedgerDO, itemStat : $(txnPayload.inventoryRunningLedgerDOList}">
+
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].idPk" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].idPk"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].transactionType" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].transactionType"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].productname" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].productname"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].dislayname" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].dislayname"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].transactionQuantity" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].transactionQuantity"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].productId" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].productId"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].legalentityIdpk" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].legalentityIdpk"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].createdTs" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].createdTs"></td>
+								<td style="font-size: 80%" th:text="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].updatedByUser" th:field="${txnPayload.inventoryRunningLedgerDOList[__${itemStat.index}__].updatedByUser"></td>
+							</tr>
+						</tbody>
+					</table>
+					</div></div>
+			
+			
+		</form>
+	</div>
+</body>
+</html>

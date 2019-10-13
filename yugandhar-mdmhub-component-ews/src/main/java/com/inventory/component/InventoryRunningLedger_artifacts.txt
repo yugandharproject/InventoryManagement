@@ -1,0 +1,194 @@
+/* Generated 12 Oct, 2019 12:26:35 AM by Hibernate Tools 5.3.0.Beta2 using Yugandhar custom templates. 
+Generated and to be used in accordance with Yugandhar Licensing Terms. */
+
+//This file covers the artifacts for manual modification of database and codebase.
+// Step 1. Execute the SQLs in database. For Maria DB enable the SQL_MODE=ORACLE option and then execute the insert scripts. 
+// Step 2. Make an entry in make entry in YugandharBootProjectApplication
+// Step 3. Add the generated DO to in TxnPayload object
+// Step 4. execute the transaction using sample message generated
+
+###STEP 1###
+/* insert sqls for transaction registration */
+//----------------------------------------------------
+/*#enable below SQL_MODE option for mariaDB/MySQL else the insert SQL will fail. No need to enable this option for Oracle Database */
+/*set SQL_MODE=ORACLE; */
+
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION, CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+   (YUG_REGISTRY_SEQ.nextval, 0, 'createInventoryRunningLedgerBase', 'com.inventory.component.InventoryRunningLedgerService', 'add', 
+    'create record in the database', CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, 'Generator', '000000000');
+
+
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION,CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+    (YUG_REGISTRY_SEQ.nextval, 0, 'updateInventoryRunningLedgerBase', 'com.inventory.component.InventoryRunningLedgerService', 'merge', 
+    'update the database record based on primary key i.e. idpk', CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Generator', '000000000');
+
+
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION,CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+   (YUG_REGISTRY_SEQ.nextval, 0, 'retrieveInventoryRunningLedgerBase', 'com.inventory.component.InventoryRunningLedgerService', 'findById', 
+    'retrieve the record from database based on primary key i.e. idpk', CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Generator', '000000000');
+COMMIT;
+
+/* rollback scripts if needed
+delete from CONFIG_TXN_REGISTRY where TXNSERVICE_NAME ='createInventoryRunningLedgerBase';
+delete from CONFIG_TXN_REGISTRY where TXNSERVICE_NAME ='updateInventoryRunningLedgerBase';
+delete from CONFIG_TXN_REGISTRY where TXNSERVICE_NAME ='retrieveInventoryRunningLedgerBase';
+commit; */
+
+###STEP 2###
+	//Modify the entry in YugandharBootProjectApplication for your generated packages for spring component scan, entity scan and repository scan. Make the changes as below
+	//
+		@ComponentScan({"com.yugandhar.*","<your package name here>"})
+		@EntityScan({"com.yugandhar.*","<your package name here>"})
+		@EnableJpaRepositories({"com.yugandhar.*","<your package name here>"})
+		
+		e.g.
+		@ComponentScan({"com.yugandhar.*","com.demo.*"})
+		@EntityScan({"com.yugandhar.*","com.demo.*"})
+		@EnableJpaRepositories({"com.yugandhar.*","com.demo.*"})
+
+###STEP 3###
+	/* Add the below code snippet in com.yugandhar.common.extern.transferobj.TxnPayload object */
+
+	protected InventoryRunningLedgerDO inventoryRunningLedgerDO;
+	protected List<InventoryRunningLedgerDO> inventoryRunningLedgerDOList;
+	/**
+	 * @return the demoDO
+	 */
+	public InventoryRunningLedgerDO getInventoryRunningLedgerDO() {
+		return inventoryRunningLedgerDO;
+	}
+	/**
+	 * @param demoDO the demoDO to set
+	 */
+	public void setInventoryRunningLedgerDO(InventoryRunningLedgerDO inventoryRunningLedgerDO) {
+		this.inventoryRunningLedgerDO = inventoryRunningLedgerDO;
+	}
+	/**
+	 * @return the demoDOList
+	 */
+	public List<InventoryRunningLedgerDO> getInventoryRunningLedgerDOList() {
+		return inventoryRunningLedgerDOList;
+	}
+	/**
+	 * @param demoDOList the demoDOList to set
+	 */
+	public void setInventoryRunningLedgerDOList(List<InventoryRunningLedgerDO> inventoryRunningLedgerDOList) {
+		this.inventoryRunningLedgerDOList = inventoryRunningLedgerDOList;
+	}
+
+
+###STEP 4###
+/* Sample JSON Messages for test */
+//----------------------------------------------------
+=================================================================
+createInventoryRunningLedgerBase sample JSON message
+=================================================================
+
+{
+	"txnHeader": {
+	 "requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+      "transactionServiceName": "createInventoryRunningLedgerBase"
+	},
+	"txnPayload": {
+			 "inventoryRunningLedgerDO":       {
+		  "idPk": null, 
+		 		  "version": null, 
+		 		  "createdTs": null, 
+		 		  "deletedTs": null, 
+		 		  "updatedTs": null, 
+		 		  "updatedByUser": null, 
+		 		  "updatedByTxnId": null, 
+		 		  "legalentityIdpk": null, 
+		 		  "productId": null, 
+		 		  "transactionTye": null, 
+		 		  "transactionQuantity": null
+      }
+		
+	}
+	
+}
+  
+=================================================================
+updateInventoryRunningLedgerBase sample JSON message
+================================================================= 
+  {
+	"txnHeader": {
+		"requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+      "transactionServiceName": "updateInventoryRunningLedgerBase"
+	},
+	"txnPayload": {
+			 "inventoryRunningLedgerDO":       {
+		  "idPk": null, 
+		 		  "version": null, 
+		 		  "createdTs": null, 
+		 		  "deletedTs": null, 
+		 		  "updatedTs": null, 
+		 		  "updatedByUser": null, 
+		 		  "updatedByTxnId": null, 
+		 		  "legalentityIdpk": null, 
+		 		  "productId": null, 
+		 		  "transactionTye": null, 
+		 		  "transactionQuantity": null
+      }
+		
+	}
+	
+}
+
+=================================================================
+retrieveInventoryRunningLedgerBase sample JSON message
+================================================================= 
+{
+	"txnHeader": {
+		"requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+	  "transactionServiceName": "retrieveInventoryRunningLedgerBase"
+	},
+	"txnPayload": {
+			 "inventoryRunningLedgerDO":       {
+		"idPk": "1"
+		 
+      }
+		
+	}
+	
+}
+ 
+
+== custom ==
+set SQL_MODE=ORACLE;
+
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION, CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+   (YUG_REGISTRY_SEQ.nextval, 0, 'fetchInventoryRunningLedgerService', 'com.inventory.component.fetchInventoryRunningLedgerService', 'add', 
+    'create record in the database', CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, 'Generator', '000000000'); 

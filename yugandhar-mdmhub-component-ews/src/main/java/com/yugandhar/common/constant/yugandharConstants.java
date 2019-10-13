@@ -37,4 +37,12 @@ public final class yugandharConstants {
 	public static final String com_yugandhar_match_le_candidateSearch_processing_mode_realtime = "realtime";
 	public static final String com_yugandhar_match_le_candidateSearch_processing_mode_nearrealtime = "near-realtime";
 	
+	
+	public static final String INV_MAINTAINCE_TXN_TYPE_ISSUE ="ISSUE";
+	public static final String INV_MAINTAINCE_TXN_TYPE_RETURN ="RETURN";
+	public static final String INV_MAINTAINCE_TXN_TYPE_LOST ="LOST";
+	public static final String INV_MAINTAINCE_TXN_TYPE_DAMAGED ="DAMAGED";
+	public static final String INV_MAINTAINCE_TXN_TYPE_PROCURE ="PROCURE";
+	
+	
 }

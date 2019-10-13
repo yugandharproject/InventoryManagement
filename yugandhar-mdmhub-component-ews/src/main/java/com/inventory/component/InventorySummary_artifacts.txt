@@ -1,0 +1,185 @@
+/* Generated 12 Oct, 2019 12:26:35 AM by Hibernate Tools 5.3.0.Beta2 using Yugandhar custom templates. 
+Generated and to be used in accordance with Yugandhar Licensing Terms. */
+
+//This file covers the artifacts for manual modification of database and codebase.
+// Step 1. Execute the SQLs in database. For Maria DB enable the SQL_MODE=ORACLE option and then execute the insert scripts. 
+// Step 2. Make an entry in make entry in YugandharBootProjectApplication
+// Step 3. Add the generated DO to in TxnPayload object
+// Step 4. execute the transaction using sample message generated
+
+###STEP 1###
+/* insert sqls for transaction registration */
+//----------------------------------------------------
+/*#enable below SQL_MODE option for mariaDB/MySQL else the insert SQL will fail. No need to enable this option for Oracle Database */
+/*set SQL_MODE=ORACLE; */
+
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION, CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+   (YUG_REGISTRY_SEQ.nextval, 0, 'createInventorySummaryBase', 'com.inventory.component.InventorySummaryService', 'add', 
+    'create record in the database', CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, 'Generator', '000000000');
+
+
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION,CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+    (YUG_REGISTRY_SEQ.nextval, 0, 'updateInventorySummaryBase', 'com.inventory.component.InventorySummaryService', 'merge', 
+    'update the database record based on primary key i.e. idpk', CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Generator', '000000000');
+
+
+Insert into CONFIG_TXN_REGISTRY
+   (ID_PK, VERSION, TXNSERVICE_NAME, TXNSERVICE_CLASS, TXNSERVICE_CLASSMETHOD, DESCRIPTION,CREATED_TS, UPDATED_TS, UPDATED_BY_USER, UPDATED_TXN_REF_ID)
+ Values
+   (YUG_REGISTRY_SEQ.nextval, 0, 'retrieveInventorySummaryBase', 'com.inventory.component.InventorySummaryService', 'findById', 
+    'retrieve the record from database based on primary key i.e. idpk', CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,'Generator', '000000000');
+COMMIT;
+
+/* rollback scripts if needed
+delete from CONFIG_TXN_REGISTRY where TXNSERVICE_NAME ='createInventorySummaryBase';
+delete from CONFIG_TXN_REGISTRY where TXNSERVICE_NAME ='updateInventorySummaryBase';
+delete from CONFIG_TXN_REGISTRY where TXNSERVICE_NAME ='retrieveInventorySummaryBase';
+commit; */
+
+###STEP 2###
+	//Modify the entry in YugandharBootProjectApplication for your generated packages for spring component scan, entity scan and repository scan. Make the changes as below
+	//
+		@ComponentScan({"com.yugandhar.*","<your package name here>"})
+		@EntityScan({"com.yugandhar.*","<your package name here>"})
+		@EnableJpaRepositories({"com.yugandhar.*","<your package name here>"})
+		
+		e.g.
+		@ComponentScan({"com.yugandhar.*","com.demo.*"})
+		@EntityScan({"com.yugandhar.*","com.demo.*"})
+		@EnableJpaRepositories({"com.yugandhar.*","com.demo.*"})
+
+###STEP 3###
+	/* Add the below code snippet in com.yugandhar.common.extern.transferobj.TxnPayload object */
+
+	protected InventorySummaryDO inventorySummaryDO;
+	protected List<InventorySummaryDO> inventorySummaryDOList;
+	/**
+	 * @return the demoDO
+	 */
+	public InventorySummaryDO getInventorySummaryDO() {
+		return inventorySummaryDO;
+	}
+	/**
+	 * @param demoDO the demoDO to set
+	 */
+	public void setInventorySummaryDO(InventorySummaryDO inventorySummaryDO) {
+		this.inventorySummaryDO = inventorySummaryDO;
+	}
+	/**
+	 * @return the demoDOList
+	 */
+	public List<InventorySummaryDO> getInventorySummaryDOList() {
+		return inventorySummaryDOList;
+	}
+	/**
+	 * @param demoDOList the demoDOList to set
+	 */
+	public void setInventorySummaryDOList(List<InventorySummaryDO> inventorySummaryDOList) {
+		this.inventorySummaryDOList = inventorySummaryDOList;
+	}
+
+
+###STEP 4###
+/* Sample JSON Messages for test */
+//----------------------------------------------------
+=================================================================
+createInventorySummaryBase sample JSON message
+=================================================================
+
+{
+	"txnHeader": {
+	 "requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+      "transactionServiceName": "createInventorySummaryBase"
+	},
+	"txnPayload": {
+			 "inventorySummaryDO":       {
+		  "idPk": null, 
+		 		  "version": null, 
+		 		  "createdTs": null, 
+		 		  "deletedTs": null, 
+		 		  "updatedTs": null, 
+		 		  "updatedByUser": null, 
+		 		  "updatedByTxnId": null, 
+		 		  "legalentityIdpk": null, 
+		 		  "productId": null, 
+		 		  "quantityRunningBalance": null, 
+		 		  "quantityYearToDate": null
+      }
+		
+	}
+	
+}
+  
+=================================================================
+updateInventorySummaryBase sample JSON message
+================================================================= 
+  {
+	"txnHeader": {
+		"requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+      "transactionServiceName": "updateInventorySummaryBase"
+	},
+	"txnPayload": {
+			 "inventorySummaryDO":       {
+		  "idPk": null, 
+		 		  "version": null, 
+		 		  "createdTs": null, 
+		 		  "deletedTs": null, 
+		 		  "updatedTs": null, 
+		 		  "updatedByUser": null, 
+		 		  "updatedByTxnId": null, 
+		 		  "legalentityIdpk": null, 
+		 		  "productId": null, 
+		 		  "quantityRunningBalance": null, 
+		 		  "quantityYearToDate": null
+      }
+		
+	}
+	
+}
+
+=================================================================
+retrieveInventorySummaryBase sample JSON message
+================================================================= 
+{
+	"txnHeader": {
+		"requesterLanguage": "1",
+      "requesterLocale": null,
+      "userName": "admin",
+      "userRole": "admin",
+      "accessToken": null,
+      "txnCorrelationId": null,
+      "txnMessageId": "1234567890123",
+      "requestOriginSource": null,
+      "requesterSystem": null,
+	  "transactionServiceName": "retrieveInventorySummaryBase"
+	},
+	"txnPayload": {
+			 "inventorySummaryDO":       {
+		"idPk": "1"
+		 
+      }
+		
+	}
+	
+}
+  
