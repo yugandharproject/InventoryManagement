@@ -58,7 +58,7 @@ div.div-outline {
 			<div class="row col-sm-5"><h5><small class="text-info bg-light">Basic Details</small></h5></div>
 			<div class=" row">
 				<label class="control-label col-sm-2 col-form-label-sm"
-					for="personnameone">First Name</label>
+					for="personnameone">First Name<sup style="color:red;">*</sup></label>
 				<div class="col-sm-3">
 					<input required type="text" class="form-control form-control-sm"
 						id="personnameone" placeholder="" name="personnameone"
@@ -69,7 +69,7 @@ div.div-outline {
 			
 			<div class=" row">
 				<label class="control-label col-sm-2 col-form-label-sm"
-					for="personLastName">Last Name</label>
+					for="personLastName">Last Name<sup style="color:red;">*</sup></label>
 				<div class="col-sm-3">
 					<input required type="text" class="form-control form-control-sm"
 						id="personLastName" placeholder="" name="personLastName"
@@ -88,7 +88,7 @@ div.div-outline {
 			</div>
 			
 			<div class=" row">
-				<label class="control-label col-sm-2 col-form-label-sm" for="Gender">Gender</label>
+				<label class="control-label col-sm-2 col-form-label-sm" for="Gender">Gender<sup style="color:red;">*</sup></label>
 				<div class="col-sm-2">
 					<select class="form-control form-control-sm" id="Gender" name="Gender" th:field="*{lePersonDO.genderRefkey}">
 					    <option th:each="refGenderDO, itemStat : ${txnPayload.refGenderDOList}" th:value="${txnPayload.refGenderDOList[__${itemStat.index}__].key}" 
@@ -104,7 +104,7 @@ div.div-outline {
 			</div>
 			<div class="row">
 				<label class="control-label  col-sm-2 col-form-label-sm"
-					for="mobile">Mobile</label>
+					for="mobile">Mobile<sup style="color:red;">*</sup></label>
 					
 				<div class="col-sm-2">
 					<input required type="text" class="form-control form-control-sm" id="mobile" placeholder="" name="mobile" 
@@ -181,19 +181,21 @@ div.div-outline {
 				</div>		
 				<div class="row ">
 					<label class="control-label col-sm-2 col-form-label-sm"
-						for="houseNumber">House Number</label>
-					<div class="col-sm-3">
-						<input required type="text" class="form-control form-control-sm"
-							id="houseNumber" placeholder="" name="houseNumber"
-							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.houseNumber}" />
-					</div>
-					<label class="control-label col-sm-2 col-form-label-sm"
-						for="addressLineOne">address Line One</label>
+						for="addressLineOne">address Line One<sup style="color:red;">*</sup></label>
 					<div class="col-sm-3">
 						<input required type="text" class="form-control form-control-sm"
 							id="addressLineOne" placeholder="" name="addressLineOne"
 							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.addressLineOne}" />
 					</div>
+					
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="houseNumber">House Number</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control form-control-sm"
+							id="houseNumber" placeholder="" name="houseNumber"
+							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.houseNumber}" />
+					</div>
+					
 				</div>
 				<div class="row ">
 					<label class="control-label col-sm-2 col-form-label-sm"
@@ -213,7 +215,7 @@ div.div-outline {
 				</div>
 				<div class="row ">
 					<label class="control-label col-sm-2 col-form-label-sm"
-						for="city">City</label>
+						for="city">City<sup style="color:red;">*</sup></label>
 					<div class="col-sm-3">
 						<input required type="text" class="form-control form-control-sm"
 							id="city" placeholder="" name="city"
@@ -231,9 +233,11 @@ div.div-outline {
 					<label class="control-label col-sm-2 col-form-label-sm"
 						for="stateProvinceRefkey">State</label>
 					<div class="col-sm-3">
-						<select class="form-control form-control-sm" id="stateProvinceRefkey" name="stateProvinceRefkey"  th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.stateProvinceRefkey}">
+						<select class="form-control form-control-sm" id="stateProvinceRefkey" name="stateProvinceRefkey"  
+						th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.stateProvinceRefkey}"/>
 						<option th:each="refStateProvinceDO, itemStatphone : ${txnPayload.refStateProvinceDOList}" th:value="${txnPayload.refStateProvinceDOList[__${itemStatphone.index}__].key}" 
-							    th:text="${txnPayload.refStateProvinceDOList[__${itemStatphone.index}__].value}">
+							    th:text="${txnPayload.refStateProvinceDOList[__${itemStatphone.index}__].value}" 
+							    th:selected="${txnPayload.refStateProvinceDOList[__${itemStatphone.index}__].key== '1016'}">
 						</option>
 						</select>
 					</div>

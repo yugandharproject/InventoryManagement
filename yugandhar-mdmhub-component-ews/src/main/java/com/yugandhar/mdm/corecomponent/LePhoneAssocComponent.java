@@ -307,11 +307,11 @@ public class LePhoneAssocComponent {
 					"LePhoneAssocDO.phoneTypeRefkey is needed in the request");
 		}
 
-		if (null == txnTransferObj.getTxnPayload().getLePhoneAssocDO().getPhoneNumber()
-				|| txnTransferObj.getTxnPayload().getLePhoneAssocDO().getPhoneNumber().isEmpty()) {
-			throw commonValidationUtil.populateValidationErrorResponse(txnTransferObj, "10011",
-					"LePhoneAssocDO.phoneNumber is needed in the request");
-		}
+//		if (null == txnTransferObj.getTxnPayload().getLePhoneAssocDO().getPhoneNumber()
+//				|| txnTransferObj.getTxnPayload().getLePhoneAssocDO().getPhoneNumber().isEmpty()) {
+//			throw commonValidationUtil.populateValidationErrorResponse(txnTransferObj, "10011",
+//					"LePhoneAssocDO.phoneNumber is needed in the request");
+//		}
 
 		LePhoneAssocDO theLePhoneAssocDO = (LePhoneAssocDO) txnTransferObj.getTxnPayload().getLePhoneAssocDO();
 		theLePhoneAssocDO.setCreatedTs(new Date());

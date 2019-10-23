@@ -79,6 +79,7 @@ $(document).ready(function(){
 	
 			<Form name="MaintainInventoryForm" class="container-fluid form-horizontal"
 			action="#" th:action="@{maintaininvt_do}" th:object="${txnPayload}" method="post">
+			
 			<div class="row">
 			<label class="control-label col-sm-2 col-form-label-sm" for="invokedtransactiontype">Transaction Type</label>
 				<div class="col-sm-2 nopadding">
@@ -265,7 +266,10 @@ $(document).ready(function(){
 			</table>
 			
 			</div> </div></div>
-			
+
+			<div class="row" th:if="${txnPayload.inventoryProductDO.quantityInhand != null}">
+			<p class="text-info col-sm-4 col-form-label-sm" th:text="'Current quantity in hand of product ' + ${txnPayload.inventoryProductDO.productName} + ' is: ' + ${txnPayload.inventoryProductDO.quantityInhand}"></p>
+			</div>
 			<div class="row">
 			<p class="text-body col-sm-2 col-form-label-sm" th:text="'Quantity:'"></p>
 			<div class="col-sm-2 nopadding">

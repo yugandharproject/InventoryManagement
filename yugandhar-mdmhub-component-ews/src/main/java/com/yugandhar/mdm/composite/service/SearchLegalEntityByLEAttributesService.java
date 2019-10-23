@@ -225,8 +225,8 @@ public class SearchLegalEntityByLEAttributesService {
 		if (!isNullOrEmpty(displayName)) {
 			// queryCriteriaString.append(" and legalentity.display_name like
 			// '%" + displayName + "%'");
-			queryCriteriaString.append(" and legalentity.display_name like :displayName ");
-			paramMap.put("displayName", displayName);
+			queryCriteriaString.append(" and upper(legalentity.display_name) like :displayName ");
+			paramMap.put("displayName", displayName.toUpperCase());
 		}
 
 		if (!isNullOrEmpty(personNameOne) || !isNullOrEmpty(personLastName)) {

@@ -60,7 +60,7 @@ div.div-outline {
 			
 			<div class=" row">
 				<label class="control-label col-sm-2 col-form-label-sm"
-					for="personnameone">First Name</label>
+					for="personnameone">First Name<sup style="color:red;">*</sup></label>
 				<div class="col-sm-3">
 					<input required type="text" class="form-control form-control-sm" id="personnameone"th:field="${legalentityDO.lePersonDO.personnamesDOList[__0__].nameOne}"  placeholder="" name="personnameone" >
 					<input hidden="true" type="text" class="form-control form-control-sm" id="personnameone"th:field="${legalentityDO.lePersonDO.personnamesDOList[__0__].idPk}"  placeholder="" name="personnameone" >
@@ -71,7 +71,7 @@ div.div-outline {
 			
 			<div class=" row">
 				<label class="control-label col-sm-2 col-form-label-sm"
-					for="personLastName">Last Name</label>
+					for="personLastName">Last Name<sup style="color:red;">*</sup></label>
 				<div class="col-sm-3">
 					<input required type="text" class="form-control form-control-sm"
 						id="personLastName" placeholder="" name="personLastName"
@@ -90,7 +90,7 @@ div.div-outline {
 			</div>
 			
 			<div class=" row">
-				<label class="control-label col-sm-2 col-form-label-sm" for="Gender">Gender</label>
+				<label class="control-label col-sm-2 col-form-label-sm" for="Gender">Gender<sup style="color:red;">*</sup></label>
 				<div class="col-sm-2">
 					<select class="form-control form-control-sm" id="Gender" name="Gender" th:field="*{lePersonDO.genderRefkey}">
 					    <option th:each="refGenderDO, itemStat : ${txnPayload.refGenderDOList}" th:value="${txnPayload.refGenderDOList[__${itemStat.index}__].key}" 
@@ -106,7 +106,7 @@ div.div-outline {
 			</div>
 			<div class="row">
 				<label class="control-label  col-sm-2 col-form-label-sm"
-					for="mobile">Mobile</label>
+					for="mobile">Mobile<sup style="color:red;">*</sup></label>
 					
 				<div class="col-sm-2">
 					<input required type="text" class="form-control form-control-sm" id="mobile" placeholder="" name="mobile" 
@@ -164,21 +164,23 @@ div.div-outline {
 				 <input type="text" hidden="true" th:field="*{leAddressAssocDOList[__${itemStat.index}__].version}" />
 				</div>		
 				<div class="row ">
+					
 					<label class="control-label col-sm-2 col-form-label-sm"
-						for="houseNumber">House Number</label>
-					<div class="col-sm-3">
-						<input required type="text" class="form-control form-control-sm" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.houseNumber}" id="houseNumber" placeholder="" name="houseNumber" />
-						<input hidden="true" type="text" class="form-control form-control-sm" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.idPk}" id="houseNumber" placeholder="" name="houseNumber" />
-						<input hidden="true" type="text" class="form-control form-control-sm" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.version}" id="houseNumber" placeholder="" name="houseNumber" />	
-							
-							
-					</div>
-					<label class="control-label col-sm-2 col-form-label-sm"
-						for="addressLineOne">address Line One</label>
+						for="addressLineOne">address Line One<sup style="color:red;">*</sup></label>
 					<div class="col-sm-3">
 						<input required type="text" class="form-control form-control-sm"
 							id="addressLineOne" placeholder="" name="addressLineOne"
 							th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.addressLineOne}" />
+					</div>
+					
+					<label class="control-label col-sm-2 col-form-label-sm"
+						for="houseNumber">House Number</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control form-control-sm" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.houseNumber}" id="houseNumber" placeholder="" name="houseNumber" />
+						<input hidden="true" type="text" class="form-control form-control-sm" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.idPk}" id="houseNumber" placeholder="" name="houseNumber" />
+						<input hidden="true" type="text" class="form-control form-control-sm" th:field="*{leAddressAssocDOList[__${itemStat.index}__].addressDO.version}" id="houseNumber" placeholder="" name="houseNumber" />	
+							
+							
 					</div>
 				</div>
 				<div class="row ">
@@ -199,7 +201,7 @@ div.div-outline {
 				</div>
 				<div class="row ">
 					<label class="control-label col-sm-2 col-form-label-sm"
-						for="city">City</label>
+						for="city">City<sup style="color:red;">*</sup></label>
 					<div class="col-sm-3">
 						<input required type="text" class="form-control form-control-sm"
 							id="city" placeholder="" name="city"

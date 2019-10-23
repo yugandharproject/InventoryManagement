@@ -158,10 +158,10 @@ public class LePhoneAssocComponentRule {
 					"Recieved empty string for LePhoneAssocDO.phoneTypeRefkey, this attribute cannot be updated to null");
 		}
 
-		if (dbimageLePhoneAssocDO.getPhoneNumber().isEmpty()) {
-			throw commonValidationUtil.populateValidationErrorResponse(txnTransferObj, "10011",
-					"Recieved empty string for LePhoneAssocDO.phoneNumber, this attribute cannot be updated to null");
-		}
+//		if (dbimageLePhoneAssocDO.getPhoneNumber().isEmpty()) {
+//			throw commonValidationUtil.populateValidationErrorResponse(txnTransferObj, "10011",
+//					"Recieved empty string for LePhoneAssocDO.phoneNumber, this attribute cannot be updated to null");
+//		}
 
 		// PhoneTypeRefkey
 		if (!(null == dbimageLePhoneAssocDO.getPhoneTypeRefkey()
